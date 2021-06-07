@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    tools:context="com.stu.careers_search_engine.Home">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        >
+    <ImageView
+        android:id="@+id/IMG_home_logo"
+        android:src="@drawable/home_logo"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:layout_centerInParent="true"
+        />
+        <ImageView
+            android:id="@+id/IMG_settings_logo"
+            android:src="@drawable/settings_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+        <TextView
+            android:id="@+id/TV_welcome_message"
+            android:text="@string/welcome_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/IMG_home_logo"
+            android:layout_marginTop="40dp"
+            android:padding="10dp"
+            android:textSize="30sp"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_marginTop="15dp"
+
+        >
+        <Button
+            android:id="@+id/BTN_take_quiz"
+            android:text="@string/take_the_quiz"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:drawableRight="@drawable/question_resize"
+            />
+
+
+        <Button
+            android:id="@+id/BTN_quiz_results"
+            android:text="@string/see_results"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/BTN_take_quiz"
+            android:layout_marginTop="15dp"
+            android:drawableRight="@drawable/results_resize"
+            />
+        <Button
+            android:id="@+id/BTN_suggested_careers"
+            android:text="@string/suggested_careers"
+            android:drawableRight="@drawable/suggested_resize"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/BTN_quiz_results"
+            android:layout_marginTop="15dp"/>
+        <Button
+            android:id="@+id/BTN_favourites"
+            android:text="@string/favourites_list"
+            android:drawableRight="@drawable/favourites_resize"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/BTN_suggested_careers"
+            android:layout_marginTop="15dp"/>
+    </RelativeLayout>
+
+</LinearLayout>
