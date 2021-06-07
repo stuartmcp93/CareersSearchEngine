@@ -1,0 +1,12 @@
+<resources>
+    <!--Login page strings-->
+    <string name="app_name">CareersSearchEngine</string>
+    <string name="remember_me">Remember me</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="forgot_details">Forgot details?</string>
+    <string name="title">Careers Search Engine</string>
+    <string name="enter_email_address">Enter email address</string>
+    <string name="enter_password">Enter password</string>
+    <!--#########################################################################################-->
+</resources>
