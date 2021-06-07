@@ -9,6 +9,8 @@
     android:orientation="vertical"
     tools:context="com.stu.careers_search_engine.Home">
 
+    <!-- Test comments for gitHub -->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
