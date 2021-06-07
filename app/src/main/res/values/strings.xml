@@ -16,4 +16,14 @@
     <string name="suggested_careers">Suggested careers</string>
     <string name="favourites_list">Favourites list</string>
     <!--#########################################################################################-->
+    <!--Personality quiz questions-->
+    <string name="total_num_questions">/25</string>
+    <string name="question_instructions">Rate each statement according to how well it describes you.</string>
+    <string name="example_question">I prefer variety to routine. </string>
+    <string name="strongly_agree">Strongly agree</string>
+    <string name="agree">Agree</string>
+    <string name="neutral">Neutral</string>
+    <string name="disagree">Disagree</string>
+    <string name="strongly_disagree">Strongly disagree</string>
+    <!--#########################################################################################-->
 </resources>

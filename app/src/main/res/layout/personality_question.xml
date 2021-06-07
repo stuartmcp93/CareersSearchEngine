@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    tools:context="com.stu.careers_search_engine.PersonalityQuestion">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        >
+        <ImageView
+            android:id="@+id/IMG_question_image"
+            android:src="@drawable/question_logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="15dp"
+            />
+        <TextView
+            android:id="@+id/TV_question_number"
+            android:text="1"
+            android:textSize="22sp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_toEndOf="@+id/IMG_question_image"
+            android:layout_toRightOf="@+id/IMG_question_image"
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/TV_question_total"
+            android:text="@string/total_num_questions"
+            android:layout_width="35dp"
+            android:layout_height="50dp"
+            android:layout_toEndOf="@+id/TV_question_number"
+            android:layout_toRightOf="@+id/TV_question_number"
+            android:gravity="center_vertical"
+            android:textSize="22sp"
+            android:layout_centerVertical="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginTop="5dp"
+        >
+        <TextView
+            android:id="@+id/TV_question_instructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/question_instructions"
+            android:layout_centerHorizontal="true"
+            android:textSize="20dp"
+            android:background="@drawable/border"
+            />
+
+        <TextView
+            android:id="@+id/TV_question_display"
+            android:layout_below="@+id/TV_question_instructions"
+            android:text="@string/example_question"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="150dp"
+            android:maxWidth="400dp"
+            android:background="@drawable/border"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginTop="5dp"
+        >
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <RadioButton
+                android:id="@+id/RBTN_strongly_agree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/strongly_agree"
+                android:layout_gravity="center_horizontal"
+                android:checked="false"
+                android:textSize="20dp" />
+
+            <RadioButton
+                android:id="@+id/RBTN_agree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/agree"
+                android:layout_gravity="center_horizontal"
+                android:checked="false"
+                android:textSize="20dp" />
+
+            <RadioButton
+                android:id="@+id/RBTN_neutral"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/neutral"
+                android:layout_gravity="center_horizontal"
+                android:checked="false"
+                android:textSize="20dp" />
+
+            <RadioButton
+                android:id="@+id/RBTN_disagree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disagree"
+                android:layout_gravity="center_horizontal"
+                android:checked="false"
+                android:textSize="20dp" />
+            <RadioButton
+                android:id="@+id/RBTN_strongly_disagree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/strongly_disagree"
+                android:layout_gravity="center_horizontal"
+                android:checked="false"
+                android:textSize="20dp" />
+            <!--07/06/21 18:00 -->
+        </RadioGroup>
+
+    </RelativeLayout>
+
+</LinearLayout>
