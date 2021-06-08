@@ -28,4 +28,16 @@
     <string name="prev_question">Previous</string>
     <string name="submit_answer">Submit</string>
     <!--#########################################################################################-->
+    <!--Personality results strings-->
+    <!--Personality types-->
+    <string name="conscientiousness">Conscientiousness</string>
+    <string name="agreeableness">Agreeableness</string>
+    <string name="neuroticism">Neuroticism</string>
+    <string name="openness_to_experience">Openness to Experience</string>
+    <string name="extraversion">Extraversion</string>
+    
+    <string name="personality_results_title">Personality trait match (%):</string>
+    <string name="see_career_area_matches">Career matches</string>
+    <!--#########################################################################################-->
+    
 </resources>
