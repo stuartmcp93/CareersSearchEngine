@@ -25,5 +25,7 @@
     <string name="neutral">Neutral</string>
     <string name="disagree">Disagree</string>
     <string name="strongly_disagree">Strongly disagree</string>
+    <string name="prev_question">Previous</string>
+    <string name="submit_answer">Submit</string>
     <!--#########################################################################################-->
 </resources>
