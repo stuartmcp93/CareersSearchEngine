@@ -100,7 +100,8 @@
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
-            android:text="@string/login"/>
+            android:text="@string/login"
+           />
         <TextView
             android:id="@+id/TV_sign_up"
             android:text="@string/sign_up"

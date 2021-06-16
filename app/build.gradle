@@ -28,6 +28,10 @@ android {
     }
 }
 
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.3.0'
@@ -43,4 +47,8 @@ dependencies {
     // Chart and graph library
     implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
+
+    //For bar chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+
 }
