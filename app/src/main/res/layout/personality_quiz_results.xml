@@ -27,7 +27,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewGraph"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="65dp"
@@ -72,7 +72,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    android:layout_height="17dp"
                     android:layout_gravity="center_vertical">
 
                     <!--View to display the yellow color icon-->
@@ -93,7 +93,7 @@
                 <!--Linear layout to display Python-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    android:layout_height="17dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="5dp">
 
@@ -115,7 +115,7 @@
                 <!--Linear layout to display C++-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    android:layout_height="17dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="5dp">
 
@@ -137,14 +137,14 @@
                 <!--Linear layout to display Java-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="17dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="5dp">
 
                     <!--View to display the blue color icon-->
                     <View
                         android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_height="match_parent"
                         android:background="@color/Java"/>
 
                     <!--Text view to display Java text -->
@@ -158,7 +158,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="15dp"
+                    android:layout_height="17dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginTop="5dp">
 
@@ -203,7 +203,7 @@
         <LinearLayout
             android:id="@+id/LO_results_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="350dp"
             android:orientation="vertical">
 
             <!--Text view to use of -->
@@ -249,7 +249,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:id="@+id/tvR"
+                    android:id="@+id/TV_conscientiousness"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textColor="@color/color_one"
@@ -290,7 +290,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:id="@+id/tvPython"
+                    android:id="@+id/TV_agreeableness"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textColor="@color/color_one"
@@ -329,7 +329,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:id="@+id/tvCPP"
+                    android:id="@+id/TV_neuroticism"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textColor="@color/color_one"
@@ -369,7 +369,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:id="@+id/tvJava"
+                    android:id="@+id/TV_openness_to_exp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textColor="@color/color_one"
@@ -409,7 +409,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:id="@+id/tvJava2"
+                    android:id="@+id/TV_extraversion"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
                     android:textColor="@color/color_one"
@@ -441,7 +441,8 @@
                     android:layout_width="75dp"
                     android:layout_height="70dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentRight="true"
+                    />
 
             </RelativeLayout>
         </LinearLayout>
