@@ -3,6 +3,7 @@ package com.stu.careers_search_engine;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,12 +21,14 @@ import java.util.Objects;
 public class PersonalityResultsDisplay extends AppCompatActivity {
     TextView TV_con, TV_agreeableness, TV_neuroticism, TV_openness, TV_extraversion;
     PieChart pieChart;
+
+    //Need to change to ImageButton
     ImageView IMG_home;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personality_quiz_results);
-        //Objects.requireNonNull(getSupportActionBar()).hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
 
         // Link those objects with their respective
@@ -46,6 +49,7 @@ public class PersonalityResultsDisplay extends AppCompatActivity {
         IMG_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                IMG_home.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
                 returnHome();
             }
         });

@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CareersSearchEngine">
-        <activity android:name=".Home"></activity>
-        <activity android:name=".PersonalityResultsDisplay"></activity>
-        <activity android:name=".CareerMatchesDisplay"></activity>
-
+        <activity android:name=".SuggestedCareersDisplay"/>
+        <activity android:name=".FavouritesList" />
+        <activity android:name=".Home" />
+        <activity android:name=".PersonalityResultsDisplay" />
+        <activity android:name=".PersonalityQuestion" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

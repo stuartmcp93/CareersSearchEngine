@@ -22,7 +22,7 @@ public class Home extends Activity {
         //Assign values to buttons
         BTN_takeQuiz = findViewById(R.id.BTN_take_quiz);
         BTN_viewResults = findViewById(R.id.BTN_quiz_results);
-        BTN_suggestedCareers = findViewById(R.id.BTN_see_career_area_matches);
+        BTN_suggestedCareers = findViewById(R.id.BTN_suggested_careers);
         BTN_favouritesList = findViewById(R.id.BTN_favourites);
 
         //On click go to personality quiz results
@@ -33,7 +33,43 @@ public class Home extends Activity {
             }
         });
 
+        BTN_takeQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startQuiz();
+            }
+        });
 
+        BTN_suggestedCareers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSuggestedCareers();
+            }
+        });
+
+        BTN_favouritesList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFavList();
+            }
+        });
+
+
+    }
+
+    private void showSuggestedCareers() {
+        Intent showSuggestedCIntent = new Intent(this, SuggestedCareersDisplay.class);
+        startActivity(showSuggestedCIntent);
+    }
+
+    private void showFavList() {
+        Intent showFavLitIntent = new Intent(this, FavouritesList.class);
+        startActivity(showFavLitIntent);
+    }
+
+    private void startQuiz() {
+        Intent startQuizIntent = new Intent(this, PersonalityQuestion.class);
+        startActivity(startQuizIntent);
     }
 
     /**
