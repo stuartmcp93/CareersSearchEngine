@@ -67,7 +67,6 @@
             android:layout_below="@+id/TV_question_instructions"
             android:text="@string/example_question"
             android:textSize="25dp"
-            android:textAppearance="@color/design_default_color_primary_dark"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

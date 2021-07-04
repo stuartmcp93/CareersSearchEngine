@@ -1,13 +1,10 @@
 package com.stu.careers_search_engine;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,8 +15,8 @@ import org.eazegraph.lib.models.PieModel;
 
 import java.util.Objects;
 
-public class PersonalityResultsDisplay extends AppCompatActivity {
-    TextView TV_con, TV_agreeableness, TV_neuroticism, TV_openness, TV_extraversion;
+public class PersonalityQuizResults extends AppCompatActivity {
+    TextView TV_con, TV_agreeableness, TV_neuroticism, TV_openness, TV_extroversion;
     PieChart pieChart;
 
     //Need to change to ImageButton
@@ -27,7 +24,7 @@ public class PersonalityResultsDisplay extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.personality_quiz_results);
+        setContentView(R.layout.activity_personality_quiz_results);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
 
@@ -37,7 +34,7 @@ public class PersonalityResultsDisplay extends AppCompatActivity {
         TV_agreeableness = findViewById(R.id.TV_agreeableness);
         TV_neuroticism = findViewById(R.id.TV_neuroticism);
         TV_openness = findViewById(R.id.TV_openness_to_exp);
-        TV_extraversion = findViewById(R.id.TV_extraversion);
+        TV_extroversion = findViewById(R.id.TV_extraversion);
         pieChart = findViewById(R.id.piechart);
 
         // Creating a method setData()
@@ -68,7 +65,7 @@ public class PersonalityResultsDisplay extends AppCompatActivity {
         TV_agreeableness.setText(Integer.toString(30));
         TV_neuroticism.setText(Integer.toString(5));
         TV_openness.setText(Integer.toString(25));
-        TV_extraversion.setText(Integer.toString(35));
+        TV_extroversion.setText(Integer.toString(35));
 
         // Set the data and color to the pie chart
         pieChart.addPieSlice(
@@ -94,7 +91,7 @@ public class PersonalityResultsDisplay extends AppCompatActivity {
         pieChart.addPieSlice(
                 new PieModel(
                         "Extraversion",
-                        Integer.parseInt(TV_extraversion.getText().toString()),
+                        Integer.parseInt(TV_extroversion.getText().toString()),
                         Color.parseColor("#29B6F6")));
 
         // To animate the pie chart

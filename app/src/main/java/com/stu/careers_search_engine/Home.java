@@ -1,14 +1,10 @@
 package com.stu.careers_search_engine;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import java.util.Objects;
 
 public class Home extends Activity {
 
@@ -58,7 +54,7 @@ public class Home extends Activity {
     }
 
     private void showSuggestedCareers() {
-        Intent showSuggestedCIntent = new Intent(this, SuggestedCareersDisplay.class);
+        Intent showSuggestedCIntent = new Intent(this, CareerMatchesDisplay.class);
         startActivity(showSuggestedCIntent);
     }
 
@@ -76,7 +72,7 @@ public class Home extends Activity {
      * Method to go to personality quiz results on click of view results button on home page.
      */
     private void viewPersonalityQuizResults() {
-        Intent viewResultsIntent = new Intent(this, PersonalityResultsDisplay.class);
+        Intent viewResultsIntent = new Intent(this, PersonalityQuizResults.class);
         startActivity(viewResultsIntent);
     }
 

@@ -34,7 +34,7 @@
     <string name="agreeableness">Agreeableness</string>
     <string name="neuroticism">Neuroticism</string>
     <string name="openness_to_experience">Openness to Experience</string>
-    <string name="extraversion">Extraversion</string>
+    <string name="extroversion">Extroversion</string>
 
     <string name="personality_results_title">Personality trait match (%):</string>
     <string name="see_career_area_matches">Career \n matches</string>
@@ -43,5 +43,10 @@
     <!--Favourites list-->
     <string name="favourites_header">Favourites List</string>
     <!--#########################################################################################-->
+
+    <!--Career area matches-->
+    <string name="spinner_text">Filter</string>
+    <!--#########################################################################################-->
+
 
 </resources>
