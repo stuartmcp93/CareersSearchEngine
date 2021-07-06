@@ -237,13 +237,21 @@ public class PersonalityQuestion extends AppCompatActivity {
                 Log.d("O score", String.valueOf(opennessScore));
 
                 Toast.makeText(PersonalityQuestion.this, "Questions finished!", Toast.LENGTH_LONG).show();
-                returnHome();
+                loadResultsDisplay();
             }
         }
 
-            //returnHome();
 
-        //Also will need to display a toast and catch error if they click submit without selecting an option
+    }
+
+    public void loadResultsDisplay(){
+        Intent resultsIntent = new Intent(PersonalityQuestion.this, PersonalityQuizResults.class);
+        resultsIntent.putExtra("E score", extroversionScore);
+        resultsIntent.putExtra("A score", agreeablenessScore);
+        resultsIntent.putExtra("C score", conscientiousnessScore);
+        resultsIntent.putExtra("N score", neuroticismScore);
+        resultsIntent.putExtra("O score", opennessScore);
+        startActivity(resultsIntent);
     }
 
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +28,19 @@ public class PersonalityQuizResults extends AppCompatActivity {
         setContentView(R.layout.activity_personality_quiz_results);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        Intent intent = getIntent();
+        int extroversionScore = intent.getIntExtra("E score", 0);
+        int agreeablenessScore = intent.getIntExtra("A score", 0);
+        int conscientiousnessScore = intent.getIntExtra("C score", 0);
+        int neuroticismScore = intent.getIntExtra("N score", 0);
+        int opennessScore = intent.getIntExtra("O score", 0);
+
+        Log.d("E score", String.valueOf(extroversionScore));
+        Log.d("A score", String.valueOf(agreeablenessScore));
+        Log.d("C score", String.valueOf(conscientiousnessScore));
+        Log.d("N score", String.valueOf(neuroticismScore));
+        Log.d("O score", String.valueOf(opennessScore));
+
 
         // Link those objects with their respective
         // id's that we have given in .XML file
@@ -39,7 +53,7 @@ public class PersonalityQuizResults extends AppCompatActivity {
 
         // Creating a method setData()
         // to set the text in text view and pie chart
-        setData();
+        setData(extroversionScore, agreeablenessScore, conscientiousnessScore, neuroticismScore, opennessScore);
 
         IMG_home = findViewById(R.id.IMG_home_logo_quiz_res);
 
@@ -57,44 +71,50 @@ public class PersonalityQuizResults extends AppCompatActivity {
         startActivity(homeIntent);
     }
 
-    private void setData()
+    private void setData(int eScore, int aScore, int cScore, int nScore, int oScore)
     {
 
-        // Set the percentage of language used
-        TV_con.setText(Integer.toString(40));
-        TV_agreeableness.setText(Integer.toString(30));
-        TV_neuroticism.setText(Integer.toString(5));
-        TV_openness.setText(Integer.toString(25));
-        TV_extroversion.setText(Integer.toString(35));
+        // Set the score
+        TV_extroversion.setText(Integer.toString(eScore));
+        TV_agreeableness.setText(Integer.toString(aScore));
+        TV_con.setText(Integer.toString(cScore));
+        TV_neuroticism.setText(Integer.toString(nScore));
+        TV_openness.setText(Integer.toString(oScore));
+
 
         // Set the data and color to the pie chart
         pieChart.addPieSlice(
                 new PieModel(
-                        "Conscientiousness",
-                        Integer.parseInt(TV_con.getText().toString()),
-                        Color.parseColor("#FFA726")));
+                        "Extroversion",
+                        Float.valueOf(eScore),
+                        Color.parseColor("#29B6F6")));
+
+        pieChart.addPieSlice(
+            new PieModel(
+                    "Agreeableness",
+                    Float.valueOf(aScore),
+                    Color.parseColor("#66BB6A")));
         pieChart.addPieSlice(
                 new PieModel(
-                        "Agreeableness",
-                        Integer.parseInt(TV_agreeableness.getText().toString()),
-                        Color.parseColor("#66BB6A")));
+                        "Conscientiousness",
+                        Float.valueOf(cScore),
+                        Color.parseColor("#FFA726")));
+
         pieChart.addPieSlice(
                 new PieModel(
                         "Neuroticism",
-                        Integer.parseInt(TV_neuroticism.getText().toString()),
-                        Color.parseColor("#EF5350")));
+                        Float.valueOf(nScore),
+                        Color.parseColor("#FBFE09")));
         pieChart.addPieSlice(
                 new PieModel(
-                        "Openness to experience",
-                        Integer.parseInt(TV_openness.getText().toString()),
+                        "Openness",
+                        Float.valueOf(oScore),
                         Color.parseColor("#EF5350")));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "Extraversion",
-                        Integer.parseInt(TV_extroversion.getText().toString()),
-                        Color.parseColor("#29B6F6")));
+
+
 
         // To animate the pie chart
         pieChart.startAnimation();
+
     }
 }
