@@ -17,7 +17,8 @@
     <string name="favourites_list">Favourites list</string>
     <!--#########################################################################################-->
     <!--Personality quiz questions-->
-    <string name="total_num_questions">/25</string>
+    <string name="question_num">1</string>
+    <string name="total_num_questions">/50</string>
     <string name="question_instructions">Rate each statement according to how well it describes you.</string>
     <string name="example_question">I prefer variety to routine. </string>
     <string name="strongly_agree">Strongly agree</string>
