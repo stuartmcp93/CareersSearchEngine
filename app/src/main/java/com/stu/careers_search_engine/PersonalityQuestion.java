@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -99,7 +100,14 @@ public class PersonalityQuestion extends AppCompatActivity {
         BTN_submit_answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nextQuestion();
+
+                //nextQuestion();
+                try {
+                    getQuestionAndPT();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -126,18 +134,23 @@ public class PersonalityQuestion extends AppCompatActivity {
         int score = 0;
         if(RB_sAgree.isChecked()){
             score = 5;
+            RB_sAgree.setChecked(false);
         }
         if(RB_agree.isChecked()){
             score = 4;
+            RB_agree.setChecked(false);
         }
         if(RB_neutral.isChecked()){
             score = 3;
+            RB_neutral.setChecked(false);
         }
         if(RB_disagree.isChecked()){
             score = 2;
+            RB_disagree.setChecked(false);
         }
         if(RB_sDisagree.isChecked()){
             score = 1;
+            RB_sDisagree.setChecked(false);
         }
         return score;
     }
@@ -206,6 +219,9 @@ public class PersonalityQuestion extends AppCompatActivity {
              */
             int currentQuestionNum = Integer.parseInt(currentQuestionStr);
 
+            //Have function to grab question from DB here
+            //getQuestion();
+
             //Passing the trait and user answer to the trait scores
             addScoreToPersonalityTrait(dummyPT[currentQuestionNum - 1], userAnswer);
 
@@ -223,6 +239,7 @@ public class PersonalityQuestion extends AppCompatActivity {
                     Set question text to next question - when API is working this will get grabbed
                     from there.
                  */
+                //getQuestionAndPT();
                 TV_questionDisplay.setText(dummyQuestions[currentQuestionNum]);
 
                 //Toast tell user answer was submitted
@@ -258,64 +275,68 @@ public class PersonalityQuestion extends AppCompatActivity {
 
 
 
-/*
-        So need to include functions that either load the next question if there is still some left
-        or returns to the previous question. Also functionality to submit final answer and view the
-        results. It should also hide the previous button if on the first question.
-         */
-    /* COME BACK TO THIS WHEN CAN GET API TO CONNECT - DO LOGIC OF FUNCTIONALITY FIRST
-    private void nextQuestion() {
-        //if (questionNum < 25){ go to next question; pull question from DB and display it
-        // questionNum++;
-        //if (questionNum == 25){ start activity(showResults);
-        //Intent submitQuizAnswers = new Intent(this, PersonalityResultsDisplay.class);
-        //startActivity(submitQuizAnswers);
+    //COME BACK TO THIS WHEN CAN GET API TO CONNECT - DO LOGIC OF FUNCTIONALITY FIRST*/
+    //Will get it to return the question and PT as string[] it will take number as parameter
+    public void getQuestionAndPT() throws IOException {
 
-        //##############################THIS WORKS
-        //Need to get it to connect to local host obvs!!!
-        /*Retrofit retrofit = new Retrofit.Builder().baseUrl("https://jsonplaceholder.typicode.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();*/
-    //String url ="http://127.0.0.1:5000/item/1";
-    //String url ="http://10.0.2.2:5000/item/1"; didn't work
-    //String url = "http://192.168.1.9:5000/item/1"; 192.168.1.9
-    //
-    //http://10.0.2.2:8080/
-    //https://stackoverflow.com/questions/9887621/accessing-localhost-of-pc-from-usb-connected-android-mobile-device
-        /*Retrofit retrofit = new Retrofit.Builder().baseUrl("http://10.0.2.2:5000/question/1/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        //Create base holder in retrofit
+        //This worked for tutorial grabbing example API but need to connect to local server
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl("https://jsonplaceholder.typicode.com/")
+                //.addConverterFactory(GsonConverterFactory.create())
+                //.build();
 
+        /*Attempted urls:
+        1 - https://192.168.1.9:5000/
+        2- https://192.168.1.4:49650/
+        3 - https://192.168.1.9:3000
+        4 - http://192.168.1.9:8090 - gives cleartext error
 
+        * */
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://127.0.0.1:5000")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+        //Implement interface methods
         PlaceholderAPI placeholderAPI = retrofit.create(PlaceholderAPI.class);
 
-        Call<List> call = placeholderAPI.getItem();
+        //Hold the response in the list
+        Call<List<Question>> call = placeholderAPI.getQuestions();
 
-        call.enqueue(new Callback<List>() {
+        //Apparently can use this if not on main thread
+        //call.execute();
+
+
+        //Tutorial guy did this>>>
+        call.enqueue(new Callback<List<Question>>() {
             @Override
-            public void onResponse(Call<List> call, Response<List> response) {
+            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
 
-                if (response.isSuccessful()) {
-                    //List posts = response.body();
-                    //assert posts != null;
-                    //Log.d("Success", posts.get(0).toString());
-                    //TV_questionDisplay.setText(posts.get(0).toString());
-                    TV_questionDisplay.setText("It worked!");
-
-                } else {
-                    Log.d("Yo", "Boo!");
+                //If no response display HTTP code
+                if(!response.isSuccessful()){
+                    TV_questionDisplay.setText("Code:" + response.code());
                     return;
                 }
+
+                //Hold data from response in a list
+                List<Question> questions = response.body();
+
+
+                assert questions != null;
+                String questionToDisplay = questions.get(1).getQuestion();
+                TV_questionDisplay.setText(questionToDisplay);
             }
 
             @Override
-            public void onFailure(Call<List> call, Throwable t) {
-                Log.d("Yo", "Errror!");
-                TV_questionDisplay.setText("oh no :-(");
-            }
+            public void onFailure(Call<List<Question>> call, Throwable t) {
 
+                //Display error message if no response from the server
+                TV_questionDisplay.setText(t.getMessage());
+            }
         });
 
-    }*/
+
+
+    }
 
 }
