@@ -286,14 +286,18 @@ public class PersonalityQuestion extends AppCompatActivity {
                 //.build();
 
         /*Attempted urls:
-        1 - https://192.168.1.9:5000/
+        1 - https://192.168.1.9:5000/ & https://192.168.1.9:5000 - failed to connect
+        && http://192.168.1.9:5000 & http://192.168.1.9:5000/ (Tried all these on mobile device)
         2- https://192.168.1.4:49650/
         3 - https://192.168.1.9:3000
         4 - http://192.168.1.9:8090 - gives cleartext error
+        5 - http://127.0.0.1:5000 - failed to connect error (mobile device) & https://127.0.0.1:5000
+        http://127.0.0.1:5000/
+        6 - http://10.0.2.2:8080/ (emulator)
 
         * */
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://127.0.0.1:5000")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://10.0.2.2:5000/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
@@ -306,12 +310,13 @@ public class PersonalityQuestion extends AppCompatActivity {
         //Apparently can use this if not on main thread
         //call.execute();
 
-
+        Log.d("Before response:", "code is working up till here");
         //Tutorial guy did this>>>
         call.enqueue(new Callback<List<Question>>() {
             @Override
             public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
 
+                Log.d("Response:", "IT'S ALIIIIIIIIIIIIVE!!!!!!!!!!!!!!!!!");
                 //If no response display HTTP code
                 if(!response.isSuccessful()){
                     TV_questionDisplay.setText("Code:" + response.code());
@@ -329,7 +334,7 @@ public class PersonalityQuestion extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Question>> call, Throwable t) {
-
+                Log.d("Error:", t.getMessage());
                 //Display error message if no response from the server
                 TV_questionDisplay.setText(t.getMessage());
             }
