@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,6 +44,11 @@ public class PersonalityQuestion extends AppCompatActivity {
     int extroversionScore, agreeablenessScore, conscientiousnessScore,
             neuroticismScore, opennessScore;
 
+    ArrayList<Question> questionsList;
+
+
+
+
 
 
 
@@ -55,7 +61,7 @@ public class PersonalityQuestion extends AppCompatActivity {
 
 
         //Adding array with questions for pseudocode - this will be read from API database in real app
-        dummyQuestions = new String[5];
+        /*dummyQuestions = new String[5];
         dummyQuestions[0] = "I am the life of the party.";
         dummyQuestions[1] = "I feel little concern for others.";
         dummyQuestions[2] = "I am always prepared.";
@@ -66,7 +72,7 @@ public class PersonalityQuestion extends AppCompatActivity {
         dummyPT[1] = "A";
         dummyPT[2] = "C";
         dummyPT[3] = "N";
-        dummyPT[4] = "O";
+        dummyPT[4] = "O";*/
 
 
 
@@ -82,10 +88,14 @@ public class PersonalityQuestion extends AppCompatActivity {
         RB_neutral = findViewById(R.id.RBTN_neutral);
         RB_disagree = findViewById(R.id.RBTN_disagree);
         RB_sDisagree = findViewById(R.id.RBTN_strongly_disagree);
+        questionsList = new ArrayList<Question>();
 
-
-
-
+        try {
+            getQuestionsList();
+        } catch (IOException e) {
+            e.printStackTrace();
+            TV_questionDisplay.setText("code:" + e);
+        }
 
 
         //Set on click listeners
@@ -101,13 +111,16 @@ public class PersonalityQuestion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                TV_questionDisplay.setText(questionsList.get(1).getQuestion());
+                TV_questionNum.setText(questionsList.get(1).getQuestion_num());
+
                 //nextQuestion();
-                try {
+               /* try {
                     getQuestionAndPT();
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         });
 
@@ -275,28 +288,11 @@ public class PersonalityQuestion extends AppCompatActivity {
 
 
 
-    //COME BACK TO THIS WHEN CAN GET API TO CONNECT - DO LOGIC OF FUNCTIONALITY FIRST*/
-    //Will get it to return the question and PT as string[] it will take number as parameter
-    public void getQuestionAndPT() throws IOException {
+    //Try return the questions from this and call in onCreate()
+    //public ArrayList<String> getQuestionsList() throws IOException
+    public void getQuestionsList() throws IOException {
 
-        //Create base holder in retrofit
-        //This worked for tutorial grabbing example API but need to connect to local server
-        //Retrofit retrofit = new Retrofit.Builder().baseUrl("https://jsonplaceholder.typicode.com/")
-                //.addConverterFactory(GsonConverterFactory.create())
-                //.build();
-
-        /*Attempted urls:
-        1 - https://192.168.1.9:5000/ & https://192.168.1.9:5000 - failed to connect
-        && http://192.168.1.9:5000 & http://192.168.1.9:5000/ (Tried all these on mobile device)
-        2- https://192.168.1.4:49650/
-        3 - https://192.168.1.9:3000
-        4 - http://192.168.1.9:8090 - gives cleartext error
-        5 - http://127.0.0.1:5000 - failed to connect error (mobile device) & https://127.0.0.1:5000
-        http://127.0.0.1:5000/
-        6 - http://10.0.2.2:8080/ (emulator)
-
-        * */
-
+        //ArrayList<String> questionsList = new ArrayList<>();
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://10.0.2.2:5000/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
@@ -307,10 +303,11 @@ public class PersonalityQuestion extends AppCompatActivity {
         //Hold the response in the list
         Call<List<Question>> call = placeholderAPI.getQuestions();
 
+
         //Apparently can use this if not on main thread
         //call.execute();
 
-        Log.d("Before response:", "code is working up till here");
+        //Log.d("Before response:", "code is working up till here");
         //Tutorial guy did this>>>
         call.enqueue(new Callback<List<Question>>() {
             @Override
@@ -328,8 +325,20 @@ public class PersonalityQuestion extends AppCompatActivity {
 
 
                 assert questions != null;
-                String questionToDisplay = questions.get(1).getQuestion();
-                TV_questionDisplay.setText(questionToDisplay);
+                questionsList.addAll(questions);
+
+
+
+                /*
+                assert questions != null;
+                //Question questionToDisplay = questions.get(1);
+                TV_questionDisplay.setText((CharSequence) questions.get(1));*/
+
+                /*
+
+                IT WORKS!!!!!!!!!!!!!!!!!!!!!!*/
+                TV_questionDisplay.setText(questions.get(0).getQuestion());
+                TV_questionNum.setText(questions.get(0).getQuestion_num());
             }
 
             @Override
@@ -340,7 +349,7 @@ public class PersonalityQuestion extends AppCompatActivity {
             }
         });
 
-
+        //return questionsList;
 
     }
 
