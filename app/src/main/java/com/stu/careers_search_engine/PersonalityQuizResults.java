@@ -14,11 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class PersonalityQuizResults extends AppCompatActivity {
     TextView TV_con, TV_agreeableness, TV_neuroticism, TV_openness, TV_extroversion;
     PieChart pieChart;
+    ArrayList<Integer> extroversionResList, agreeablenessResList, conscientiousnessResList,
+            neuroticismResList, opennessResList;
 
     //Need to change to ImageButton
     ImageView IMG_home;
@@ -29,31 +33,33 @@ public class PersonalityQuizResults extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         Intent intent = getIntent();
-        int extroversionScore = intent.getIntExtra("E score", 0);
-        int agreeablenessScore = intent.getIntExtra("A score", 0);
-        int conscientiousnessScore = intent.getIntExtra("C score", 0);
-        int neuroticismScore = intent.getIntExtra("N score", 0);
-        int opennessScore = intent.getIntExtra("O score", 0);
+        extroversionResList = intent.getIntegerArrayListExtra("E score");
+        agreeablenessResList = intent.getIntegerArrayListExtra("A score");
+        conscientiousnessResList = intent.getIntegerArrayListExtra("C score");
+        neuroticismResList = intent.getIntegerArrayListExtra("N score");
+        opennessResList = intent.getIntegerArrayListExtra("O score");
 
-        Log.d("E score", String.valueOf(extroversionScore));
-        Log.d("A score", String.valueOf(agreeablenessScore));
-        Log.d("C score", String.valueOf(conscientiousnessScore));
-        Log.d("N score", String.valueOf(neuroticismScore));
-        Log.d("O score", String.valueOf(opennessScore));
+        for(int score : extroversionResList){
+            Log.d("Score:", String.valueOf(score));
+        }
 
 
-        // Link those objects with their respective
         // id's that we have given in .XML file
         TV_con = findViewById(R.id.TV_conscientiousness);
         TV_agreeableness = findViewById(R.id.TV_agreeableness);
         TV_neuroticism = findViewById(R.id.TV_neuroticism);
-        TV_openness = findViewById(R.id.TV_openness_to_exp);
-        TV_extroversion = findViewById(R.id.TV_extraversion);
+        TV_openness = findViewById(R.id.TV_openness);
+        TV_extroversion = findViewById(R.id.TV_extroversion);
         pieChart = findViewById(R.id.piechart);
 
         // Creating a method setData()
         // to set the text in text view and pie chart
-        setData(extroversionScore, agreeablenessScore, conscientiousnessScore, neuroticismScore, opennessScore);
+        setData(calcExtroversionScore(),
+                calcAgreeablenessScore(),
+                calcConScore(),
+                calcNueScore(),
+                calcOpenScore());
+
 
         IMG_home = findViewById(R.id.IMG_home_logo_quiz_res);
 
@@ -70,6 +76,48 @@ public class PersonalityQuizResults extends AppCompatActivity {
         Intent homeIntent = new Intent(this, Home.class);
         startActivity(homeIntent);
     }
+
+    private int calcExtroversionScore(){
+        int eScore = 20;
+        eScore += extroversionResList.get(0);
+        eScore -= extroversionResList.get(1);
+        eScore += extroversionResList.get(2);
+        return eScore;
+    }
+
+    private int calcAgreeablenessScore(){
+        int aScore = 14;
+        aScore -= agreeablenessResList.get(0);
+        aScore += agreeablenessResList.get(1);
+        aScore -= agreeablenessResList.get(2);
+        return aScore;
+    }
+
+    private int calcConScore(){
+        int cScore = 14;
+        cScore += conscientiousnessResList.get(0);
+        cScore -= conscientiousnessResList.get(1);
+        cScore += conscientiousnessResList.get(2);
+        return cScore;
+    }
+
+    private int calcNueScore(){
+        int nScore = 38;
+        nScore += neuroticismResList.get(0);
+        nScore -= neuroticismResList.get(1);
+        nScore += neuroticismResList.get(2);
+        return nScore;
+    }
+
+    private int calcOpenScore(){
+        int oScore = 20;
+        oScore += opennessResList.get(0);
+        oScore -= opennessResList.get(1);
+        oScore += opennessResList.get(2);
+        return oScore;
+    }
+
+
 
     private void setData(int eScore, int aScore, int cScore, int nScore, int oScore)
     {
