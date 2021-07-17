@@ -28,6 +28,7 @@
     <string name="strongly_disagree">Strongly disagree</string>
     <string name="prev_question">Previous</string>
     <string name="submit_answer">Submit</string>
+    <string name="see_results_btn">See quiz results!</string>
     <!--#########################################################################################-->
     <!--Personality results strings-->
     <!--Personality types-->

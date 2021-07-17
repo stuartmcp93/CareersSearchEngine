@@ -18,15 +18,15 @@ public class CareerMatchesDisplay extends AppCompatActivity {
 
     // variable for our bar chart
     BarChart barChart;
-
     // variable for our bar data.
     BarData barData;
-
     // variable for our bar data set.
     BarDataSet barDataSet;
-
     // array list for storing entries.
     ArrayList barEntriesArrayList;
+
+    //Wil need to read jobs from DB but to get functionality just use arrayList
+    ArrayList<String> careerAreasList;
 
 
     @Override
@@ -61,6 +61,8 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         // setting text size
         barDataSet.setValueTextSize(16f);
         barChart.getDescription().setEnabled(false);
+
+
     }
 
     private void getBarEntries() {

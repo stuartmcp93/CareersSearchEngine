@@ -32,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PersonalityQuestion extends AppCompatActivity {
     ImageView IMG_home_btn;
-    Button BTN_submit_answer, BTN_previous_question;
+    Button BTN_submit_answer, BTN_previous_question, BTN_view_results;
     TextView TV_questionDisplay, TV_questionNum;
     RadioButton RB_sAgree, RB_agree, RB_neutral, RB_disagree, RB_sDisagree;
 
@@ -56,6 +56,7 @@ public class PersonalityQuestion extends AppCompatActivity {
         IMG_home_btn = findViewById(R.id.IMG_home_logo_quiz);
         BTN_submit_answer = findViewById(R.id.BTN_submit_answer);
         BTN_previous_question = findViewById(R.id.BTN_previous_question);
+        //BTN_view_results = findViewById(R.id.BTN_view_results);
         TV_questionDisplay = findViewById(R.id.TV_question_display);
         TV_questionNum = findViewById(R.id.TV_question_number);
         TV_questionNum.setText(getString(R.string.question_num));
@@ -170,6 +171,9 @@ public class PersonalityQuestion extends AppCompatActivity {
          * and added to the API request string to get the next question from the DB
          */
         int currentQuestionNum = Integer.parseInt((String) TV_questionNum.getText());
+        /*if (currentQuestionNum == 15) {
+            loadResultsDisplay();
+        }*/
         Log.d("Question number:", String.valueOf(currentQuestionNum));
 
         //get the users answer for the question
@@ -205,10 +209,6 @@ public class PersonalityQuestion extends AppCompatActivity {
                 }
 
 
-                //Have function to grab question from DB here
-                //getQuestion();
-
-
 
 
             /*
@@ -216,15 +216,12 @@ public class PersonalityQuestion extends AppCompatActivity {
                 is finished calculate scores for each personality trait and display them in the
                 results activity
              */ //Toast tell user answer was submitted
-                Toast.makeText(PersonalityQuestion.this, "Answer submitted", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PersonalityQuestion.this, "Answer submitted", Toast.LENGTH_SHORT).show();
 
                 //if (currentQuestionNum <= questionsList.size()) {
                 //Set question number and display next question
-                if (currentQuestionNum == 15) {
-                    Toast.makeText(PersonalityQuestion.this, "Questions finished!", Toast.LENGTH_LONG).show();
-                    wait(1000);
-                    loadResultsDisplay();
-                }
+
+
                 for (Question questions : questionsList) {
                     if (questions.getQuestionNum() == currentQuestionNum + 1) {
                         TV_questionDisplay.setText(questions.getQuestion());
@@ -232,19 +229,32 @@ public class PersonalityQuestion extends AppCompatActivity {
                     }
                 }
 
+
             }
+
+            if(opennessScore.size() == 3){
+                loadResultsDisplay();
+            }
+
         }
 
     }
 
 
     public void loadResultsDisplay() {
+        //Add results to arrayList before going to the activity
+        Toast.makeText(PersonalityQuestion.this, "Questions finished! Calculating score",
+                Toast.LENGTH_SHORT).show();
+        calcScoreList();
         Intent resultsIntent = new Intent(PersonalityQuestion.this, PersonalityQuizResults.class);
-        resultsIntent.putExtra("E score", extroversionScore);
+
+        /*
+        resultsIntent.putExtra("user scores", extroversionScore);
         resultsIntent.putExtra("A score", agreeablenessScore);
         resultsIntent.putExtra("C score", conscientiousnessScore);
         resultsIntent.putExtra("N score", neuroticismScore);
-        resultsIntent.putExtra("O score", opennessScore);
+        resultsIntent.putExtra("O score", opennessScore);*/
+
         startActivity(resultsIntent);
     }
 
@@ -254,6 +264,47 @@ public class PersonalityQuestion extends AppCompatActivity {
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    //Temporary to get all other functionality working
+    private void calcScoreList() {
+
+        //Add the extroversion score
+        int eScore = 20;
+        eScore += extroversionScore.get(0);
+        eScore -= extroversionScore.get(1);
+        eScore += extroversionScore.get(2);
+        ListHolder.getInstance().userPTscore.add(eScore);
+
+
+        //add the agreeableness score
+        int aScore = 20;
+        aScore -= agreeablenessScore.get(0);
+        aScore += agreeablenessScore.get(1);
+        aScore -= agreeablenessScore.get(2);
+        ListHolder.getInstance().userPTscore.add(aScore);
+
+        //add conscientiousness score
+        int cScore = 20;
+        cScore += conscientiousnessScore.get(0);
+        cScore -= conscientiousnessScore.get(1);
+        cScore += conscientiousnessScore.get(2);
+        ListHolder.getInstance().userPTscore.add(cScore);
+
+        //add Neuroticism score
+        int nScore = 20;
+        nScore += neuroticismScore.get(0);
+        nScore += neuroticismScore.get(1);
+        nScore += neuroticismScore.get(2);
+        ListHolder.getInstance().userPTscore.add(nScore);
+
+        //add Openness score
+        int oScore = 20;
+        oScore += opennessScore.get(0);
+        oScore += opennessScore.get(1);
+        oScore += opennessScore.get(2);
+        ListHolder.getInstance().userPTscore.add(oScore);
+
     }
 
 
@@ -301,67 +352,3 @@ public class PersonalityQuestion extends AppCompatActivity {
 
 }
 
-//Try return the questions from this and call in onCreate()
-//public ArrayList<String> getQuestionsList() throws IOException
-    /*public void getQuestionsList() throws IOException {
-
-        //ArrayList<String> questionsList = new ArrayList<>();
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://10.0.2.2:5000/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-        //Implement interface methods
-        PlaceholderAPI placeholderAPI = retrofit.create(PlaceholderAPI.class);
-
-        //Hold the response in the list
-        Call<List<Question>> call = placeholderAPI.getQuestions();
-
-
-        //Apparently can use this if not on main thread
-        //call.execute();
-
-        //Log.d("Before response:", "code is working up till here");
-        //Tutorial guy did this>>>
-        call.enqueue(new Callback<List<Question>>() {
-            @Override
-            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
-
-                Log.d("Response:", "IT'S ALIIIIIIIIIIIIVE!!!!!!!!!!!!!!!!!");
-                //If no response display HTTP code
-                if(!response.isSuccessful()){
-                    TV_questionDisplay.setText("Code:" + response.code());
-                    return;
-                }
-
-                //Hold data from response in a list
-                List<Question> questions = response.body();
-
-
-                assert questions != null;
-                questionsList.addAll(questions);
-
-
-
-                /*
-                assert questions != null;
-                //Question questionToDisplay = questions.get(1);
-                TV_questionDisplay.setText((CharSequence) questions.get(1));*/
-
-                /*
-
-                IT WORKS!!!!!!!!!!!!!!!!!!!!!!*/
-               /* TV_questionDisplay.setText(questions.get(0).getQuestion());
-                TV_questionNum.setText(questions.get(0).getQuestion_num());
-            }
-
-            @Override
-            public void onFailure(Call<List<Question>> call, Throwable t) {
-                Log.d("Error:", t.getMessage());
-                //Display error message if no response from the server
-                TV_questionDisplay.setText(t.getMessage());
-            }
-        });
-
-        //return questionsList;
-
-    }*/

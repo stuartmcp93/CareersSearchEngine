@@ -6,8 +6,10 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,6 +21,8 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class PersonalityQuizResults extends AppCompatActivity {
+
+    Button BTN_career_matches_display;
     TextView TV_con, TV_agreeableness, TV_neuroticism, TV_openness, TV_extroversion;
     PieChart pieChart;
     ArrayList<Integer> extroversionResList, agreeablenessResList, conscientiousnessResList,
@@ -32,18 +36,6 @@ public class PersonalityQuizResults extends AppCompatActivity {
         setContentView(R.layout.activity_personality_quiz_results);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        Intent intent = getIntent();
-        extroversionResList = intent.getIntegerArrayListExtra("E score");
-        agreeablenessResList = intent.getIntegerArrayListExtra("A score");
-        conscientiousnessResList = intent.getIntegerArrayListExtra("C score");
-        neuroticismResList = intent.getIntegerArrayListExtra("N score");
-        opennessResList = intent.getIntegerArrayListExtra("O score");
-
-        for(int score : extroversionResList){
-            Log.d("Score:", String.valueOf(score));
-        }
-
-
         // id's that we have given in .XML file
         TV_con = findViewById(R.id.TV_conscientiousness);
         TV_agreeableness = findViewById(R.id.TV_agreeableness);
@@ -52,13 +44,34 @@ public class PersonalityQuizResults extends AppCompatActivity {
         TV_extroversion = findViewById(R.id.TV_extroversion);
         pieChart = findViewById(R.id.piechart);
 
-        // Creating a method setData()
-        // to set the text in text view and pie chart
-        setData(calcExtroversionScore(),
-                calcAgreeablenessScore(),
-                calcConScore(),
-                calcNueScore(),
-                calcOpenScore());
+
+        //Intent intent = getIntent();
+        /*if(intent != null){
+            extroversionResList = intent.getIntegerArrayListExtra("E score");
+            agreeablenessResList = intent.getIntegerArrayListExtra("A score");
+            conscientiousnessResList = intent.getIntegerArrayListExtra("C score");
+            neuroticismResList = intent.getIntegerArrayListExtra("N score");
+            opennessResList = intent.getIntegerArrayListExtra("O score");
+        }*/
+
+        
+
+
+
+
+        if(ListHolder.getInstance().userPTscore.size() == 0){
+            Toast.makeText(PersonalityQuizResults.this, "Take quiz to see results",
+                    Toast.LENGTH_SHORT).show();
+            setData(0,0,0,0,0);
+        } else {
+            setData(ListHolder.getInstance().userPTscore.get(0),
+                    ListHolder.getInstance().userPTscore.get(1),
+                    ListHolder.getInstance().userPTscore.get(2),
+                    ListHolder.getInstance().userPTscore.get(3),
+                    ListHolder.getInstance().userPTscore.get(4)
+            );
+        }
+
 
 
         IMG_home = findViewById(R.id.IMG_home_logo_quiz_res);
@@ -77,45 +90,7 @@ public class PersonalityQuizResults extends AppCompatActivity {
         startActivity(homeIntent);
     }
 
-    private int calcExtroversionScore(){
-        int eScore = 20;
-        eScore += extroversionResList.get(0);
-        eScore -= extroversionResList.get(1);
-        eScore += extroversionResList.get(2);
-        return eScore;
-    }
 
-    private int calcAgreeablenessScore(){
-        int aScore = 14;
-        aScore -= agreeablenessResList.get(0);
-        aScore += agreeablenessResList.get(1);
-        aScore -= agreeablenessResList.get(2);
-        return aScore;
-    }
-
-    private int calcConScore(){
-        int cScore = 14;
-        cScore += conscientiousnessResList.get(0);
-        cScore -= conscientiousnessResList.get(1);
-        cScore += conscientiousnessResList.get(2);
-        return cScore;
-    }
-
-    private int calcNueScore(){
-        int nScore = 38;
-        nScore += neuroticismResList.get(0);
-        nScore -= neuroticismResList.get(1);
-        nScore += neuroticismResList.get(2);
-        return nScore;
-    }
-
-    private int calcOpenScore(){
-        int oScore = 20;
-        oScore += opennessResList.get(0);
-        oScore -= opennessResList.get(1);
-        oScore += opennessResList.get(2);
-        return oScore;
-    }
 
 
 
