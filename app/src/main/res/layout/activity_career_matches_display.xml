@@ -45,7 +45,7 @@
             android:id="@+id/TV_career_matchesLV_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/career_area_matches"
+            android:text="@string/job_matches"
             android:textSize="23sp"
             android:textStyle="bold"
             android:layout_alignParentLeft="true"/>
@@ -70,7 +70,7 @@
         <ListView
             android:id="@+id/LV_career_match_list"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="280dp"
             android:background="@drawable/border"
             />
 

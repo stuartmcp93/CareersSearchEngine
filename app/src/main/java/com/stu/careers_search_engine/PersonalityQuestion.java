@@ -166,14 +166,10 @@ public class PersonalityQuestion extends AppCompatActivity {
      */
     private void nextQuestion() {
 
-        /*
-         * Convert current question number to int. When API is working this will be incremented
-         * and added to the API request string to get the next question from the DB
-         */
+
         int currentQuestionNum = Integer.parseInt((String) TV_questionNum.getText());
-        /*if (currentQuestionNum == 15) {
-            loadResultsDisplay();
-        }*/
+
+
         Log.d("Question number:", String.valueOf(currentQuestionNum));
 
         //get the users answer for the question
@@ -258,13 +254,7 @@ public class PersonalityQuestion extends AppCompatActivity {
         startActivity(resultsIntent);
     }
 
-    public static void wait(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-    }
+
 
     //Temporary to get all other functionality working
     private void calcScoreList() {

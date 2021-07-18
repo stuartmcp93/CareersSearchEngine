@@ -12,9 +12,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -98,9 +100,24 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         barEntriesArrayList.add(new BarEntry(1f, 4));
         barEntriesArrayList.add(new BarEntry(2f, 6));
         barEntriesArrayList.add(new BarEntry(3f, 8));
-        barEntriesArrayList.add(new BarEntry(4f, 2));
-        barEntriesArrayList.add(new BarEntry(5f, 4));
-        barEntriesArrayList.add(new BarEntry(6f, 1));
+
+    }
+
+    private void getResultsFromDB(){
+        if(ListHolder.getInstance().userPTscore.size() == 0){
+            Toast.makeText(CareerMatchesDisplay.this, "Take quiz to see matches",
+                    Toast.LENGTH_SHORT).show();
+
+        } else {
+            int eScore = ListHolder.getInstance().userPTscore.get(0);
+            int aScore = ListHolder.getInstance().userPTscore.get(1);
+            int cScore = ListHolder.getInstance().userPTscore.get(2);
+            int nScore = ListHolder.getInstance().userPTscore.get(3);
+            int oScore = ListHolder.getInstance().userPTscore.get(4);
+
+
+
+        }
     }
 
 
