@@ -2,6 +2,7 @@ package com.stu.careers_search_engine;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.Button;
 public class Home extends Activity {
 
     Button BTN_takeQuiz, BTN_viewResults, BTN_suggestedCareers, BTN_favouritesList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class Home extends Activity {
 
 
     }
+
+
 
     private void showSuggestedCareers() {
         Intent showSuggestedCIntent = new Intent(this, CareerMatchesDisplay.class);

@@ -43,6 +43,7 @@ public class PersonalityQuizResults extends AppCompatActivity {
         TV_openness = findViewById(R.id.TV_openness);
         TV_extroversion = findViewById(R.id.TV_extroversion);
         pieChart = findViewById(R.id.piechart);
+        BTN_career_matches_display = findViewById(R.id.BTN_career_area_matches);
 
 
         //Intent intent = getIntent();
@@ -72,6 +73,13 @@ public class PersonalityQuizResults extends AppCompatActivity {
             );
         }
 
+        BTN_career_matches_display.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadCareerMatches();
+            }
+        });
+
 
 
         IMG_home = findViewById(R.id.IMG_home_logo_quiz_res);
@@ -83,6 +91,12 @@ public class PersonalityQuizResults extends AppCompatActivity {
                 returnHome();
             }
         });
+    }
+
+    private void loadCareerMatches() {
+        Intent matchesIntent = new Intent(this, CareerMatchesDisplay.class);
+        startActivity(matchesIntent);
+
     }
 
     private void returnHome() {

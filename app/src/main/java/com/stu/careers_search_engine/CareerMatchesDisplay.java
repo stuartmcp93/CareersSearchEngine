@@ -1,7 +1,13 @@
 package com.stu.careers_search_engine;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +18,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class CareerMatchesDisplay extends AppCompatActivity {
@@ -28,12 +35,18 @@ public class CareerMatchesDisplay extends AppCompatActivity {
     //Wil need to read jobs from DB but to get functionality just use arrayList
     ArrayList<String> careerAreasList;
 
+    ListView LV_jobMatchesList;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_career_matches_display);
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+        LV_jobMatchesList = findViewById(R.id.LV_career_match_list);
 
         // initializing variable for bar chart.
         barChart = findViewById(R.id.BG_careers_match);
@@ -63,9 +76,20 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         barChart.getDescription().setEnabled(false);
 
 
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+        List<Career> careerMatches = dataBaseHelper.getAllJobs();
+        List<String> jobTitlesMatches = new ArrayList<>();
+        for(Career career : careerMatches){
+            jobTitlesMatches.add(career.getJobTitle());
+        }
+        //Toast.makeText(CareerMatchesDisplay.this, allJobs.toString(), Toast.LENGTH_LONG).show();
+        ArrayAdapter jobsArrayAdapter = new ArrayAdapter<>(CareerMatchesDisplay.this, android.R.layout.simple_list_item_1, jobTitlesMatches);
+        LV_jobMatchesList.setAdapter(jobsArrayAdapter);
+
     }
 
     private void getBarEntries() {
+        //Once have DB running the bar lists will be the top 5 career areas and their count
         // creating a new array list
         barEntriesArrayList = new ArrayList<>();
 
@@ -78,4 +102,8 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         barEntriesArrayList.add(new BarEntry(5f, 4));
         barEntriesArrayList.add(new BarEntry(6f, 1));
     }
+
+
+
+
 }

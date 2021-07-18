@@ -429,7 +429,7 @@
                 >
 
                 <Button
-                    android:id="@+id/BTN_see_career_area_matches"
+                    android:id="@+id/BTN_career_area_matches"
                     android:text="@string/see_career_area_matches"
                     android:drawableRight="@drawable/suggested_resize"
                     android:layout_width="wrap_content"
