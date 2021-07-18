@@ -25,7 +25,7 @@
             />
         <TextView
             android:id="@+id/TV_question_number"
-            android:text="1"
+            android:text="@string/question_num"
             android:textSize="22sp"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -65,8 +65,7 @@
         <TextView
             android:id="@+id/TV_question_display"
             android:layout_below="@+id/TV_question_instructions"
-            android:text="@string/example_question"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,9 +80,18 @@
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         >
+        <!--<Button
+            android:id="@+id/BTN_view_results"
+            android:text="@string/see_results_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"/>-->
         <RadioGroup
+            android:id="@+id/RG_radio_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="1">
@@ -95,7 +103,8 @@
                 android:text="@string/strongly_agree"
                 android:layout_gravity="center_horizontal"
                 android:checked="false"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                />
 
             <RadioButton
                 android:id="@+id/RBTN_agree"
@@ -104,7 +113,8 @@
                 android:text="@string/agree"
                 android:layout_gravity="center_horizontal"
                 android:checked="false"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                />
 
             <RadioButton
                 android:id="@+id/RBTN_neutral"
@@ -113,7 +123,8 @@
                 android:text="@string/neutral"
                 android:layout_gravity="center_horizontal"
                 android:checked="false"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                />
 
             <RadioButton
                 android:id="@+id/RBTN_disagree"
@@ -122,7 +133,8 @@
                 android:text="@string/disagree"
                 android:layout_gravity="center_horizontal"
                 android:checked="false"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                />
             <RadioButton
                 android:id="@+id/RBTN_strongly_disagree"
                 android:layout_width="wrap_content"
@@ -130,8 +142,9 @@
                 android:text="@string/strongly_disagree"
                 android:layout_gravity="center_horizontal"
                 android:checked="false"
-                android:textSize="20dp" />
-            <!--08/06/21 06:00 -->
+                android:textSize="20dp"
+                />
+
         </RadioGroup>
 
     </RelativeLayout>
@@ -141,8 +154,8 @@
         android:layout_height="wrap_content"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="10dp"
         >
         <Button
             android:id="@+id/BTN_previous_question"
@@ -150,20 +163,23 @@
             android:layout_width="wrap_content"
             android:layout_height="75dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"/>
         <ImageView
             android:id="@+id/IMG_home_logo_quiz"
             android:src="@drawable/home_logo"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/>
         <Button
             android:id="@+id/BTN_submit_answer"
             android:text="@string/submit_answer"
             android:layout_width="wrap_content"
             android:layout_height="75dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 

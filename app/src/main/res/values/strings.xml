@@ -17,7 +17,8 @@
     <string name="favourites_list">Favourites list</string>
     <!--#########################################################################################-->
     <!--Personality quiz questions-->
-    <string name="total_num_questions">/25</string>
+    <string name="question_num">1</string>
+    <string name="total_num_questions">/50</string>
     <string name="question_instructions">Rate each statement according to how well it describes you.</string>
     <string name="example_question">I prefer variety to routine. </string>
     <string name="strongly_agree">Strongly agree</string>
@@ -27,5 +28,28 @@
     <string name="strongly_disagree">Strongly disagree</string>
     <string name="prev_question">Previous</string>
     <string name="submit_answer">Submit</string>
+    <string name="see_results_btn">See quiz results!</string>
     <!--#########################################################################################-->
+    <!--Personality results strings-->
+    <!--Personality types-->
+    <string name="conscientiousness">Conscientiousness</string>
+    <string name="agreeableness">Agreeableness</string>
+    <string name="neuroticism">Neuroticism</string>
+    <string name="openness">Openness</string>
+    <string name="extroversion">Extroversion</string>
+
+    <string name="personality_results_title">Personality trait score:</string>
+    <string name="see_career_area_matches">Career \n matches</string>
+    <!--#########################################################################################-->
+
+    <!--Favourites list-->
+    <string name="favourites_header">Favourites List</string>
+    <!--#########################################################################################-->
+
+    <!--Career area matches-->
+    <string name="spinner_text">Filter</string>
+    <string name="career_area_matches">Career area matches:</string>
+    <!--#########################################################################################-->
+
+
 </resources>
