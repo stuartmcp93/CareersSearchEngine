@@ -35,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PersonalityQuestion extends AppCompatActivity {
     ImageView IMG_home_btn;
-    Button BTN_submit_answer, BTN_previous_question, BTN_view_results;
+    Button BTN_submit_answer;
     TextView TV_questionDisplay, TV_questionNum;
     RadioButton RB_sAgree, RB_agree, RB_neutral, RB_disagree, RB_sDisagree;
 
@@ -59,7 +59,6 @@ public class PersonalityQuestion extends AppCompatActivity {
 
         IMG_home_btn = findViewById(R.id.IMG_home_logo_quiz);
         BTN_submit_answer = findViewById(R.id.BTN_submit_answer);
-        BTN_previous_question = findViewById(R.id.BTN_previous_question);
         //BTN_view_results = findViewById(R.id.BTN_view_results);
         TV_questionDisplay = findViewById(R.id.TV_question_display);
         TV_questionNum = findViewById(R.id.TV_question_number);
@@ -267,7 +266,7 @@ public class PersonalityQuestion extends AppCompatActivity {
 
 
         //add Neuroticism score
-        int nScore = 2;
+        int nScore = 20;
         nScore += neuroticismScore.get(0);
         nScore += neuroticismScore.get(1);
         nScore += neuroticismScore.get(2);

@@ -434,18 +434,19 @@
                     android:drawableRight="@drawable/suggested_resize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:minHeight="100dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentBottom="true"/>
+                    android:minHeight="150dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    />
                 <ImageView
                     android:id="@+id/IMG_home_logo_quiz_res"
                     android:src="@drawable/home_logo"
                     android:layout_width="75dp"
                     android:layout_height="70dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+
                     />
 
             </RelativeLayout>

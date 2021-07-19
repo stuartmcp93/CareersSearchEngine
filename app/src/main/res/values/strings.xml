@@ -18,7 +18,7 @@
     <!--#########################################################################################-->
     <!--Personality quiz questions-->
     <string name="question_num">1</string>
-    <string name="total_num_questions">/50</string>
+    <string name="total_num_questions">/15</string>
     <string name="question_instructions">Rate each statement according to how well it describes you.</string>
     <string name="example_question">I prefer variety to routine. </string>
     <string name="strongly_agree">Strongly agree</string>
@@ -49,6 +49,13 @@
     <!--Career area matches-->
     <string name="spinner_text">Filter</string>
     <string name="job_matches">Jobs:</string>
+    <!--#########################################################################################-->
+
+    <!--Job search info-->
+    <string name="job_description">Description:</string>
+    <string name="job_avg_salary">Average salary (UK):</string>
+    <string name="job_search_local_area">Indeed.com link:</string>
+
     <!--#########################################################################################-->
 
 
