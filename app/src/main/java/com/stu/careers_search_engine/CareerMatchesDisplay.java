@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -20,7 +21,9 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class CareerMatchesDisplay extends AppCompatActivity {
@@ -38,8 +41,6 @@ public class CareerMatchesDisplay extends AppCompatActivity {
     ArrayList<String> careerAreasList;
 
     ListView LV_jobMatchesList;
-
-
 
 
     @Override
@@ -77,11 +78,12 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         barDataSet.setValueTextSize(16f);
         barChart.getDescription().setEnabled(false);
 
-
+        String highestPTScore = getHighestPTScore("stuartM");
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
-        List<Career> careerMatches = dataBaseHelper.getAllJobs();
+        dataBaseHelper.checkUserScoreTable();
+        List<Career> careerMatches = dataBaseHelper.getHighMatchingJobs(highestPTScore);
         List<String> jobTitlesMatches = new ArrayList<>();
-        for(Career career : careerMatches){
+        for (Career career : careerMatches) {
             jobTitlesMatches.add(career.getJobTitle());
         }
         //Toast.makeText(CareerMatchesDisplay.this, allJobs.toString(), Toast.LENGTH_LONG).show();
@@ -103,24 +105,51 @@ public class CareerMatchesDisplay extends AppCompatActivity {
 
     }
 
-    private void getResultsFromDB(){
-        if(ListHolder.getInstance().userPTscore.size() == 0){
-            Toast.makeText(CareerMatchesDisplay.this, "Take quiz to see matches",
-                    Toast.LENGTH_SHORT).show();
+    private String getHighestPTScore(String username) {
+        String highestPT = "";
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+        HashMap<String, Integer> userResultMap = dataBaseHelper.getUserPTScores(username);
 
-        } else {
-            int eScore = ListHolder.getInstance().userPTscore.get(0);
-            int aScore = ListHolder.getInstance().userPTscore.get(1);
-            int cScore = ListHolder.getInstance().userPTscore.get(2);
-            int nScore = ListHolder.getInstance().userPTscore.get(3);
-            int oScore = ListHolder.getInstance().userPTscore.get(4);
-
-
-
+        String res = "";
+        int max = 0;
+        for (Map.Entry<String, Integer> entry : userResultMap.entrySet())
+        {
+            Log.d(entry.getKey(), Integer.toString(entry.getValue()));
+            if(entry.getValue() > max){
+                max = entry.getValue();
+                res = entry.getKey();
+            }
         }
+
+        Log.d("########################## Res String:", res);
+        switch (res) {
+            case "eScore":
+                highestPT = "E";
+                Log.d("######################### HighestPT STR:", highestPT);
+                return highestPT;
+            case "aScore":
+               highestPT = "A";
+                Log.d("######################### HighestPT STR:", highestPT);
+                return highestPT;
+            case "cScore":
+                highestPT = "C";
+                Log.d("######################### HighestPT STR:", highestPT);
+                return highestPT;
+            case "nScore":
+                highestPT = "N";
+                Log.d("######################### HighestPT STR:", highestPT);
+                return highestPT;
+            case "oScore":
+                highestPT = "O";
+                Log.d("######################### HighestPT STR:", highestPT);
+                return highestPT;
+        }
+
+        Log.d("######################### HighestPT STR:", highestPT);
+        return highestPT;
     }
-
-
-
-
 }
+
+
+
+

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -135,8 +136,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         insertCareer(db,"Transport & Logistics", "Flight Attendant", "O");
         insertCareer(db,"IT", "Web Developer", "O");
         insertCareer(db,"IT", "Software Engineer", "O");
+
+
+        //Creating users table
+        db.execSQL("CREATE TABLE USER_TABLE( USER_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "USERNAME TEXT NOT NULL UNIQUE, " +
+                "EMAIL_ADDRESS TEXT NOT NULL, " +
+                "PASSWORD TEXT NOT NULL);");
+        insertUSer(db, "stuartM", "stuart@gmail.com", "password");
+
+
+        db.execSQL("CREATE TABLE USER_PERSONALITY_TEST_SCORE(USERNAME TEXT NOT NULL UNIQUE, " +
+                "E_SCORE INTEGER, " +
+                "A_SCORE INTEGER, " +
+                "C_SCORE INTEGER, " +
+                "N_SCORE INTEGER, " +
+                "O_SCORE INTEGER, " +
+                "FOREIGN KEY(USERNAME) REFERENCES USER_TABLE(USERNAME))");
+
         Log.d("M:","===================================================================");
         Log.d("M:", "Success DB!");
+
+
 
 
     }
@@ -144,6 +165,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS JOBS_TABLE");
+        db.execSQL("DROP TABLE IF EXISTS USER_TABLE");
+        db.execSQL("DROP TABLE IF EXISTS USER_PERSONALITY_TEST_SCORE");
+        Log.d("######### databse", "UPDATED!!!!");
         onCreate(db);
 
     }
@@ -157,14 +181,74 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.insert("JOBS_TABLE", null, jobValues);
     }
 
-    public List<Career> getAllJobs(){
+    private static void insertUSer(SQLiteDatabase db, String username, String emailAdd,
+                                     String pWord) {
+        ContentValues userValues = new ContentValues();
+        userValues.put("USERNAME", username);
+        userValues.put("EMAIL_ADDRESS", emailAdd);
+        userValues.put("PASSWORD", pWord);
+        db.insert("USER_TABLE", null, userValues);
+    }
+
+
+
+    public HashMap<String, Integer> getUserPTScores(String username){
+
+        HashMap<String, Integer> resultMap = new HashMap<>();
+        String query = "SELECT E_SCORE, A_SCORE, C_SCORE, N_SCORE, O_SCORE " +
+                "FROM USER_PERSONALITY_TEST_SCORE WHERE USERNAME = ?;";
+        String[] args = new String[1];
+        args[0] = username;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, args);
+        if(cursor.moveToFirst()) {
+            do {
+                resultMap.put("eScore", cursor.getInt(0));
+                resultMap.put("aScore", cursor.getInt(1));
+                resultMap.put("cScore", cursor.getInt(2));
+                resultMap.put("nScore", cursor.getInt(3));
+                resultMap.put("oScore", cursor.getInt(4));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return resultMap;
+    }
+
+    public void checkUserScoreTable(){
+        String query = "SELECT * FROM USER_PERSONALITY_TEST_SCORE;";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do{
+                Log.d("############# USER PT SCORE TABLE", "#########");
+                Log.d("USERNAME", cursor.getString(0));
+                Log.d("eScore", Integer.toString(cursor.getInt(1)));
+                Log.d("aScore", Integer.toString(cursor.getInt(2)));
+                Log.d("cScore", Integer.toString(cursor.getInt(3)));
+                Log.d("nScore", Integer.toString(cursor.getInt(4)));
+                Log.d("oScore", Integer.toString(cursor.getInt(5)));
+            } while(cursor.moveToNext());
+
+        }
+
+    }
+
+
+
+    public List<Career> getHighMatchingJobs(String highestTrait){
 
         List<Career> returnList = new ArrayList<>();
 
-        String query = "SELECT * FROM JOBS_TABLE;";
+        String query = "SELECT * FROM JOBS_TABLE WHERE MATCHING_TRAIT LIKE ?;";
+        String[] args = new String[1];
+        Log.d("############################ highest trait param:", highestTrait);
+        args[0] = highestTrait;
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = db.rawQuery(query, args);
 
         if(cursor.moveToFirst()){
             //Loop through the results

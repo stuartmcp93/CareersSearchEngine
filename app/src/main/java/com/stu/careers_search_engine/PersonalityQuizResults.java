@@ -18,6 +18,8 @@ import org.eazegraph.lib.models.PieModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class PersonalityQuizResults extends AppCompatActivity {
@@ -46,32 +48,21 @@ public class PersonalityQuizResults extends AppCompatActivity {
         BTN_career_matches_display = findViewById(R.id.BTN_career_area_matches);
 
 
-        //Intent intent = getIntent();
-        /*if(intent != null){
-            extroversionResList = intent.getIntegerArrayListExtra("E score");
-            agreeablenessResList = intent.getIntegerArrayListExtra("A score");
-            conscientiousnessResList = intent.getIntegerArrayListExtra("C score");
-            neuroticismResList = intent.getIntegerArrayListExtra("N score");
-            opennessResList = intent.getIntegerArrayListExtra("O score");
-        }*/
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+        HashMap<String, Integer> userResultMap = dataBaseHelper.getUserPTScores("stuartM");
 
-        
+        for (Map.Entry<String, Integer> entry : userResultMap.entrySet())
+        {
 
+            Log.d("########## Quiz results from DB:", "######");
+            Log.d(entry.getKey(), Integer.toString(entry.getValue()));
 
-
-
-        if(ListHolder.getInstance().userPTscore.size() == 0){
-            Toast.makeText(PersonalityQuizResults.this, "Take quiz to see results",
-                    Toast.LENGTH_SHORT).show();
-            setData(0,0,0,0,0);
-        } else {
-            setData(ListHolder.getInstance().userPTscore.get(0),
-                    ListHolder.getInstance().userPTscore.get(1),
-                    ListHolder.getInstance().userPTscore.get(2),
-                    ListHolder.getInstance().userPTscore.get(3),
-                    ListHolder.getInstance().userPTscore.get(4)
-            );
         }
+        setData(userResultMap.getOrDefault("eScore", 0),
+                userResultMap.getOrDefault("aScore", 0),
+                userResultMap.getOrDefault("cScore", 0),
+                userResultMap.getOrDefault("nScore", 0),
+                userResultMap.getOrDefault("oScore", 0));
 
         BTN_career_matches_display.setOnClickListener(new View.OnClickListener() {
             @Override

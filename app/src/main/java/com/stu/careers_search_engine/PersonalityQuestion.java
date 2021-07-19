@@ -2,7 +2,10 @@ package com.stu.careers_search_engine;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +47,7 @@ public class PersonalityQuestion extends AppCompatActivity {
             neuroticismScore, opennessScore;
 
     ArrayList<Question> questionsList;
+
 
 
     @Override
@@ -207,17 +211,6 @@ public class PersonalityQuestion extends AppCompatActivity {
 
 
 
-            /*
-                Checking the question number against number of questions in the quiz. if quiz
-                is finished calculate scores for each personality trait and display them in the
-                results activity
-             */ //Toast tell user answer was submitted
-                //Toast.makeText(PersonalityQuestion.this, "Answer submitted", Toast.LENGTH_SHORT).show();
-
-                //if (currentQuestionNum <= questionsList.size()) {
-                //Set question number and display next question
-
-
                 for (Question questions : questionsList) {
                     if (questions.getQuestionNum() == currentQuestionNum + 1) {
                         TV_questionDisplay.setText(questions.getQuestion());
@@ -229,7 +222,7 @@ public class PersonalityQuestion extends AppCompatActivity {
             }
 
             if(opennessScore.size() == 3){
-                loadResultsDisplay();
+                loadResultsDisplay("stuartM");
             }
 
         }
@@ -237,19 +230,11 @@ public class PersonalityQuestion extends AppCompatActivity {
     }
 
 
-    public void loadResultsDisplay() {
+    public void loadResultsDisplay(String username) {
         //Add results to arrayList before going to the activity
-        Toast.makeText(PersonalityQuestion.this, "Questions finished! Calculating score",
-                Toast.LENGTH_SHORT).show();
-        calcScoreList();
+        calcScoreList(username);
         Intent resultsIntent = new Intent(PersonalityQuestion.this, PersonalityQuizResults.class);
 
-        /*
-        resultsIntent.putExtra("user scores", extroversionScore);
-        resultsIntent.putExtra("A score", agreeablenessScore);
-        resultsIntent.putExtra("C score", conscientiousnessScore);
-        resultsIntent.putExtra("N score", neuroticismScore);
-        resultsIntent.putExtra("O score", opennessScore);*/
 
         startActivity(resultsIntent);
     }
@@ -257,14 +242,14 @@ public class PersonalityQuestion extends AppCompatActivity {
 
 
     //Temporary to get all other functionality working
-    private void calcScoreList() {
+    private void calcScoreList(String username) {
 
         //Add the extroversion score
         int eScore = 20;
         eScore += extroversionScore.get(0);
         eScore -= extroversionScore.get(1);
         eScore += extroversionScore.get(2);
-        ListHolder.getInstance().userPTscore.add(eScore);
+
 
 
         //add the agreeableness score
@@ -272,28 +257,47 @@ public class PersonalityQuestion extends AppCompatActivity {
         aScore -= agreeablenessScore.get(0);
         aScore += agreeablenessScore.get(1);
         aScore -= agreeablenessScore.get(2);
-        ListHolder.getInstance().userPTscore.add(aScore);
+
 
         //add conscientiousness score
         int cScore = 20;
         cScore += conscientiousnessScore.get(0);
         cScore -= conscientiousnessScore.get(1);
         cScore += conscientiousnessScore.get(2);
-        ListHolder.getInstance().userPTscore.add(cScore);
+
 
         //add Neuroticism score
-        int nScore = 20;
+        int nScore = 2;
         nScore += neuroticismScore.get(0);
         nScore += neuroticismScore.get(1);
         nScore += neuroticismScore.get(2);
-        ListHolder.getInstance().userPTscore.add(nScore);
+
 
         //add Openness score
         int oScore = 20;
         oScore += opennessScore.get(0);
-        oScore += opennessScore.get(1);
+        oScore -= opennessScore.get(1);
         oScore += opennessScore.get(2);
-        ListHolder.getInstance().userPTscore.add(oScore);
+
+
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+        // Gets the data repository in write mode
+        SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
+
+        ContentValues userScoreValues = new ContentValues();
+        userScoreValues.put("USERNAME", username);
+        userScoreValues.put("E_SCORE", eScore);
+        Log.d("########## E_SCORE ADDING TO DB:", Integer.toString(eScore));
+        userScoreValues.put("A_SCORE", aScore);
+        Log.d("########## A_SCORE ADDING TO DB:", Integer.toString(aScore));
+        userScoreValues.put("C_SCORE", cScore);
+        Log.d("########## C_SCORE ADDING TO DB:", Integer.toString(cScore));
+        userScoreValues.put("N_SCORE", nScore);
+        Log.d("########## N_SCORE ADDING TO DB:", Integer.toString(nScore));
+        userScoreValues.put("O_SCORE", oScore);
+        Log.d("########## O_SCORE ADDING TO DB:", Integer.toString(oScore));
+        db.insert("USER_PERSONALITY_TEST_SCORE", null, userScoreValues);
+
 
     }
 
