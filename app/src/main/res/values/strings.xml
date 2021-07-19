@@ -54,7 +54,8 @@
     <!--Job search info-->
     <string name="job_description">Description:</string>
     <string name="job_avg_salary">Average salary (UK):</string>
-    <string name="job_search_local_area">Indeed.com link:</string>
+    <string name="job_search_link">Search link:</string>
+    <string name="add_to_favs_list">Add to favourites list</string>
 
     <!--#########################################################################################-->
 

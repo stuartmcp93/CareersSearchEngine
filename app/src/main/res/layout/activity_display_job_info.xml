@@ -34,6 +34,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:id="@+id/TV_add_fav"
+            android:text="@string/add_to_favs_list"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Switch
+        android:id="@+id/SW_add_to_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -193,7 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="@string/job_search_local_area"
+                    android:text="@string/job_search_link"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
 
@@ -239,6 +263,8 @@
 
 
             </RelativeLayout>
+
+
 
 
         </LinearLayout>
