@@ -59,7 +59,7 @@ public class PersonalityQuestion extends AppCompatActivity {
 
         IMG_home_btn = findViewById(R.id.IMG_home_logo_quiz);
         BTN_submit_answer = findViewById(R.id.BTN_submit_answer);
-        //BTN_view_results = findViewById(R.id.BTN_view_results);
+
         TV_questionDisplay = findViewById(R.id.TV_question_display);
         TV_questionNum = findViewById(R.id.TV_question_number);
         TV_questionNum.setText(getString(R.string.question_num));

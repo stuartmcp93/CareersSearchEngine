@@ -26,16 +26,105 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/TV_job_title_display_info"
+        android:id="@+id/title_data"
         android:background="@drawable/border"
         android:layout_marginTop="5dp"
         android:textSize="23sp"
         android:textStyle="bold"
         android:gravity="center"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/job_description"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_two"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/TV_description"
+        android:textSize="15sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/job_avg_salary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_two"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/TV_salary"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/job_search_link"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_two"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:id="@+id/TV_search"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
+
+
+
+
+
+
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -43,239 +132,24 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:layout_marginTop="5dp">
+
+
         <TextView
             android:id="@+id/TV_add_fav"
             android:text="@string/add_to_favs_list"
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/SW_add_to_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
-
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cardViewGraph"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp"
-        android:id="@+id/details">
-
-        <!--Relative layout to display -->
-        <!-- use of programming languages -->
-        <LinearLayout
-            android:id="@+id/LO_results_layout"
-            android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:orientation="vertical">
-
-            <!--Text view to use of -->
-            <!-- programming languages text-->
-            <TextView
-                android:id="@+id/TV_description_card_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/job_description"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"/>
-
-            <!--View to display the line-->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_two"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-
-                <TextView
-                    android:id="@+id/TV_description_display"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="0dp"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="end"
-                    android:text=""
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/color_one"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-
-            <!--View to display the line-->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_two"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/job_avg_salary"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
-
-                <!--Text view to display the percentage -->
-                <!-- of programming language used. -->
-                <!-- For now default set to 0-->
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:shadowColor="@color/colorPrimaryDark"
-                    android:id="@+id/TV_agreeableness"
-                    android:textAlignment="textEnd"
-                    android:textSize="20sp"
-                    android:fontFamily="sans-serif-light"
-                    android:layout_alignParentRight="true"
-                    android:gravity="end" />
-
-            </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_two"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-
-
-                <!--Text view to display the percentage -->
-                <!-- of programming language used. -->
-                <!-- For now default set to 0-->
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:id="@+id/TV_avg_salary_display"
-                    android:textAlignment="textEnd"
-                    android:textSize="18sp"
-                    android:textColor="@color/color_one"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif-light"
-                    android:layout_alignParentRight="true"
-                    android:gravity="end" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_two"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/job_search_link"
-                    android:textSize="20sp"
-                    android:textStyle="bold"/>
-
-                <!--Text view to display the percentage -->
-                <!-- of programming language used. -->
-                <!-- For now default set to 0-->
-
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_two"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="25dp"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-
-
-                <!--Text view to display the percentage -->
-                <!-- of programming language used. -->
-                <!-- For now default set to 0-->
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:id="@+id/TV_indeed_link"
-                    android:textAlignment="textEnd"
-                    android:textSize="18sp"
-                    android:textColor="@color/color_one"
-                    android:textStyle="bold"
-                    android:fontFamily="sans-serif-light"
-                    android:layout_alignParentRight="true"
-                    android:gravity="end" />
-
-
-            </RelativeLayout>
-
-
-
-
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-
-
 
 
     <RelativeLayout
@@ -286,12 +160,12 @@
         android:layout_marginTop="5dp">
 
         <ImageView
-            android:id="@+id/IMG_home_logo_quiz_res"
+            android:id="@+id/IMG_home_logo_info"
             android:src="@drawable/home_logo"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             />
 
     </RelativeLayout>

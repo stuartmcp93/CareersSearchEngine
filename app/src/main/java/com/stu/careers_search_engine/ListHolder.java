@@ -8,8 +8,8 @@ Using the listHolder class until can set up DB. Get all functionality working co
 
 public class ListHolder {
 
-    final ArrayList<Integer> userPTscore = new ArrayList<>();
-    final ArrayList<String> careerAreas = new ArrayList<String>();
+    final ArrayList<String> username = new ArrayList<>();
+    
 
 
 

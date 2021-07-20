@@ -18,6 +18,8 @@ public class Career implements Serializable {
         this.careerArea = careerArea;
         this.jobTitle = jobTitle;
         this.matchingTrait = matchingTrait;
+        this.description = description;
+        this.salary = salary;
     }
 
 

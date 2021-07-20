@@ -6,11 +6,11 @@
     <string name="sign_up">Sign up</string>
     <string name="forgot_details">Forgot details?</string>
     <string name="title">Careers Search Engine</string>
-    <string name="enter_email_address">Enter email address</string>
+    <string name="enter_username">Enter username</string>
     <string name="enter_password">Enter password</string>
     <!--#########################################################################################-->
     <!--Home page strings-->
-    <string name="welcome_message">Welcome user!</string>
+    <string name="welcome_message">Welcome </string>
     <string name="take_the_quiz">Take the quiz</string>
     <string name="see_results">See results</string>
     <string name="suggested_careers">Suggested careers</string>

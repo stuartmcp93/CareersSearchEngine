@@ -6,10 +6,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Home extends Activity {
 
     Button BTN_takeQuiz, BTN_viewResults, BTN_suggestedCareers, BTN_favouritesList;
+    TextView username;
 
 
     @Override
@@ -22,6 +24,8 @@ public class Home extends Activity {
         BTN_viewResults = findViewById(R.id.BTN_quiz_results);
         BTN_suggestedCareers = findViewById(R.id.BTN_suggested_careers);
         BTN_favouritesList = findViewById(R.id.BTN_favourites);
+        username = findViewById(R.id.TV_username);
+        username.setText(ListHolder.getInstance().username.get(0));
 
         //On click go to personality quiz results
         BTN_viewResults.setOnClickListener(new View.OnClickListener() {

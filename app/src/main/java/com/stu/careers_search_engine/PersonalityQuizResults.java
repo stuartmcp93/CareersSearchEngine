@@ -51,6 +51,10 @@ public class PersonalityQuizResults extends AppCompatActivity {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
         HashMap<String, Integer> userResultMap = dataBaseHelper.getUserPTScores("stuartM");
 
+        if(userResultMap.isEmpty()){
+            Toast.makeText(this, "Take quiz to see results", Toast.LENGTH_SHORT).show();
+        }
+
         for (Map.Entry<String, Integer> entry : userResultMap.entrySet())
         {
 

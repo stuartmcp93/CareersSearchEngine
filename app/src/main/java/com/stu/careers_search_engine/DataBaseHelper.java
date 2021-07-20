@@ -30,7 +30,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "JOB_TITLE TEXT," +
                 "MATCHING_TRAIT TEXT, " +
                 "DESCRIPTION TEXT," +
-                " AVG_SALARY TEXT);");
+                "AVG_SALARY TEXT);");
 
 
 
@@ -324,6 +324,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "O_SCORE INTEGER, " +
                 "FOREIGN KEY(USERNAME) REFERENCES USER_TABLE(USERNAME))");
 
+        db.execSQL("CREATE TABLE USER_FAVOURITES_TABLE(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "USERNAME TEXT, JOB_ID INTEGER, " +
+                "FOREIGN KEY(USERNAME) REFERENCES USER_TABLE(USERNAME)," +
+                "FOREIGN KEY(JOB_ID) REFERENCES JOBS_TABLE(_id));");
+
+        //insertFavourite(db, "stuartM" , 1);
+
+
+
         Log.d("M:","===================================================================");
         Log.d("M:", "Success DB!");
 
@@ -337,7 +346,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS JOBS_TABLE");
         db.execSQL("DROP TABLE IF EXISTS USER_TABLE");
         db.execSQL("DROP TABLE IF EXISTS USER_PERSONALITY_TEST_SCORE");
-        Log.d("######### databse", "UPDATED!!!!");
+        db.execSQL("DROP TABLE IF EXISTS USER_FAVOURITES_TABLE");
+        Log.d("######### database", "UPDATED!!!!");
         onCreate(db);
 
     }
@@ -351,6 +361,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         jobValues.put("DESCRIPTION", description);
         jobValues.put("AVG_SALARY", salary);
         db.insert("JOBS_TABLE", null, jobValues);
+    }
+
+    private static void insertFavourite(SQLiteDatabase db, String username, int jobID ) {
+        ContentValues favValues = new ContentValues();
+        favValues.put("USERNAME", username);
+        favValues.put("JOB_ID", jobID);
+        db.insert("USER_FAVOURITES_TABLE", null, favValues);
     }
 
     private static void insertUSer(SQLiteDatabase db, String username, String emailAdd,
@@ -442,5 +459,70 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
+    }
+
+    public List<Career> getUserFavouriteList(String username){
+
+        List<Career> returnList = new ArrayList<>();
+        String[] args = new String[1];
+        args[0] = username;
+
+        String query = "SELECT * FROM JOBS_TABLE WHERE _id IN (" +
+                "SELECT JOB_ID FROM USER_FAVOURITES_TABLE WHERE USERNAME LIKE ?);";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, args);
+
+
+        if(cursor.moveToFirst()){
+            //Loop through the results
+            do {
+                int id = cursor.getInt(0);
+                String careerArea = cursor.getString(1);
+                String jobTitle = cursor.getString(2);
+                String matchingTrait = cursor.getString(3);
+                String description = cursor.getString(4);
+                String salary = cursor.getString(5);
+                Career career = new Career(id, careerArea, jobTitle, matchingTrait,
+                        description, salary);
+                returnList.add(career);
+
+            } while(cursor.moveToNext());
+
+        }
+
+
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    public boolean checkPassword(String pword){
+        boolean match = false;
+
+        String query = "SELECT * FROM USER_TABLE WHERE PASSWORD = ?;";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[] {pword});
+        if(cursor.moveToFirst()){
+            match = true;
+        }
+
+        cursor.close();
+        db.close();
+        return match;
+    }
+
+    public boolean checkUsername(String username){
+        boolean match = false;
+
+        String query = "SELECT * FROM USER_TABLE WHERE USERNAME = ?;";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[] {username});
+        if(cursor.moveToFirst()){
+            match = true;
+        }
+
+        cursor.close();
+        db.close();
+        return match;
     }
 }

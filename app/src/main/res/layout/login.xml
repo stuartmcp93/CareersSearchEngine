@@ -48,8 +48,8 @@
         android:orientation="vertical"
         android:layout_marginTop="20dp">
         <EditText
-            android:id="@+id/ET_email"
-            android:hint="@string/enter_email_address"
+            android:id="@+id/ET_username"
+            android:hint="@string/enter_username"
             android:gravity="center"
             android:layout_width="300dp"
             android:layout_height="50dp"

@@ -5,12 +5,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +33,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class CareerMatchesDisplay extends AppCompatActivity {
+
+    ImageView IMG_home_btn;
 
     // variable for our bar chart
     BarChart barChart;
@@ -82,16 +86,24 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         barDataSet.setValueTextSize(16f);
         barChart.getDescription().setEnabled(false);
 
-        String highestPTScore = getHighestPTScore("stuartM");
+        IMG_home_btn = findViewById(R.id.IMG_home_logo_quiz);
+
+        String highestPTScore = getHighestPTScore(ListHolder.getInstance().username.get(0));
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
         dataBaseHelper.checkUserScoreTable();
         List<Career> careerMatches = dataBaseHelper.getHighMatchingJobs(highestPTScore);
         List<String> jobTitlesMatches = new ArrayList<>();
         for (Career career : careerMatches) {
             jobTitlesMatches.add(career.getJobTitle());
+
         }
-        //Toast.makeText(CareerMatchesDisplay.this, allJobs.toString(), Toast.LENGTH_LONG).show();
-        ArrayAdapter jobsArrayAdapter = new ArrayAdapter<>(CareerMatchesDisplay.this, android.R.layout.simple_list_item_1, jobTitlesMatches);
+        if(careerMatches.size() == 0){
+            Toast.makeText(CareerMatchesDisplay.this, "Take quiz to see jobs!",
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        ArrayAdapter jobsArrayAdapter = new ArrayAdapter<>(CareerMatchesDisplay.this,
+                android.R.layout.simple_list_item_1, jobTitlesMatches);
         LV_jobMatchesList.setAdapter(jobsArrayAdapter);
 
         LV_jobMatchesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,6 +115,14 @@ public class CareerMatchesDisplay extends AppCompatActivity {
                 displayJobInfo(careerToDisplay);
 
 
+            }
+        });
+
+        IMG_home_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IMG_home_btn.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+                returnHome();
             }
         });
 
@@ -171,6 +191,11 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         displayJobIntent.putExtra("career obj", careerToDisplay);
         startActivity(displayJobIntent);
 
+    }
+
+    private void returnHome() {
+        Intent returnHome = new Intent(this, Home.class);
+        startActivity(returnHome);
     }
 }
 
