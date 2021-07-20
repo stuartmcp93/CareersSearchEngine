@@ -1,11 +1,15 @@
 package com.stu.careers_search_engine;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -90,6 +94,19 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         ArrayAdapter jobsArrayAdapter = new ArrayAdapter<>(CareerMatchesDisplay.this, android.R.layout.simple_list_item_1, jobTitlesMatches);
         LV_jobMatchesList.setAdapter(jobsArrayAdapter);
 
+        LV_jobMatchesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Career careerToDisplay = careerMatches.get(position);
+
+                displayJobInfo(careerToDisplay);
+
+
+            }
+        });
+
+
     }
 
     private void getBarEntries() {
@@ -147,6 +164,13 @@ public class CareerMatchesDisplay extends AppCompatActivity {
 
         Log.d("######################### HighestPT STR:", highestPT);
         return highestPT;
+    }
+
+    public void displayJobInfo(Career careerToDisplay){
+        Intent displayJobIntent = new Intent(this, DisplayJobInfo.class);
+        displayJobIntent.putExtra("career obj", careerToDisplay);
+        startActivity(displayJobIntent);
+
     }
 }
 

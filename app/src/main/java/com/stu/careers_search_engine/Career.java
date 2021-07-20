@@ -1,13 +1,19 @@
 package com.stu.careers_search_engine;
 
-public class Career {
+import java.io.Serializable;
+
+@SuppressWarnings("serial") //With this annotation we are going to hide compiler warnings
+public class Career implements Serializable {
 
     private int id;
     private String careerArea;
     private String jobTitle;
     private String matchingTrait;
+    private String description;
+    private String salary;
 
-    public Career( int id, String careerArea, String jobTitle, String matchingTrait) {
+    public Career( int id, String careerArea, String jobTitle, String matchingTrait,
+                   String description, String salary) {
         this.id = id;
         this.careerArea = careerArea;
         this.jobTitle = jobTitle;
@@ -29,5 +35,13 @@ public class Career {
 
     public String getMatchingTrait() {
         return matchingTrait;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getSalary() {
+        return salary;
     }
 }

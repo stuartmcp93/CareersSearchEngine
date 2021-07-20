@@ -429,7 +429,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String careerArea = cursor.getString(1);
                 String jobTitle = cursor.getString(2);
                 String matchingTrait = cursor.getString(3);
-                Career career = new Career(id, careerArea, jobTitle, matchingTrait);
+                String description = cursor.getString(4);
+                String salary = cursor.getString(5);
+                Career career = new Career(id, careerArea, jobTitle, matchingTrait,
+                        description, salary);
                 returnList.add(career);
 
             } while(cursor.moveToNext());

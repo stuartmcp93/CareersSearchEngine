@@ -252,7 +252,7 @@ public class PersonalityQuestion extends AppCompatActivity {
 
 
         //add the agreeableness score
-        int aScore = 20;
+        int aScore = 90;
         aScore -= agreeablenessScore.get(0);
         aScore += agreeablenessScore.get(1);
         aScore -= agreeablenessScore.get(2);
