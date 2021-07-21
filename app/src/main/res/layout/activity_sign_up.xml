@@ -89,6 +89,7 @@
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/border"
+            android:inputType="textPassword"
 
             />
 
@@ -100,7 +101,8 @@
             android:layout_height="50dp"
             android:layout_marginTop="65dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/border"/>
+            android:background="@drawable/border"
+            android:inputType="textPassword"/>
 
 
 

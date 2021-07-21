@@ -23,7 +23,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="2dp"
@@ -52,16 +52,16 @@
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border"/>
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:textSize="18sp"
-                    android:background="@drawable/border"
+                    android:textSize="20sp"
                     android:text="@string/percent"
                     android:textStyle="bold"
+                    android:layout_marginRight="25dp"
                     />
             </RelativeLayout>
 
@@ -74,24 +74,24 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:text="@string/top_match"
-                    android:textSize="18sp"
-                    android:background="@drawable/border"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="25dp"
                     />
                 <TextView
-                    android:id="@+id/TV_top_career_area"
+                    android:id="@+id/TV_top_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:textSize="18sp"
-                    android:background="@drawable/border"
+                    android:textSize="20sp"
                     />
                 <TextView
-                    android:id="@+id/TV_top_career_percent"
+                    android:id="@+id/TV_top_percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="25dp"
                     android:textSize="18sp"
-                    android:background="@drawable/border"
+
                     />
 
             </RelativeLayout>
@@ -105,24 +105,24 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:text="@string/second_match"
-                    android:textSize="18sp"
-                    android:background="@drawable/border"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="25dp"
                     />
                 <TextView
                     android:id="@+id/TV_second_top"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:textSize="18sp"
-                    android:background="@drawable/border"
+                    android:textSize="20sp"
+
                     />
                 <TextView
-                    android:id="@+id/TV_top_career_percent"
+                    android:id="@+id/TV_second_percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="25dp"
                     android:textSize="18sp"
-                    android:background="@drawable/border"
                     />
 
             </RelativeLayout>
@@ -136,24 +136,24 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:text="@string/third_match"
-                    android:textSize="18sp"
-                    android:background="@drawable/border"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="25dp"
                     />
                 <TextView
-                    android:id="@+id/TV_top_career_area"
+                    android:id="@+id/TV_third_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:textSize="18sp"
-                    android:background="@drawable/border"
+
                     />
                 <TextView
-                    android:id="@+id/TV_top_career_percent"
+                    android:id="@+id/TV_third_percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="25dp"
                     android:textSize="18sp"
-                    android:background="@drawable/border"
                     />
 
             </RelativeLayout>
@@ -197,7 +197,7 @@
         <ListView
             android:id="@+id/LV_career_match_list"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:background="@drawable/border"
             />
 
