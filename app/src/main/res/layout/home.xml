@@ -27,12 +27,12 @@
         />
 
         <Spinner
+            android:id="@+id/SP_home_spinner"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:background="@drawable/settings_logo"
-            android:spinnerMode="dropdown"
             />
 
         <!--

@@ -427,17 +427,48 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
 
+
     public List<Career> getHighMatchingJobs(String highestTrait){
 
         List<Career> returnList = new ArrayList<>();
 
         String query = "SELECT * FROM JOBS_TABLE WHERE MATCHING_TRAIT LIKE ?;";
-        String[] args = new String[1];
-        Log.d("############################ highest trait param:", highestTrait);
-        args[0] = highestTrait;
 
+        Log.d("############################ highest trait param:", highestTrait);
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, args);
+        Cursor cursor = db.rawQuery(query, new String[]{highestTrait});
+
+        if(cursor.moveToFirst()){
+            //Loop through the results
+            do {
+                int id = cursor.getInt(0);
+                String careerArea = cursor.getString(1);
+                String jobTitle = cursor.getString(2);
+                String matchingTrait = cursor.getString(3);
+                String description = cursor.getString(4);
+                String salary = cursor.getString(5);
+                Career career = new Career(id, careerArea, jobTitle, matchingTrait,
+                        description, salary);
+                returnList.add(career);
+
+            } while(cursor.moveToNext());
+
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    public List<Career> getLowMatchingJobs(String lowestTrait){
+
+        List<Career> returnList = new ArrayList<>();
+
+        String query = "SELECT * FROM JOBS_TABLE WHERE MATCHING_TRAIT LIKE ?;";
+
+        Log.d("############################ highest trait param:", lowestTrait);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[]{lowestTrait});
 
         if(cursor.moveToFirst()){
             //Loop through the results
@@ -464,13 +495,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public List<Career> getUserFavouriteList(String username){
 
         List<Career> returnList = new ArrayList<>();
-        String[] args = new String[1];
-        args[0] = username;
 
         String query = "SELECT * FROM JOBS_TABLE WHERE _id IN (" +
                 "SELECT JOB_ID FROM USER_FAVOURITES_TABLE WHERE USERNAME LIKE ?);";
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, args);
+        Cursor cursor = db.rawQuery(query, new String[]{username});
 
 
         if(cursor.moveToFirst()){

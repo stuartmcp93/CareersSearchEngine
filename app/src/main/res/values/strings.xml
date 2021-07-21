@@ -54,6 +54,7 @@
     <string name="second_match">2. </string>
     <string name="third_match">3. </string>
     <string name="percent">%</string>
+    <string name="filter">Filter by</string>
     <!--#########################################################################################-->
 
     <!--Job search info-->
