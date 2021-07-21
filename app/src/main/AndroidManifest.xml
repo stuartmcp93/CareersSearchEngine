@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CareersSearchEngine"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DisplayJobInfo"/>
+        <activity android:name=".SignUp"></activity>
+        <activity android:name=".DisplayJobInfo" />
         <activity android:name=".CareerMatchesDisplay" />
         <activity android:name=".FavouritesList" />
         <activity android:name=".Home" />

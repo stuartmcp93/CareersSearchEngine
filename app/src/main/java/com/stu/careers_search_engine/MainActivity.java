@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Objects;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button BTN_login;
     EditText ET_username, ET_password;
+    TextView TV_signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +29,20 @@ public class MainActivity extends AppCompatActivity {
         BTN_login = findViewById(R.id.BTN_login);
         ET_username = findViewById(R.id.ET_username);
         ET_password = findViewById(R.id.ET_password);
+        TV_signup = findViewById(R.id.TV_sign_up);
 
         BTN_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 login();
+            }
+        });
+
+        TV_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signUpActivity();
             }
         });
     }
@@ -49,5 +59,10 @@ public class MainActivity extends AppCompatActivity {
     } else {
             Toast.makeText(this, "Username or password not found!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void signUpActivity(){
+        Intent intent = new Intent(this, SignUp.class);
+        startActivity(intent);
     }
 }

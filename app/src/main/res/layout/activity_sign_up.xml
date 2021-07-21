@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context="com.stu.careers_search_engine.MainActivity">
+    tools:context="com.stu.careers_search_engine.SignUp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,34 +19,34 @@
         <ImageView
             android:id="@+id/IMG_main_logo"
             android:src="@drawable/main_logo"
-            android:layout_width="300dp"
-            android:layout_height="150dp"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+
             />
 
         <TextView
-            android:id="@+id/TV_title"
-            android:text="@string/title"
+            android:text="@string/sign_up_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/IMG_main_logo"
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:textSize="30sp"
-           >
+            >
 
         </TextView>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:paddingLeft="16dp"
         android:paddingTop="20dp"
         android:paddingRight="16dp"
         android:orientation="vertical"
         android:layout_marginTop="20dp">
+
         <EditText
             android:id="@+id/ET_username"
             android:hint="@string/enter_username"
@@ -59,8 +59,8 @@
             />
 
         <EditText
-            android:id="@+id/ET_password"
-            android:hint="@string/enter_password"
+            android:id="@+id/ET_email_add"
+            android:hint="@string/enter_email_add"
             android:gravity="center"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -68,23 +68,43 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/border"/>
 
-        <CheckBox
-            android:id="@+id/CB_remember_me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="125dp"
-            android:layout_marginLeft="100dp"
-           />
 
-        <TextView
-            android:id="@+id/TV_remember_me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="125dp"
-            android:layout_toRightOf="@id/CB_remember_me"
-            android:text="@string/remember_me"
-            android:paddingTop="15dp"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="20dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical"
+        >
+        <EditText
+            android:id="@+id/ET_password"
+            android:hint="@string/enter_password2"
+            android:gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/border"
+
+            />
+
+        <EditText
+            android:id="@+id/ET_retype_password"
+            android:hint="@string/retype_password"
+            android:gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="65dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/border"/>
+
+
+
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -96,34 +116,17 @@
         android:orientation="vertical"
         android:layout_marginTop="2dp">
         <Button
-            android:id="@+id/BTN_login"
+            android:id="@+id/BTN_sign_up"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
-            android:text="@string/login"
-           />
-        <TextView
-            android:id="@+id/TV_sign_up"
             android:text="@string/sign_up"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="60dp"
-            android:layout_marginLeft="25dp"
-            android:textSize="25sp"
-            />
-        <TextView
-            android:id="@+id/TV_forgot_details"
-            android:text="@string/forgot_details"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="60dp"
-            android:layout_marginRight="25dp"
-            android:textSize="20sp"
+            android:layout_alignParentTop="true"
             />
 
 
-</RelativeLayout>
+
+
+    </RelativeLayout>
 
 </LinearLayout>

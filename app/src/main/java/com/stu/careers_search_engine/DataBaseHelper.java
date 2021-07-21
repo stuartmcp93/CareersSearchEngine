@@ -521,6 +521,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             match = true;
         }
 
+        Log.d("########### match", String.valueOf(match));
         cursor.close();
         db.close();
         return match;

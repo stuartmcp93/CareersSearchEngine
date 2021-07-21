@@ -49,6 +49,11 @@
     <!--Career area matches-->
     <string name="spinner_text">Filter</string>
     <string name="job_matches">Jobs:</string>
+    <string name="top_three_title">Top 3 area matches:</string>
+    <string name="top_match">1. </string>
+    <string name="second_match">2. </string>
+    <string name="third_match">3. </string>
+    <string name="percent">%</string>
     <!--#########################################################################################-->
 
     <!--Job search info-->
@@ -57,6 +62,14 @@
     <string name="job_search_link">Search link:</string>
     <string name="add_to_favs_list">Add to favourites list</string>
 
+    <!--#########################################################################################-->
+
+    <!--Sign up-->
+    <string name="sign_up_title">Sign up</string>
+    <string name="enter_a_username">Enter a username</string>
+    <string name="enter_email_add">Enter email address</string>
+    <string name="enter_password2">Enter a password</string>
+    <string name="retype_password">Retype password</string>
     <!--#########################################################################################-->
 
 

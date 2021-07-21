@@ -36,14 +36,7 @@ public class CareerMatchesDisplay extends AppCompatActivity {
 
     ImageView IMG_home_btn;
 
-    // variable for our bar chart
-    BarChart barChart;
-    // variable for our bar data.
-    BarData barData;
-    // variable for our bar data set.
-    BarDataSet barDataSet;
-    // array list for storing entries.
-    ArrayList barEntriesArrayList;
+
 
     //Wil need to read jobs from DB but to get functionality just use arrayList
     ArrayList<String> careerAreasList;
@@ -59,32 +52,7 @@ public class CareerMatchesDisplay extends AppCompatActivity {
 
         LV_jobMatchesList = findViewById(R.id.LV_career_match_list);
 
-        // initializing variable for bar chart.
-        barChart = findViewById(R.id.BG_careers_match);
 
-        // calling method to get bar entries.
-        getBarEntries();
-
-        // creating a new bar data set.
-        barDataSet = new BarDataSet(barEntriesArrayList, "Career areas");
-
-        // creating a new bar data and
-        // passing our bar data set.
-        barData = new BarData(barDataSet);
-
-        // below line is to set data
-        // to our bar chart.
-        barChart.setData(barData);
-
-        // adding color to our bar data set.
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-
-        // setting text color.
-        barDataSet.setValueTextColor(Color.BLACK);
-
-        // setting text size
-        barDataSet.setValueTextSize(16f);
-        barChart.getDescription().setEnabled(false);
 
         IMG_home_btn = findViewById(R.id.IMG_home_logo_quiz);
 
@@ -129,18 +97,6 @@ public class CareerMatchesDisplay extends AppCompatActivity {
 
     }
 
-    private void getBarEntries() {
-        //Once have DB running the bar lists will be the top 5 career areas and their count
-        // creating a new array list
-        barEntriesArrayList = new ArrayList<>();
-
-        // adding new entry to our array list with bar
-        // entry and passing x and y axis value to it.
-        barEntriesArrayList.add(new BarEntry(1f, 4));
-        barEntriesArrayList.add(new BarEntry(2f, 6));
-        barEntriesArrayList.add(new BarEntry(3f, 8));
-
-    }
 
     private String getHighestPTScore(String username) {
         String highestPT = "";

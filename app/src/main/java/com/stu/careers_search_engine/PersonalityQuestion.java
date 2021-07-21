@@ -296,7 +296,7 @@ public class PersonalityQuestion extends AppCompatActivity {
         userScoreValues.put("O_SCORE", oScore);
         Log.d("########## O_SCORE ADDING TO DB:", Integer.toString(oScore));
         db.insert("USER_PERSONALITY_TEST_SCORE", null, userScoreValues);
-
+        db.close();
 
     }
 
