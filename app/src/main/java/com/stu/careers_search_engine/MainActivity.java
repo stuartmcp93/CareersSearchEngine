@@ -47,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        //do nothing
+    }
+
     public void login(){
         String username =  ET_username.getText().toString();
         String password = ET_password.getText().toString();

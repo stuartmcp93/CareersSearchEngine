@@ -87,6 +87,11 @@ public class Home extends Activity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        //do nothing
+    }
+
     public void logout() {
         Toast.makeText(Home.this, "Logging out!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Home.this, MainActivity.class);
