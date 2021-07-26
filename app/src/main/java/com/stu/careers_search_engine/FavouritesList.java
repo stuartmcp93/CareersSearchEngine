@@ -33,7 +33,7 @@ public class FavouritesList extends AppCompatActivity {
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
         dataBaseHelper.checkUserScoreTable();
-        List<Career> careerFavouritesList = dataBaseHelper.getUserFavouriteList("stuartM");
+        List<Career> careerFavouritesList = dataBaseHelper.getUserFavouriteList(ListHolder.getInstance().username.get(0));
 
         if(careerFavouritesList.size() == 0){
             Toast.makeText(FavouritesList.this, "Favourites list is empty!",

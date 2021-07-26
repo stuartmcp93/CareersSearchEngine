@@ -268,7 +268,7 @@ public class CareerMatchesDisplay extends AppCompatActivity {
     }
 
     public void setMatchesDisplayAndPercent(List<Career> careerMatches){
-            int topPercent, secondPercent, thirdPercent;
+            double topPercent, secondPercent, thirdPercent;
 
         HashMap<String, Integer> careerAreaAndCounts = new HashMap<>();
 
@@ -305,15 +305,20 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         TV_secondMatch.setText(topThreeListAreas.get(1));
         TV_thirdMatch.setText(topThreeListAreas.get(2));
 
-        topPercent =  Math.round((topThreeListCounts.get(0) / careerMatches.size()) * 100);
-        secondPercent = Math.round((topThreeListCounts.get(1) / careerMatches.size()) * 100);
-        thirdPercent = Math.round((topThreeListCounts.get(2) / careerMatches.size()) * 100);
+        Log.d("################## list count 0", Integer.toString(topThreeListCounts.get(0)));
 
-        Log.d("########## percentage top", Integer.toString(topPercent));
+        double size = careerMatches.size();
+        Log.d("########### size", Integer.toString((int) size));
 
-        TV_topPercent.setText(Integer.toString(topPercent));
-        TV_secondPercent.setText(Integer.toString(secondPercent));
-        TV_thirdPercent.setText(Integer.toString(thirdPercent));
+        topPercent =  (double) (topThreeListCounts.get(0) / size) * 100;
+        secondPercent = (double) (topThreeListCounts.get(1) / size) * 100;
+        thirdPercent =  (double) (topThreeListCounts.get(2) / size) * 100;
+
+        Log.d("########## percentage top", Integer.toString((int) topPercent));
+
+        TV_topPercent.setText(Integer.toString((int) topPercent));
+        TV_secondPercent.setText(Integer.toString((int) secondPercent));
+        TV_thirdPercent.setText(Integer.toString((int) thirdPercent));
 
 
 

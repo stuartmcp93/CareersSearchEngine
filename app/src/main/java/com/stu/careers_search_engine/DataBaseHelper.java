@@ -16,7 +16,7 @@ import java.util.List;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "CAREERS_SEARCH_ENGINE_DB"; // the name of our database
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     DataBaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
@@ -313,7 +313,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "USERNAME TEXT NOT NULL UNIQUE, " +
                 "EMAIL_ADDRESS TEXT NOT NULL, " +
                 "PASSWORD TEXT NOT NULL);");
-        insertUSer(db, "stuartM", "stuart@gmail.com", "password");
+
+
+
+
+        insertUser(db, "stuartM", "stuart@gmail.com", "password");
 
 
         db.execSQL("CREATE TABLE USER_PERSONALITY_TEST_SCORE(USERNAME TEXT NOT NULL UNIQUE, " +
@@ -322,14 +326,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "C_SCORE INTEGER, " +
                 "N_SCORE INTEGER, " +
                 "O_SCORE INTEGER, " +
-                "FOREIGN KEY(USERNAME) REFERENCES USER_TABLE(USERNAME))");
+                "FOREIGN KEY(USERNAME) REFERENCES USER_TABLE(USERNAME));");
 
-        db.execSQL("CREATE TABLE USER_FAVOURITES_TABLE(ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "USERNAME TEXT, JOB_ID INTEGER, " +
+
+        db.execSQL("CREATE TABLE USER_FAVOURITES_TABLE(USERNAME TEXT, JOB_ID INTEGER, " +
                 "FOREIGN KEY(USERNAME) REFERENCES USER_TABLE(USERNAME)," +
                 "FOREIGN KEY(JOB_ID) REFERENCES JOBS_TABLE(_id));");
 
-        //insertFavourite(db, "stuartM" , 1);
+        db.execSQL("CREATE TABLE PERSONALITY_QUESTIONS(QUESTION_NUM INTEGER PRIMARY KEY AUTOINCREMENT, QUESTION TEXT NOT NULL, TRAIT TEXT NOT NULL );");
+
+        insertPersonalityQuestion(db, "I am the life of the party.", "E");
+        insertPersonalityQuestion(db,"I feel little concern for others.", "A");
+        insertPersonalityQuestion(db,"I am always prepared.", "C");
+        insertPersonalityQuestion(db,"I get stressed out easily.", "N");
+        insertPersonalityQuestion(db,"I have a rich vocabulary.", "O");
+        insertPersonalityQuestion(db,"I don't talk a lot.", "E");
+        insertPersonalityQuestion(db,"I am interested in people.", "A");
+        insertPersonalityQuestion(db, "I leave my belongings around.", "C");
+        insertPersonalityQuestion(db,"I am relaxed most of the time.", "N");
+        insertPersonalityQuestion(db,"I have difficulty understanding abstract ideas.", "O");
+        insertPersonalityQuestion(db,"I feel comfortable around people.", "E");
+        insertPersonalityQuestion(db,"I insult people.","A");
+        insertPersonalityQuestion(db,"I pay attention to details.", "C");
+        insertPersonalityQuestion(db,"I worry about things.", "N");
+        insertPersonalityQuestion(db, "I have a vivid imagination.", "O");
+
+
 
 
 
@@ -343,12 +365,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS JOBS_TABLE");
-        db.execSQL("DROP TABLE IF EXISTS USER_TABLE");
-        db.execSQL("DROP TABLE IF EXISTS USER_PERSONALITY_TEST_SCORE");
-        db.execSQL("DROP TABLE IF EXISTS USER_FAVOURITES_TABLE");
-        Log.d("######### database", "UPDATED!!!!");
-        onCreate(db);
+        if(oldVersion < newVersion){
+            db.execSQL("DROP TABLE IF EXISTS JOBS_TABLE");
+            db.execSQL("DROP TABLE IF EXISTS USER_TABLE");
+            db.execSQL("DROP TABLE IF EXISTS USER_PERSONALITY_TEST_SCORE");
+            db.execSQL("DROP TABLE IF EXISTS USER_FAVOURITES_TABLE");
+            db.execSQL("DROP TABLE IF EXISTS PERSONALITY_QUESTIONS");
+            Log.d("######### database", "UPDATED!!!!");
+            onCreate(db);
+        }
+
 
     }
 
@@ -363,20 +389,87 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.insert("JOBS_TABLE", null, jobValues);
     }
 
-    private static void insertFavourite(SQLiteDatabase db, String username, int jobID ) {
-        ContentValues favValues = new ContentValues();
-        favValues.put("USERNAME", username);
-        favValues.put("JOB_ID", jobID);
-        db.insert("USER_FAVOURITES_TABLE", null, favValues);
+    private static void insertPersonalityQuestion(SQLiteDatabase db, String question, String trait){
+        ContentValues questionValues = new ContentValues();
+        questionValues.put("QUESTION", question);
+        questionValues.put("TRAIT", trait);
+        db.insert("PERSONALITY_QUESTIONS", null, questionValues);
+
     }
 
-    private static void insertUSer(SQLiteDatabase db, String username, String emailAdd,
+    public void insertUserScores(SQLiteDatabase db, String username, int eScore,
+                                        int aScore, int cScore, int nScore, int oScore){
+        db.delete("USER_PERSONALITY_TEST_SCORE", "USERNAME = ?", new String[]{username});
+        ContentValues scoreValues = new ContentValues();
+        scoreValues.put("USERNAME", username);
+        scoreValues.put("E_SCORE", eScore);
+        scoreValues.put("A_SCORE", aScore);
+        scoreValues.put("C_SCORE", cScore);
+        scoreValues.put("N_SCORE", nScore);
+        scoreValues.put("O_SCORE", oScore);
+        db.insert("USER_PERSONALITY_TEST_SCORE", null, scoreValues);
+
+    }
+
+
+
+    private static void insertUser(SQLiteDatabase db, String username, String emailAdd,
                                      String pWord) {
         ContentValues userValues = new ContentValues();
         userValues.put("USERNAME", username);
         userValues.put("EMAIL_ADDRESS", emailAdd);
         userValues.put("PASSWORD", pWord);
         db.insert("USER_TABLE", null, userValues);
+    }
+
+    public String getNextQuestion(int questionNum){
+        String question = "";
+        String query = "SELECT QUESTION FROM PERSONALITY_QUESTIONS WHERE QUESTION_NUM = ?";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[]{Integer.toString(questionNum)});
+        if(cursor.moveToFirst()){
+            do{
+                question = cursor.getString(0);
+            } while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return question;
+    }
+
+    public String getPersonalityTrait(int questionNum){
+        String trait = "";
+        String query = "SELECT TRAIT FROM PERSONALITY_QUESTIONS WHERE QUESTION_NUM = ?";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, new String[]{Integer.toString(questionNum)});
+        if(cursor.moveToFirst()){
+            do{
+                trait = cursor.getString(0);
+            } while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return trait;
+    }
+
+    public int countQuestions(){
+        int count = 0;
+        String query = "SELECT * FROM PERSONALITY_QUESTIONS";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do{
+                count++;
+            } while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return count;
     }
 
 
@@ -386,11 +479,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         HashMap<String, Integer> resultMap = new HashMap<>();
         String query = "SELECT E_SCORE, A_SCORE, C_SCORE, N_SCORE, O_SCORE " +
                 "FROM USER_PERSONALITY_TEST_SCORE WHERE USERNAME = ?;";
-        String[] args = new String[1];
-        args[0] = username;
+
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, args);
+        Cursor cursor = db.rawQuery(query, new String[]{username});
         if(cursor.moveToFirst()) {
             do {
                 resultMap.put("eScore", cursor.getInt(0));
