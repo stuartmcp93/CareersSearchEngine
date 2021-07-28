@@ -16,7 +16,7 @@ import java.util.List;
 public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "CAREERS_SEARCH_ENGINE_DB"; // the name of our database
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
 
     DataBaseHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
@@ -333,23 +333,26 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(USERNAME) REFERENCES USER_TABLE(USERNAME)," +
                 "FOREIGN KEY(JOB_ID) REFERENCES JOBS_TABLE(_id));");
 
-        db.execSQL("CREATE TABLE PERSONALITY_QUESTIONS(QUESTION_NUM INTEGER PRIMARY KEY AUTOINCREMENT, QUESTION TEXT NOT NULL, TRAIT TEXT NOT NULL );");
+        db.execSQL("CREATE TABLE PERSONALITY_QUESTIONS(QUESTION_NUM INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " QUESTION TEXT NOT NULL," +
+                " TRAIT TEXT NOT NULL, " +
+                "SCORING INTEGER NOT NULL);");
 
-        insertPersonalityQuestion(db, "I am the life of the party.", "E");
-        insertPersonalityQuestion(db,"I feel little concern for others.", "A");
-        insertPersonalityQuestion(db,"I am always prepared.", "C");
-        insertPersonalityQuestion(db,"I get stressed out easily.", "N");
-        insertPersonalityQuestion(db,"I have a rich vocabulary.", "O");
-        insertPersonalityQuestion(db,"I don't talk a lot.", "E");
-        insertPersonalityQuestion(db,"I am interested in people.", "A");
-        insertPersonalityQuestion(db, "I leave my belongings around.", "C");
-        insertPersonalityQuestion(db,"I am relaxed most of the time.", "N");
-        insertPersonalityQuestion(db,"I have difficulty understanding abstract ideas.", "O");
-        insertPersonalityQuestion(db,"I feel comfortable around people.", "E");
-        insertPersonalityQuestion(db,"I insult people.","A");
-        insertPersonalityQuestion(db,"I pay attention to details.", "C");
-        insertPersonalityQuestion(db,"I worry about things.", "N");
-        insertPersonalityQuestion(db, "I have a vivid imagination.", "O");
+        insertPersonalityQuestion(db, "I am the life of the party.", "E", 1);
+        insertPersonalityQuestion(db,"I feel little concern for others.", "A", 0);
+        insertPersonalityQuestion(db,"I am always prepared.", "C", 1);
+        insertPersonalityQuestion(db,"I get stressed out easily.", "N", 0);
+        insertPersonalityQuestion(db,"I have a rich vocabulary.", "O", 1);
+        insertPersonalityQuestion(db,"I don't talk a lot.", "E", 0);
+        insertPersonalityQuestion(db,"I am interested in people.", "A", 1);
+        insertPersonalityQuestion(db, "I leave my belongings around.", "C", 0);
+        insertPersonalityQuestion(db,"I am relaxed most of the time.", "N", 1);
+        insertPersonalityQuestion(db,"I have difficulty understanding abstract ideas.", "O", 0);
+        insertPersonalityQuestion(db,"I feel comfortable around people.", "E", 1);
+        insertPersonalityQuestion(db,"I insult people.","A", 0);
+        insertPersonalityQuestion(db,"I pay attention to details.", "C", 1);
+        insertPersonalityQuestion(db,"I worry about things.", "N", 0);
+        insertPersonalityQuestion(db, "I have a vivid imagination.", "O", 1);
 
 
 
@@ -389,10 +392,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.insert("JOBS_TABLE", null, jobValues);
     }
 
-    private static void insertPersonalityQuestion(SQLiteDatabase db, String question, String trait){
+    private static void insertPersonalityQuestion(SQLiteDatabase db, String question, String trait, int scoring){
         ContentValues questionValues = new ContentValues();
         questionValues.put("QUESTION", question);
         questionValues.put("TRAIT", trait);
+        questionValues.put("Scoring", scoring);
         db.insert("PERSONALITY_QUESTIONS", null, questionValues);
 
     }
@@ -422,19 +426,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.insert("USER_TABLE", null, userValues);
     }
 
-    public String getNextQuestion(int questionNum){
-        String question = "";
-        String query = "SELECT QUESTION FROM PERSONALITY_QUESTIONS WHERE QUESTION_NUM = ?";
+    public Question getQuestion(int questionNum){
+        Question question = null;
+        String query = "SELECT * FROM PERSONALITY_QUESTIONS WHERE QUESTION_NUM = ?";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, new String[]{Integer.toString(questionNum)});
         if(cursor.moveToFirst()){
             do{
-                question = cursor.getString(0);
+                question = new Question(cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getInt(3));
             } while(cursor.moveToNext());
         }
 
         cursor.close();
         db.close();
+
         return question;
     }
 

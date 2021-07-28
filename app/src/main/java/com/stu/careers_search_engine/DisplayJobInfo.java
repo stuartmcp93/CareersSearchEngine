@@ -47,7 +47,7 @@ public class DisplayJobInfo extends AppCompatActivity {
         IMG_home_btn = findViewById(R.id.IMG_home_logo_info);
         ET_location = findViewById(R.id.ET_location);
         ET_salary = findViewById(R.id.ET_min_salary);
-        checkAlreadyAddedToFavs(careerToDisplay, "stuartM");
+        checkAlreadyAddedToFavs(careerToDisplay, ListHolder.getInstance().username.get(0));
 
         jobTitle.setText(careerToDisplay.getJobTitle());
         descriptionDisplay.setText(careerToDisplay.getDescription());
@@ -56,7 +56,7 @@ public class DisplayJobInfo extends AppCompatActivity {
         favSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addorRemoveJobToFavourites(careerToDisplay.getId(), "stuartM");
+                addorRemoveJobToFavourites(careerToDisplay.getId(), ListHolder.getInstance().username.get(0));
             }
         });
 

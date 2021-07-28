@@ -44,11 +44,10 @@ public class PersonalityQuestion extends AppCompatActivity {
     //them to the database for the user.
     //When having working properly will have these int[] that will hold each score the question.
     // This will allow for calculation of final score
-    ArrayList<Integer> extroversionScore, agreeablenessScore, conscientiousnessScore,
+    int extroversionScore, agreeablenessScore, conscientiousnessScore,
             neuroticismScore, opennessScore;
 
     //ArrayList<Question> questionsList;
-
 
 
     @Override
@@ -72,17 +71,17 @@ public class PersonalityQuestion extends AppCompatActivity {
         RB_sDisagree = findViewById(R.id.RBTN_strongly_disagree);
         //questionsList = getQuestions();
 
-        extroversionScore = new ArrayList<>();
-        agreeablenessScore = new ArrayList<>();
-        conscientiousnessScore = new ArrayList<>();
-        neuroticismScore = new ArrayList<>();
-        opennessScore = new ArrayList<>();
+        extroversionScore = 20;
+        agreeablenessScore = 50;
+        conscientiousnessScore = 20;
+        neuroticismScore = 20;
+        opennessScore = 20;
 
 
         //Set up first question
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
-        String question = dataBaseHelper.getNextQuestion(Integer.parseInt(TV_questionNum.getText().toString()));
-        TV_questionDisplay.setText(question);
+        Question question = dataBaseHelper.getQuestion(Integer.parseInt(TV_questionNum.getText().toString()));
+        TV_questionDisplay.setText(question.getQuestion());
         TV_total_questions.setText(" / " + dataBaseHelper.countQuestions());
 
 
@@ -145,29 +144,48 @@ public class PersonalityQuestion extends AppCompatActivity {
     /**
      * This method adds the score to the correct personality trait.
      *
-     * @param trait      the personality trait associated with the current question
+     * @param question   the personality trait associated with the current question
      * @param userAnswer the response of the user as an integer
      */
-    public void addScoreToPersonalityTrait(String trait, int userAnswer) {
-        switch (trait) {
+    public void addScoreToPersonalityTrait(Question question, int userAnswer) {
+        switch (question.getPersonalityTrait()) {
             case "E":
-                extroversionScore.add(userAnswer);
+                if (question.getScoring() == 1) {
+                    extroversionScore += userAnswer;
+                } else {
+                    extroversionScore -= userAnswer;
+                }
                 break;
             case "A":
-                agreeablenessScore.add(userAnswer);
+                if (question.getScoring() == 1) {
+                    agreeablenessScore += userAnswer;
+                } else {
+                    agreeablenessScore -= userAnswer;
+                }
                 break;
             case "C":
-                conscientiousnessScore.add(userAnswer);
+                if (question.getScoring() == 1) {
+                    conscientiousnessScore += userAnswer;
+                } else {
+                    conscientiousnessScore -= userAnswer;
+                }
                 break;
             case "N":
-                neuroticismScore.add(userAnswer);
+                if (question.getScoring() == 1) {
+                    neuroticismScore += userAnswer;
+                } else {
+                    neuroticismScore -= userAnswer;
+                }
                 break;
             case "O":
-                opennessScore.add(userAnswer);
+                if (question.getScoring() == 1) {
+                    opennessScore += userAnswer;
+                } else {
+                    opennessScore -= userAnswer;
+                }
                 break;
         }
     }
-
 
 
     /**
@@ -208,20 +226,21 @@ public class PersonalityQuestion extends AppCompatActivity {
 
             //Get the number of the current question
             //String currentQuestionStr = (String) TV_questionNum.getText();
-            addScoreToPersonalityTrait(dataBaseHelper.getPersonalityTrait(currentQuestionNum), userAnswer);
+            Question currentQuestion = dataBaseHelper.getQuestion(currentQuestionNum);
+            addScoreToPersonalityTrait(currentQuestion, userAnswer);
 
             int nextQuestionNum = currentQuestionNum + 1;
             Log.d("########### next questionNum", Integer.toString(nextQuestionNum));
 
-            String nextQuestionText = dataBaseHelper.getNextQuestion(nextQuestionNum);
-            Log.d("######### next question text", nextQuestionText);
-
-            if(!nextQuestionText.isEmpty()){
-                TV_questionNum.setText(Integer.toString(nextQuestionNum));
-                TV_questionDisplay.setText(nextQuestionText);
-            } else {
+            if (nextQuestionNum > dataBaseHelper.countQuestions()) {
                 loadResultsDisplay(ListHolder.getInstance().username.get(0));
+            } else {
+                Question nextQuestion = dataBaseHelper.getQuestion(nextQuestionNum);
+                Log.d("######### next question text", nextQuestion.getQuestion());
+                TV_questionNum.setText(Integer.toString(nextQuestionNum));
+                TV_questionDisplay.setText(nextQuestion.getQuestion());
             }
+
 
         }
 
@@ -233,17 +252,15 @@ public class PersonalityQuestion extends AppCompatActivity {
         calcScoreList(username);
         Intent resultsIntent = new Intent(PersonalityQuestion.this, PersonalityQuizResults.class);
 
-
         startActivity(resultsIntent);
     }
-
 
 
     //Temporary to get all other functionality working
     private void calcScoreList(String username) {
 
         //Add the extroversion score
-        int eScore = 20;
+        /*int eScore = 20;
         eScore += extroversionScore.get(0);
         eScore -= extroversionScore.get(1);
         eScore += extroversionScore.get(2);
@@ -275,32 +292,20 @@ public class PersonalityQuestion extends AppCompatActivity {
         int oScore = 20;
         oScore += opennessScore.get(0);
         oScore -= opennessScore.get(1);
-        oScore += opennessScore.get(2);
+        oScore += opennessScore.get(2);*/
 
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
         dataBaseHelper.insertUserScores(db, ListHolder.getInstance().username.get(0),
-                eScore, aScore, cScore, nScore, oScore);
-        /*ContentValues userScoreValues = new ContentValues();
-        userScoreValues.put("USERNAME", username);
-        userScoreValues.put("E_SCORE", eScore);
-        Log.d("########## E_SCORE ADDING TO DB:", Integer.toString(eScore));
-        userScoreValues.put("A_SCORE", aScore);
-        Log.d("########## A_SCORE ADDING TO DB:", Integer.toString(aScore));
-        userScoreValues.put("C_SCORE", cScore);
-        Log.d("########## C_SCORE ADDING TO DB:", Integer.toString(cScore));
-        userScoreValues.put("N_SCORE", nScore);
-        Log.d("########## N_SCORE ADDING TO DB:", Integer.toString(nScore));
-        userScoreValues.put("O_SCORE", oScore);
-        Log.d("########## O_SCORE ADDING TO DB:", Integer.toString(oScore));
-        db.insert("USER_PERSONALITY_TEST_SCORE", null, userScoreValues);
-        db.close();*/
+                extroversionScore,
+                agreeablenessScore,
+                conscientiousnessScore,
+                neuroticismScore,
+                opennessScore);
+
 
     }
-
-
-
 
 
 }

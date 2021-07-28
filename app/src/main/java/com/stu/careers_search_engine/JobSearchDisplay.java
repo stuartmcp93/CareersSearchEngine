@@ -49,7 +49,8 @@ public class JobSearchDisplay extends AppCompatActivity {
         Career careerToDisplay = (Career) intent.getSerializableExtra("career obj");
         TV_job_title.setText(careerToDisplay.getJobTitle());
 
-
+        Toast.makeText(JobSearchDisplay.this, "Loading results...",
+                Toast.LENGTH_LONG).show();
 
         //getting API
         /*Retrofit retrofit = new Retrofit.Builder()
@@ -73,7 +74,7 @@ public class JobSearchDisplay extends AppCompatActivity {
                 keyword,
                 intent.getStringExtra("location"),
                 intent.getStringExtra("salary"),
-                30, 5);
+                30, 15);
 
         call.enqueue(new Callback<JobSearchResult>() {
             @Override
@@ -89,9 +90,9 @@ public class JobSearchDisplay extends AppCompatActivity {
                 ArrayList<String> resultDisplayList = new ArrayList<>();
                 for(Result result : results){
                     resultDisplayList.add("Title: " + result.getJobTitle() +
-                            "\n \b Employer: \b " + result.getEmployerName() +
-                            "\n \b Location: \b" + result.getLocationName() +
-                            "\n \b Min salary: \b" + result.getMinimumSalary());
+                            "\n Employer: " + result.getEmployerName() +
+                            "\n Location: " + result.getLocationName() +
+                            "\n Min salary: " + result.getMinimumSalary());
                 }
 
 
@@ -102,6 +103,8 @@ public class JobSearchDisplay extends AppCompatActivity {
                 if(resultDisplayList.isEmpty()){
                     Toast.makeText(JobSearchDisplay.this, "No results!", Toast.LENGTH_SHORT).show();
                 }
+
+
 
                 ArrayAdapter jobsArrayAdapter = new ArrayAdapter<>(JobSearchDisplay.this,
                         android.R.layout.simple_list_item_1, resultDisplayList);
