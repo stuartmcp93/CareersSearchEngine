@@ -3,20 +3,37 @@ package com.stu.careers_search_engine;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.wifi.hotspot2.pps.Credential;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class JobSearchDisplay extends AppCompatActivity {
     TextView TV_job_title;
     Button BTN_career_matches;
     ImageView IMG_home_btn;
     ListView LV_search_display;
+    JobSearchResult jobSearchResultList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +48,81 @@ public class JobSearchDisplay extends AppCompatActivity {
         Intent intent = getIntent();
         Career careerToDisplay = (Career) intent.getSerializableExtra("career obj");
         TV_job_title.setText(careerToDisplay.getJobTitle());
+
+
+
+        //getting API
+        /*Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://jsonplaceholder.typicode.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();*/
+        String authHeader = "Basic YTU4Nzc0ZTMtZWM5YS00NDU4LThlMDItNDVlODI1ZjAyMjRkOg==";
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://www.reed.co.uk/api/1.0/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+
+
+        String keyword = careerToDisplay.getJobTitle().replace(" ", "-");
+        PlaceholderAPI placeholderAPI = retrofit.create(PlaceholderAPI.class);
+        //placeholderAPI.getJobs(authKey);
+        //Call<List<JobSearchResult>> call = placeholderAPI.getJobs(authHeader);
+        Call<JobSearchResult> call = placeholderAPI.getJobs(authHeader,
+                keyword,
+                intent.getStringExtra("location"),
+                intent.getStringExtra("salary"),
+                30, 5);
+
+        call.enqueue(new Callback<JobSearchResult>() {
+            @Override
+            public void onResponse(Call<JobSearchResult> call, Response<JobSearchResult> response) {
+                if(!response.isSuccessful()){
+                    TV_job_title.setText("Code: " + response.code());
+                    return;
+                }
+
+                Log.d("############### success", "RESPONSE!!!!!");
+                jobSearchResultList =  response.body();
+                List<Result> results = jobSearchResultList.getResults();
+                ArrayList<String> resultDisplayList = new ArrayList<>();
+                for(Result result : results){
+                    resultDisplayList.add("Title: " + result.getJobTitle() +
+                            "\n \b Employer: \b " + result.getEmployerName() +
+                            "\n \b Location: \b" + result.getLocationName() +
+                            "\n \b Min salary: \b" + result.getMinimumSalary());
+                }
+
+
+
+
+
+
+                if(resultDisplayList.isEmpty()){
+                    Toast.makeText(JobSearchDisplay.this, "No results!", Toast.LENGTH_SHORT).show();
+                }
+
+                ArrayAdapter jobsArrayAdapter = new ArrayAdapter<>(JobSearchDisplay.this,
+                        android.R.layout.simple_list_item_1, resultDisplayList);
+                LV_search_display.setAdapter(jobsArrayAdapter);
+
+            }
+
+
+
+            @Override
+            public void onFailure(Call<JobSearchResult> call, Throwable t) {
+                Log.d("############## Error", t.getMessage());
+            }
+        });
+
+
+
+
+
+
+
 
 
         IMG_home_btn.setOnClickListener(new View.OnClickListener() {
@@ -59,4 +151,6 @@ public class JobSearchDisplay extends AppCompatActivity {
         Intent returnHome = new Intent(this, Home.class);
         startActivity(returnHome);
     }
+
+
 }
