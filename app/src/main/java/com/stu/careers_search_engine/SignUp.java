@@ -58,15 +58,17 @@ public class SignUp extends AppCompatActivity {
 
 
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
-
-        ContentValues userValues = new ContentValues();
+        dataBaseHelper.insertUser(db, username, email, password);
+        Toast.makeText(this, "Creating account", Toast.LENGTH_SHORT).show();
+        db.close();
+        /*ContentValues userValues = new ContentValues();
         userValues.put("USERNAME", username);
         userValues.put("PASSWORD", password);
         userValues.put("EMAIL_ADDRESS", email);
 
         db.insert("USER_TABLE", null, userValues);
         Toast.makeText(this, "Success:" + dataBaseHelper.checkUsername(username), Toast.LENGTH_SHORT).show();
-        db.close();
+        */
 
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);

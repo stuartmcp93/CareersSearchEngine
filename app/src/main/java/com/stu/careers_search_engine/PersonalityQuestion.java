@@ -233,7 +233,7 @@ public class PersonalityQuestion extends AppCompatActivity {
             Log.d("########### next questionNum", Integer.toString(nextQuestionNum));
 
             if (nextQuestionNum > dataBaseHelper.countQuestions()) {
-                loadResultsDisplay(ListHolder.getInstance().username.get(0));
+                loadResultsDisplay(((User) this.getApplication()).getUsername());
             } else {
                 Question nextQuestion = dataBaseHelper.getQuestion(nextQuestionNum);
                 Log.d("######### next question text", nextQuestion.getQuestion());
@@ -259,45 +259,10 @@ public class PersonalityQuestion extends AppCompatActivity {
     //Temporary to get all other functionality working
     private void calcScoreList(String username) {
 
-        //Add the extroversion score
-        /*int eScore = 20;
-        eScore += extroversionScore.get(0);
-        eScore -= extroversionScore.get(1);
-        eScore += extroversionScore.get(2);
-
-
-
-        //add the agreeableness score
-        int aScore = 90;
-        aScore -= agreeablenessScore.get(0);
-        aScore += agreeablenessScore.get(1);
-        aScore -= agreeablenessScore.get(2);
-
-
-        //add conscientiousness score
-        int cScore = 20;
-        cScore += conscientiousnessScore.get(0);
-        cScore -= conscientiousnessScore.get(1);
-        cScore += conscientiousnessScore.get(2);
-
-
-        //add Neuroticism score
-        int nScore = 20;
-        nScore += neuroticismScore.get(0);
-        nScore += neuroticismScore.get(1);
-        nScore += neuroticismScore.get(2);
-
-
-        //add Openness score
-        int oScore = 20;
-        oScore += opennessScore.get(0);
-        oScore -= opennessScore.get(1);
-        oScore += opennessScore.get(2);*/
-
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
-        dataBaseHelper.insertUserScores(db, ListHolder.getInstance().username.get(0),
+        dataBaseHelper.insertUserScores(db, ((User) this.getApplication()).getUsername(),
                 extroversionScore,
                 agreeablenessScore,
                 conscientiousnessScore,
