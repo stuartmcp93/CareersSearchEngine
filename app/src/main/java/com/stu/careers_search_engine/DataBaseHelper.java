@@ -506,7 +506,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return resultMap;
     }
 
-    public void checkUserScoreTable(){
+    /*public void checkUserScoreTable(){
         String query = "SELECT * FROM USER_PERSONALITY_TEST_SCORE;";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -523,7 +523,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         }
 
-    }
+    }*/
 
 
 

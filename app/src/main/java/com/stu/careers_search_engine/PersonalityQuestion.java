@@ -47,7 +47,7 @@ public class PersonalityQuestion extends AppCompatActivity {
     int extroversionScore, agreeablenessScore, conscientiousnessScore,
             neuroticismScore, opennessScore;
 
-    //ArrayList<Question> questionsList;
+
 
 
     @Override

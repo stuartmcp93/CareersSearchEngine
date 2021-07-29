@@ -1,13 +1,8 @@
 package com.stu.careers_search_engine;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,29 +14,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * This class displays the career matches for the user after they have completed the personality
+ * quiz. A list of job matches are displayed and the top three career areas that match their result.
+ * The user can filter the results to view careers further from their personality type.
+ *
+ * @Author Stuart McPherson 29/07/2021
+ */
+
 public class CareerMatchesDisplay extends AppCompatActivity {
 
     ImageView IMG_home_btn;
     TextView TV_topMatch, TV_topPercent, TV_secondMatch,
             TV_secondPercent, TV_thirdMatch, TV_thirdPercent, TV_filterBy;
-
     List<Career> careerMatches;
-
     ListView LV_jobMatchesList;
     Spinner SP_filterSpinner;
     String[] spinnerOptions = { "", "High personality match", "Low personality match" };
@@ -64,32 +56,40 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         IMG_home_btn = findViewById(R.id.IMG_home_logo_quiz);
         SP_filterSpinner = findViewById(R.id.SP_career_match_filter_spinner);
 
+        //Get a list of high matching careers to display when activity starts
          careerMatches = getHighMatchingJobs();
+
+         //Set the top three career areas for the careers on display
          setMatchesDisplayAndPercent(careerMatches);
+
+         //Get list of job titles to display in the ListView
          List<String> highMatchingTitles = getCareerTitlesList(careerMatches);
 
+         //Set array adapter to display list of job titles in the list view
          setArrayAdapter(highMatchingTitles);
 
-
+        //On click listener for job titles displayed in the ListView
         LV_jobMatchesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                //Get the career object to be displayed in the DisplayJobInfo activity
                 Career careerToDisplay = careerMatches.get(position);
 
+                //Pass career object to method to start DisplayJobInfo activity
                 displayJobInfo(careerToDisplay);
 
 
             }
         });
 
-
+        //Setting ArrayAdapter for the filter spinner
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, spinnerOptions);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         SP_filterSpinner.setAdapter(aa);
 
-
+        //Set on click listener for home button
         IMG_home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,25 +98,44 @@ public class CareerMatchesDisplay extends AppCompatActivity {
             }
         });
 
+        //Call filter results function to set spinner and current list of jobs
         filterResults();
 
 
     }
 
-    private List<Career> getLowMatchingJobs() {
-        Log.d("######### lowMatchingCalled!", "getLowMatchingJobs()");
-        String lowestPTScore = getLowestPTScore(ListHolder.getInstance().username.get(0));
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
-        dataBaseHelper.checkUserScoreTable();
+    /**
+     * This method searches the database for the current user and returns careers that are a low
+     * match to their personality type. This method is called when the user filters results to
+     * display careers that have a low match to their personality.
+     *
+     * @return List of Career objects
+     */
+    public List<Career> getLowMatchingJobs() {
 
+        //Get string value of the lowest scoring personality trait for the current user
+        String lowestPTScore = getLowestPTScore(((User) this.getApplication()).getUsername());
+
+        //Create DatabaseHelper
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+
+        //return list of careers that match the low scoring personality trait
         return dataBaseHelper.getLowMatchingJobs(lowestPTScore);
     }
 
+
+    /**
+     *  This method searches the database for the current user and returns careers that are a high
+     *  match to their personality type. This method is called when the user filters results to
+     *  display careers that have a high match to their personality.
+     *
+     * @return List of Career objects
+     */
     public List<Career> getHighMatchingJobs() {
-        Log.d("######### highMatchingjobsCalled!", "getHighMatchingJobs()");
+
         String highestPTScore = getHighestPTScore(ListHolder.getInstance().username.get(0));
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
-        dataBaseHelper.checkUserScoreTable();
+        //dataBaseHelper.checkUserScoreTable();
 
         return dataBaseHelper.getHighMatchingJobs(highestPTScore);
     }

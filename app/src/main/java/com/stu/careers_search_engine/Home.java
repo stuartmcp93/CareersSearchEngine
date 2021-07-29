@@ -2,7 +2,6 @@ package com.stu.careers_search_engine;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,7 +32,10 @@ public class Home extends Activity {
         SP_homeSpinner = findViewById(R.id.SP_home_spinner);
 
         username = findViewById(R.id.TV_username);
-        username.setText(ListHolder.getInstance().username.get(0));
+        //username.setText(ListHolder.getInstance().username.get(0));
+
+
+        username.setText(((User) this.getApplication()).getUsername());
 
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, spinnerOptions);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -94,7 +96,7 @@ public class Home extends Activity {
 
     public void logout() {
         Toast.makeText(Home.this, "Logging out!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(Home.this, MainActivity.class);
+        Intent intent = new Intent(Home.this, Login.class);
         startActivity(intent);
     }
 

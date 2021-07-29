@@ -52,24 +52,20 @@ public class JobSearchDisplay extends AppCompatActivity {
         Toast.makeText(JobSearchDisplay.this, "Loading results...",
                 Toast.LENGTH_LONG).show();
 
-        //getting API
-        /*Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();*/
+        //Authorization API key provided by reed.co.uk for Developers - Jobseeker APIs
         String authHeader = "Basic YTU4Nzc0ZTMtZWM5YS00NDU4LThlMDItNDVlODI1ZjAyMjRkOg==";
-
+        //Create new retrofit object
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.reed.co.uk/api/1.0/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-
-
-        String keyword = careerToDisplay.getJobTitle().replace(" ", "-");
+        //Create interface and use retrofit object to send GET request
         PlaceholderAPI placeholderAPI = retrofit.create(PlaceholderAPI.class);
-        //placeholderAPI.getJobs(authKey);
-        //Call<List<JobSearchResult>> call = placeholderAPI.getJobs(authHeader);
+
+        //Convert job title to keyword search parameter
+        String keyword = careerToDisplay.getJobTitle().replace(" ", "-");
+
+        //Make call request with search parameters and return JSON object
         Call<JobSearchResult> call = placeholderAPI.getJobs(authHeader,
                 keyword,
                 intent.getStringExtra("location"),

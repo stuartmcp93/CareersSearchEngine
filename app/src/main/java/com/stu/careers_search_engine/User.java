@@ -1,10 +1,21 @@
 package com.stu.careers_search_engine;
 
-public class User {
-    String id, name, password;
-    int extroversionScore, agreeablenessScore, conscientiousnessScore,
-            neuroticismScore, opennessScore;
-    public User(String id, String name, String password){
+import android.app.Application;
 
+public class User extends Application {
+
+    private String username;
+
+    public User(){
+
+    }
+
+    public User setUsername(String username) {
+        this.username = username;
+        return null;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

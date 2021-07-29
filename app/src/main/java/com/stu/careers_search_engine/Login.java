@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
 
     Button BTN_login;
@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
         if(dataBaseHelper.checkPassword(password) && dataBaseHelper.checkUsername(username)){
-        ListHolder.getInstance().username.add(username);
+        //ListHolder.getInstance().username.add(username);
+        User user = ((User) this.getApplication()).setUsername(username);
         Intent loginIntent = new Intent(this, Home.class);
         startActivity(loginIntent);
     } else {
