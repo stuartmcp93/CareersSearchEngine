@@ -16,8 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -27,8 +25,7 @@ public class PersonalityQuizResults extends AppCompatActivity {
     Button BTN_career_matches_display;
     TextView TV_con, TV_agreeableness, TV_neuroticism, TV_openness, TV_extroversion;
     PieChart pieChart;
-    ArrayList<Integer> extroversionResList, agreeablenessResList, conscientiousnessResList,
-            neuroticismResList, opennessResList;
+
 
     //Need to change to ImageButton
     ImageView IMG_home;

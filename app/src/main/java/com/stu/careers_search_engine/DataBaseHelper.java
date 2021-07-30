@@ -2,10 +2,13 @@ package com.stu.careers_search_engine;
 
 import android.content.ContentValues;
 import android.content.Context;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -167,90 +170,272 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         " resolve any behavioural problems.", "29,883");
 
         //Conscientiousness personality trait matching jobs
-        insertCareer(db, "Arts & Humanities", "Writer", "C", "", "");
+        insertCareer(db, "Arts & Humanities", "Writer", "C",
+                "Writers produce literary compositions, articles, reports, books and other" +
+                        " texts. Excellent writing and communication skills are obviously essential," +
+                        " but so is a determined attitude and the ability to take criticism." +
+                        " The vast majority of writers are self-employed or freelance.",
+                "23,990");
 
-        insertCareer(db, "Business", "Management Consultant", "C", "", "");
+        insertCareer(db, "Business", "Management Consultant", "C",
+                "Management consultants help organisations to solve issues, create value," +
+                        " maximise growth and improve business performance. They use their business" +
+                        " skills to provide objective advice and expertise, and help an organisation" +
+                        " to develop any specialist skills that it may be lacking.", "49,241");
 
-        insertCareer(db, "IT", "Technology Consultant", "C", "", "");
+        insertCareer(db, "IT", "Technology Consultant", "C",
+                "Your role as a technology consultant is to work in partnership with" +
+                        " clients, advising them how to use information technology in order to meet " +
+                        "their business objectives or overcome problems. You'll work to improve the " +
+                        "structure and efficiency of IT systems in various organisations.",
+                "44,221");
 
-        insertCareer(db, "IT", "IT Consultant", "C", "", "");
+        insertCareer(db, "IT", "IT Consultant", "C",
+                " IT consultants, work with organizations to help them align their " +
+                        "technologies with overall goals and better utilize existing technologies" +
+                        " and processes. This role requires excellent analytical skills, extensive" +
+                        " technical knowledge, and the ability to understand how technology supports" +
+                        " business and organization goals. ",
+                "44,221");
 
-        insertCareer(db, "Construction", "Surveyor", "C", "", "");
+        insertCareer(db, "Construction", "Surveyor", "C",
+                "Surveyors provide professional advice on a range of construction-related" +
+                        " matters. They could be ensuring that new-build properties are built to " +
+                        "regulations and specifications; advising on maintenance and repair of" +
+                        " existing structures or assessing damage for legal and insurance purposes."
+                , "31,608");
 
-        insertCareer(db, "Finance", "Accountant", "C", "", "");
+        insertCareer(db, "Finance", "Accountant", "C",
+                "Preparing accounts and tax returns. Monitoring spending and budgets." +
+                        " Auditing and analysing financial performance. Financial forecasting " +
+                        "and risk analysis. Advising on how to reduce costs and increase profits.",
+                "29,621");
 
-        insertCareer(db, "Finance", "Actuary", "C", "", "");
+        insertCareer(db, "Finance", "Actuary", "C",
+                "An actuary evaluates, manages and advises on financial risks. They use" +
+                        " their knowledge of business and economics, together with their" +
+                        " understanding of probability theory, statistics and investment theory, " +
+                        "to provide strategic, commercial and financial advice.", "59,581");
 
-        insertCareer(db, "Finance", "Accountant", "C", "", "");
+        insertCareer(db, "Finance", "Bookkeeper", "C",
+                "The role of Bookkeeper is to record all company spending, including" +
+                        " purchases, invoices and sales and provide accurate information on company" +
+                        " outgoings for the purposes of filing accounts. A Bookkeeper will be " +
+                        "organised, efficient and skilled at keeping track of the various types of" +
+                        " spending by the company.", "22,571");
 
-        insertCareer(db, "Finance", "Bookkeeper", "C", "", "");
+        insertCareer(db, "Finance", "Claims Adjuster", "C",
+                "Claims adjusters are responsible for evaluating insurance claims on" +
+                        " behalf of insurance companies in order to determine who is liable." +
+                        " They investigate the circumstances of insurance claims by consulting" +
+                        " with witnesses, reviewing police reports, and compiling evidence " +
+                        "from other sources.", "29,401");
 
-        insertCareer(db, "Finance", "Claims Adjuster", "C", "", "");
+        insertCareer(db, "Finance", "Controller", "C",
+                "The controller manages accounting records and is responsible for the " +
+                        "production of financial reports. The controller oversees all employees" +
+                        " involved in the accounting process, including accounts receivable, " +
+                        "accounts payable, payroll, inventory and compliance.", "49,056");
 
-        insertCareer(db, "Finance", "Controller", "C", "", "");
+        insertCareer(db, "Finance", "Financial Analyst", "C",
+                "Financial analysts are responsible for tracking a company's financial" +
+                        " performance against a plan, analyzing business performance and market " +
+                        "conditions to create forecasts, and helping senior management make " +
+                        "tactical and strategic decisions by providing periodic reports.",
+                "33,352");
 
-        insertCareer(db, "Finance", "Financial Analyst", "C", "", "");
+        insertCareer(db, "Finance", "Insurance Underwriter", "C",
+                "Insurance underwriters analyse risk in insurance proposals, determine" +
+                        " policy terms and calculate premiums on the basis of actuarial, statistical" +
+                        " and background information.", "29,446");
 
-        insertCareer(db, "Finance", "Insurance Underwriter", "C", "", "");
+        insertCareer(db, "Healthcare", "Anesthesiologist", "C",
+                "Anaesthetists are specialist doctors who are responsible for providing" +
+                        " anaesthesia to patients for operations and procedures. They are doctors " +
+                        "who have chosen after qualifying to undertake postgraduate specialist " +
+                        "training of at least seven years in anaesthesia, intensive care medicine" +
+                        " and pain management.", "90,599");
 
-        insertCareer(db, "Healthcare", "Anesthesiologist", "C", "", "");
+        insertCareer(db, "Healthcare", "Physician (General)", "C",
+                "General practitioners (GPs) treat all common medical conditions and refer" +
+                        " patients to hospitals and other medical services for urgent and specialist" +
+                        " treatment. They focus on the health of the whole person combining physical, " +
+                        "psychological and social aspects of care.",
+                "52,068");
 
-        insertCareer(db, "Healthcare", "Physician (General)", "C", "", "");
+        insertCareer(db, "Healthcare", "Physician (Specialist)", "C",
+                "Specialist physicians are experts in preventing, diagnosing, and treating" +
+                        " diseases, physiological and psychiatric disorders, and injuries. " +
+                        "They examine patients and give advice and treatment towards the management" +
+                        " of patient's health.", "65,485");
 
-        insertCareer(db, "Healthcare", "Physician (Specialist)", "C", "", "");
+        insertCareer(db, "Healthcare", "Podiatrist", "C",
+                "As a podiatrist, you'll need to: assess, diagnose, treat and evaluate " +
+                        "abnormalities and diseases related to the foot and lower limb in people " +
+                        "of all ages. Use therapeutic and surgical techniques to treat foot and " +
+                        "lower leg issues (e.g. carrying out nail and soft tissue surgery using " +
+                        "local anaesthetic)", "28,725");
 
-        insertCareer(db, "Healthcare", "Podiatrist", "C", "", "");
+        insertCareer(db, "Marketing & Sales", "Copywriter", "C",
+                "The copywriter is responsible for taking a client's advertising brief" +
+                        " and generating original copy ideas that grab the attention of the target" +
+                        " audience. This can include creating straplines, slogans, body copy," +
+                        "jingles and scripts. Modifying copy until the client is satisfied.",
+                "24,747");
 
-        insertCareer(db, "Marketing & Sales", "Copywriter", "C", "", "");
+        insertCareer(db, "Public Services", "Detective", "C",
+                "Detectives are accredited police officers who work as Serious and" +
+                        " Complex Crime Investigators or Specialist Investigators. They're " +
+                        "responsible for managing a range of investigations including those " +
+                        "concerning robbery, drugs, domestic violence, public and child protection," +
+                        " company fraud, cybercrime, homicide and counter-terrorism.", "37,251");
 
-        insertCareer(db, "Public Services", "Detective", "C", "", "");
+        insertCareer(db, "Public Services", "Armed Forces", "C",
+                "operating and maintaining warfare systems, equipment and vehicles. " +
+                        "taking on specialist duties and skills such as engineering, air traffic " +
+                        "control, training and administration. producing briefings, reports and presentations." +
+                        " distributing equipment, resources and manpower.", "32,000");
 
-        insertCareer(db, "Public Services", "Armed Forces", "C", "", "");
+        insertCareer(db, "Public Services", "Private Investigator", "C",
+                "Private Investigators (also known as PIs) are freelance detectives, " +
+                        "hired by individuals to secretly collect evidence on a particular case. " +
+                        "Taking pictures and compiling evidence. Interviewing witnesses and " +
+                        "conducting research. Conducting background checks and running credit " +
+                        "reports.", "25,325");
 
-        insertCareer(db, "Public Services", "Private Investigator", "C", "", "");
+        insertCareer(db, "Science & Tech", "Research Technician", "C",
+                "Scientific laboratory technicians carry out the work that allows " +
+                        "scientists to concentrate on, and perform, the more complex analytical " +
+                        "processes in the laboratory. You'll be involved in a variety of " +
+                        "laboratory-based investigations within biological, chemical, " +
+                        "physical and life science areas.", "21,550");
 
-        insertCareer(db, "Science & Tech", "Research Technician", "C", "", "");
-
-        insertCareer(db, "Transport & Logistics", "Pilot", "C", "", "");
+        insertCareer(db, "Transport & Logistics", "Pilot", "C",
+                "As an airline pilot, you'll fly passengers or cargo on long or " +
+                        "short-haul flights for leisure, business or commercial purposes. " +
+                        "Pilots usually take turns to fly the plane to avoid fatigue, with one " +
+                        "operating the controls, while the other speaks to air traffic control and " +
+                        "completes the paperwork.", "70,379");
 
         //Extroversion personality trait matching jobs
-        insertCareer(db, "Business", "Human Resources", "E", "", "");
+        insertCareer(db, "Business", "Human Resources", "E",
+                "As an HR officer, your aim is to ensure that the organisation you work" +
+                        " for employs the right balance of staff in terms of skills and experience, " +
+                        "and that training and development opportunities are available to " +
+                        "colleagues to enhance their performance and achieve the company's " +
+                        "business aims.", "25,277");
 
-        insertCareer(db, "Business", "Industrial - Organizational Psychologist", "E", "", "");
+        insertCareer(db, "Business", "Industrial - Organizational Psychologist", "E",
+                "Design performance appraisal systems that enable an organisation to " +
+                        "measure, manage and reward the performance of its employees. " +
+                        "Design, develop and deliver training and development programmes." +
+                        " mediate in situations where there is conflict between employees and" +
+                        " management or an employment dispute.", "30,834");
 
-        insertCareer(db, "Business", "Operations Manager", "E", "", "");
+        insertCareer(db, "Business", "Operations Manager", "E",
+                "At both large and small organizations, operations managers" +
+                        " supervise, hire, and train employees, manage quality assurance programs," +
+                        " strategize process improvements, and more. Operations managers are " +
+                        "ultimately responsible for maintaining and increasing the efficiency " +
+                        "of a business, agency, or organization.", "35,411");
 
-        insertCareer(db, "Business", "Public Relations Manager", "E", "", "");
+        insertCareer(db, "Business", "Public Relations Manager", "E",
+                "Planning publicity strategies and campaigns. writing and producing" +
+                        " presentations and press releases. dealing with enquiries from the public," +
+                        " the press, and related organisations. organising and attending " +
+                        "promotional events such as press conferences, open days, exhibitions, " +
+                        "tours and visits.", "33,561");
 
-        insertCareer(db, "Business", "Purchasing Manager", "E", "", "");
+        insertCareer(db, "Business", "Purchasing Manager", "E",
+                "Procurement managers act as the primary point of contact between " +
+                        "suppliers and a business. They are responsible for the procurement of " +
+                        "products and goods for use in the business by identifying potential " +
+                        "supplier sources, screening them and negotiating favorable payment terms.",
+                "33,675");
 
-        insertCareer(db, "Business", "Retail Manager", "E", "", "");
+        insertCareer(db, "Business", "Retail Manager", "E",
+                "As a retail manager, you'll manage the daily operations of a store or " +
+                        "department and will have employees reporting to you. You'll report to an " +
+                        "area manager. You'll ensure promotions are run accurately and to the " +
+                        "company's standards and make sure that staff are all working towards " +
+                        "the target for the day.", "24,770");
 
-        insertCareer(db, "Construction", "Construction Manager", "E", "", "");
+        insertCareer(db, "Construction", "Construction Manager", "E",
+                "As a construction manager, you'll need to: plan and coordinate a project" +
+                        " from start to finish, including organising the schedule of work, costings" +
+                        " and budget. plan the work and oversee the buying of necessary materials " +
+                        "and equipment. Deal with any unexpected problems that may occur during " +
+                        "the project.", "45,199");
 
-        insertCareer(db, "Healthcare", "Counselor", "E", "", "");
+        insertCareer(db, "Healthcare", "Counselor", "E",
+                "Counsellors work in confidential settings with individuals who are " +
+                        "experiencing personal difficulties, to help them overcome their problems" +
+                        " and to make appropriate changes to their lives. " +
+                        "Counsellors listen to, empathise with, encourage and help to " +
+                        "empower individuals.", "23,500");
 
-        insertCareer(db, "Healthcare", "Care Assistant", "E", "", "");
+        insertCareer(db, "Healthcare", "Care Assistant", "E",
+                "Personal care includes washing, dressing, bathing, toileting and " +
+                        "medication monitoring and/or assistance. Social duties include preparing " +
+                        "and cooking meals, essential cleaning, shopping, bill payment and " +
+                        "fire maintenance.", "17,622");
 
-        insertCareer(db, "Healthcare", "Therapist", "E", "", "");
+        insertCareer(db, "Hospitality & Tourism", "Server (Waiter/Waitress)", "E",
+                "Alternative titles for this job include Waitress, waiting staff, server. " +
+                        "Waiters serve food and drinks to customers in restaurants and cafes, take " +
+                        "orders and handle payments.", "17,681");
 
-        insertCareer(db, "Hospitality & Tourism", "Server (Waiter/Waitress)", "E", "", "");
+        insertCareer(db, "Marketing & Sales", "Account Executive", "E",
+                "Meeting clients to discuss their advertising needs. Working with account" +
+                        " planners to devise a campaign that meets the client's brief and budget. " +
+                        "Presenting campaign ideas and costings to clients. Managing the account's " +
+                        "budget and invoicing the client.", "23,747");
 
-        insertCareer(db, "Marketing & Sales", "Account Executive", "E", "", "");
+        insertCareer(db, "Marketing & Sales", "Account Manager", "E",
+                "Account management responsibilities include developing strong " +
+                        "relationships with customers, connecting with key business executives and " +
+                        "stakeholders and preparing sales reports. Account Managers also answer " +
+                        "client queries and identify new business opportunities among existing " +
+                        "customers.", "27,822");
 
-        insertCareer(db, "Marketing & Sales", "Account Manager", "E", "", "");
+        insertCareer(db, "Marketing & Sales", "Event Planner", "E",
+                "Event planners develop, plan, and execute a variety of both internal and" +
+                        " external events. They oversee all aspects of event planning and " +
+                        "management, including identifying and working with a variety of external" +
+                        " venues/facilities, negotiating contracts with vendors, and maintaining " +
+                        "and managing event budgets.", "21,463");
 
-        insertCareer(db, "Marketing & Sales", "Event Planner", "E", "", "");
+        insertCareer(db, "Marketing & Sales", "Real Estate Agent", "E",
+                "Working as an estate agent, you'll usually specialise in either sales or" +
+                        " letting of residential or commercial properties, businesses or land on" +
+                        " behalf of your clients. You'll value and market properties, with the aim " +
+                        "of negotiating the best price for your client.", "21,350");
 
-        insertCareer(db, "Marketing & Sales", "Real Estate Agent", "E", "", "");
+        insertCareer(db, "Marketing & Sales", "Sales Manager", "E",
+                "Leading the team of salespeople is the sales manager, the person that" +
+                        " conducts the company's revenue engine. Sales managers hire and motivate " +
+                        "high-performing sales teams, and lead them to generate leads, hit or " +
+                        "exceed revenue forecasts, and ultimately meet customer needs.", "40,330");
 
-        insertCareer(db, "Marketing & Sales", "Sales Manager", "E", "", "");
+        insertCareer(db, "Marketing & Sales", "Sales Representative", "E",
+                "Sales representatives are responsible for selling a company's products by" +
+                        " identifying leads, educating prospects on products through calls, " +
+                        "trainings, and presentations, and providing existing customers with " +
+                        "exceptional support. Most sales reps have a Bachelor's degree in business" +
+                        " or a related field.", "20,519");
 
-        insertCareer(db, "Marketing & Sales", "Sales Representative", "E", "", "");
+        insertCareer(db, "Media & Film", "Journalist", "E",
+                "Journalists research, write, edit, proofread and file news stories, " +
+                        "features and articles. Their pieces are used on television and radio or " +
+                        "within magazines, journals and newspapers, in print and online.",
+                "25.081");
 
-        insertCareer(db, "Media & Film", "Journalist", "E", "", "");
-
-        insertCareer(db, "Transport & Logistics", "Warehouse Manager", "E", "", "");
+        insertCareer(db, "Transport & Logistics", "Warehouse Manager", "E",
+                "Any company that stores and distributes materials or products relies " +
+                        "on a high-functioning warehouse. The warehouse manager supervises all " +
+                        "activities of that facility, which often involves overseeing team " +
+                        "performance, expediting the receiving and shipping of goods, and " +
+                        "ensuring efficient, organized storage.", "26,753");
 
         //Neuroticism personality trait matching jobs
         insertCareer(db, "Finance", "Stockbroker", "N", "", "");
@@ -373,35 +558,36 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /**
      * This method upgrades the database if the old version is less than the new version.
      *
-     * @param db SQLite database
+     * @param db         SQLite database
      * @param oldVersion old version of database
      * @param newVersion latest version database
      */
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < newVersion) {
+            //Drop existing tables
             db.execSQL("DROP TABLE IF EXISTS JOBS_TABLE");
             db.execSQL("DROP TABLE IF EXISTS USER_TABLE");
             db.execSQL("DROP TABLE IF EXISTS USER_PERSONALITY_TEST_SCORE");
             db.execSQL("DROP TABLE IF EXISTS USER_FAVOURITES_TABLE");
             db.execSQL("DROP TABLE IF EXISTS PERSONALITY_QUESTIONS");
-            Log.d("######### database", "UPDATED!");
+
+            //Create updated version of the database
             onCreate(db);
         }
-
 
     }
 
     /**
      * This method inserts a career into the database.
      *
-     *
-     * @param db SQLite database
-     * @param careerArea career area
-     * @param jobTitle job title
+     * @param db            SQLite database
+     * @param careerArea    career area
+     * @param jobTitle      job title
      * @param matchingTrait matching personality trait
-     * @param description a description of the job
-     * @param salary the average salary (UK)
+     * @param description   a description of the job
+     * @param salary        the average salary (UK)
      */
     private static void insertCareer(SQLiteDatabase db, String careerArea, String jobTitle,
                                      String matchingTrait, String description, String salary) {
@@ -423,11 +609,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /**
      * This method inserts questions for the personality quiz into the database.
      *
-     *
-     * @param db SQLite database
+     * @param db       SQLite database
      * @param question the question text
-     * @param trait the personality trait being measured
-     * @param scoring scoring value to check if score is added or subtracted from total
+     * @param trait    the personality trait being measured
+     * @param scoring  scoring value to check if score is added or subtracted from total
      */
     private static void insertPersonalityQuestion(SQLiteDatabase db, String question, String trait, int scoring) {
 
@@ -446,13 +631,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /**
      * This method inserts the users score for the personality quiz into the database.
      *
-     * @param db SQLite database
+     * @param db       SQLite database
      * @param username the current user
-     * @param eScore extroversion score
-     * @param aScore agreeableness score
-     * @param cScore conscientiousness score
-     * @param nScore neuroticism score
-     * @param oScore openness score
+     * @param eScore   extroversion score
+     * @param aScore   agreeableness score
+     * @param cScore   conscientiousness score
+     * @param nScore   neuroticism score
+     * @param oScore   openness score
      */
     public void insertUserScores(SQLiteDatabase db, String username, int eScore,
                                  int aScore, int cScore, int nScore, int oScore) {
@@ -481,13 +666,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     /**
      * This method inserts a new user into the database.
      *
-     * @param db SQLite database
+     * @param db       SQLite database
      * @param username the username to add
      * @param emailAdd email address of user
-     * @param pWord password
+     * @param pWord    password
      */
     public void insertUser(SQLiteDatabase db, String username, String emailAdd,
-                                   String pWord) {
+                           String pWord) {
 
         //Create content values object
         ContentValues userValues = new ContentValues();
@@ -523,12 +708,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         //Retrieve row from cursor and create Question object
         if (cursor.moveToFirst()) {
-            //do {
-                question = new Question(cursor.getInt(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getInt(3));
-            //} while (cursor.moveToNext());
+            question = new Question(cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getInt(3));
         }
 
         //close cursor and database
@@ -577,6 +760,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /**
      * This method returns a HashMAp with the current users scores for each personality trait.
+     *
      * @param username the current user
      * @return HashMap with the users scores for each of the five personality traits measured.
      */
@@ -597,12 +781,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             //do {
-                //Add values to HashMap
-                resultMap.put("eScore", cursor.getInt(0));
-                resultMap.put("aScore", cursor.getInt(1));
-                resultMap.put("cScore", cursor.getInt(2));
-                resultMap.put("nScore", cursor.getInt(3));
-                resultMap.put("oScore", cursor.getInt(4));
+            //Add values to HashMap
+            resultMap.put("eScore", cursor.getInt(0));
+            resultMap.put("aScore", cursor.getInt(1));
+            resultMap.put("cScore", cursor.getInt(2));
+            resultMap.put("nScore", cursor.getInt(3));
+            resultMap.put("oScore", cursor.getInt(4));
             //} while (cursor.moveToNext());
         }
 
@@ -667,8 +851,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     *This method returns a list of Career objects that match the users lowest scoring
-     *      personality trait.
+     * This method returns a list of Career objects that match the users lowest scoring
+     * personality trait.
      *
      * @param lowestTrait lowest scoring personality trait for the user
      * @return List of Career objects that match the lowest personality trait

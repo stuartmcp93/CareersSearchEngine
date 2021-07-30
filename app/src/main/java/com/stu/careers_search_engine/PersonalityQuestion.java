@@ -222,6 +222,7 @@ public class PersonalityQuestion extends AppCompatActivity {
 
             //Printing answer for testing
             DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+
             Log.d("User answer", String.valueOf(userAnswer));
 
             //Get the number of the current question
