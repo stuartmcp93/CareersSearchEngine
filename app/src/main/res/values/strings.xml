@@ -6,11 +6,11 @@
     <string name="sign_up">Sign up</string>
     <string name="forgot_details">Forgot details?</string>
     <string name="title">Careers Search Engine</string>
-    <string name="enter_email_address">Enter email address</string>
+    <string name="enter_username">Enter username</string>
     <string name="enter_password">Enter password</string>
     <!--#########################################################################################-->
     <!--Home page strings-->
-    <string name="welcome_message">Welcome user!</string>
+    <string name="welcome_message">Welcome </string>
     <string name="take_the_quiz">Take the quiz</string>
     <string name="see_results">See results</string>
     <string name="suggested_careers">Suggested careers</string>
@@ -18,7 +18,7 @@
     <!--#########################################################################################-->
     <!--Personality quiz questions-->
     <string name="question_num">1</string>
-    <string name="total_num_questions">/50</string>
+    <string name="total_num_questions">/15</string>
     <string name="question_instructions">Rate each statement according to how well it describes you.</string>
     <string name="example_question">I prefer variety to routine. </string>
     <string name="strongly_agree">Strongly agree</string>
@@ -39,7 +39,7 @@
     <string name="extroversion">Extroversion</string>
 
     <string name="personality_results_title">Personality trait score:</string>
-    <string name="see_career_area_matches">Career \n matches</string>
+    <string name="see_career_area_matches">Career\n matches</string>
     <!--#########################################################################################-->
 
     <!--Favourites list-->
@@ -48,7 +48,37 @@
 
     <!--Career area matches-->
     <string name="spinner_text">Filter</string>
-    <string name="career_area_matches">Career area matches:</string>
+    <string name="job_matches">Jobs:</string>
+    <string name="top_three_title">Top 3 area matches:</string>
+    <string name="top_match">1. </string>
+    <string name="second_match">2. </string>
+    <string name="third_match">3. </string>
+    <string name="percent">%</string>
+    <string name="filter">Filter by</string>
+    <!--#########################################################################################-->
+
+    <!--Job search info-->
+    <string name="job_description">Description:</string>
+    <string name="job_avg_salary">Average salary (UK):</string>
+    <string name="job_search_link">Search for jobs:</string>
+    <string name="job_location">Enter location</string>
+    <string name="job_min_salary">Enter min. salary</string>
+    <string name="add_to_favs_list">Add to favourites list</string>
+    <string name="job_search_btn">search</string>
+    <string name="return_favs_list">Favourites list</string>
+
+    <!--#########################################################################################-->
+
+    <!--Sign up-->
+    <string name="sign_up_title">Sign up</string>
+    <string name="enter_a_username">Enter a username</string>
+    <string name="enter_email_add">Enter email address</string>
+    <string name="enter_password2">Enter a password</string>
+    <string name="retype_password">Retype password</string>
+    <!--#########################################################################################-->
+
+    <!--Search results-->
+    <string name="career_matches_return">Career matches</string>
     <!--#########################################################################################-->
 
 

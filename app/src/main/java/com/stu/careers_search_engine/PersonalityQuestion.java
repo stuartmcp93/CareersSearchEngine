@@ -2,7 +2,10 @@ package com.stu.careers_search_engine;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,18 +35,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PersonalityQuestion extends AppCompatActivity {
     ImageView IMG_home_btn;
-    Button BTN_submit_answer, BTN_previous_question, BTN_view_results;
-    TextView TV_questionDisplay, TV_questionNum;
+    Button BTN_submit_answer;
+    TextView TV_questionDisplay, TV_questionNum, TV_total_questions;
     RadioButton RB_sAgree, RB_agree, RB_neutral, RB_disagree, RB_sDisagree;
+
 
     //These will hold the users the score for each personality trait and
     //them to the database for the user.
     //When having working properly will have these int[] that will hold each score the question.
     // This will allow for calculation of final score
-    ArrayList<Integer> extroversionScore, agreeablenessScore, conscientiousnessScore,
+    int extroversionScore, agreeablenessScore, conscientiousnessScore,
             neuroticismScore, opennessScore;
 
-    ArrayList<Question> questionsList;
+
 
 
     @Override
@@ -55,24 +59,30 @@ public class PersonalityQuestion extends AppCompatActivity {
 
         IMG_home_btn = findViewById(R.id.IMG_home_logo_quiz);
         BTN_submit_answer = findViewById(R.id.BTN_submit_answer);
-        BTN_previous_question = findViewById(R.id.BTN_previous_question);
-        //BTN_view_results = findViewById(R.id.BTN_view_results);
+
         TV_questionDisplay = findViewById(R.id.TV_question_display);
+        TV_total_questions = findViewById(R.id.TV_question_total);
         TV_questionNum = findViewById(R.id.TV_question_number);
-        TV_questionNum.setText(getString(R.string.question_num));
+        //TV_questionNum.setText(getString(R.string.question_num));
         RB_sAgree = findViewById(R.id.RBTN_strongly_agree);
         RB_agree = findViewById(R.id.RBTN_agree);
         RB_neutral = findViewById(R.id.RBTN_neutral);
         RB_disagree = findViewById(R.id.RBTN_disagree);
         RB_sDisagree = findViewById(R.id.RBTN_strongly_disagree);
-        questionsList = getQuestions();
-        extroversionScore = new ArrayList<>();
-        agreeablenessScore = new ArrayList<>();
-        conscientiousnessScore = new ArrayList<>();
-        neuroticismScore = new ArrayList<>();
-        opennessScore = new ArrayList<>();
+        //questionsList = getQuestions();
 
-        TV_questionDisplay.setText(questionsList.get(0).getQuestion());
+        extroversionScore = 20;
+        agreeablenessScore = 50;
+        conscientiousnessScore = 20;
+        neuroticismScore = 20;
+        opennessScore = 20;
+
+
+        //Set up first question
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+        Question question = dataBaseHelper.getQuestion(Integer.parseInt(TV_questionNum.getText().toString()));
+        TV_questionDisplay.setText(question.getQuestion());
+        TV_total_questions.setText(" / " + dataBaseHelper.countQuestions());
 
 
         //Set on click listeners
@@ -134,28 +144,49 @@ public class PersonalityQuestion extends AppCompatActivity {
     /**
      * This method adds the score to the correct personality trait.
      *
-     * @param trait      the personality trait associated with the current question
+     * @param question   the personality trait associated with the current question
      * @param userAnswer the response of the user as an integer
      */
-    public void addScoreToPersonalityTrait(String trait, int userAnswer) {
-        switch (trait) {
+    public void addScoreToPersonalityTrait(Question question, int userAnswer) {
+        switch (question.getPersonalityTrait()) {
             case "E":
-                extroversionScore.add(userAnswer);
+                if (question.getScoring() == 1) {
+                    extroversionScore += userAnswer;
+                } else {
+                    extroversionScore -= userAnswer;
+                }
                 break;
             case "A":
-                agreeablenessScore.add(userAnswer);
+                if (question.getScoring() == 1) {
+                    agreeablenessScore += userAnswer;
+                } else {
+                    agreeablenessScore -= userAnswer;
+                }
                 break;
             case "C":
-                conscientiousnessScore.add(userAnswer);
+                if (question.getScoring() == 1) {
+                    conscientiousnessScore += userAnswer;
+                } else {
+                    conscientiousnessScore -= userAnswer;
+                }
                 break;
             case "N":
-                neuroticismScore.add(userAnswer);
+                if (question.getScoring() == 1) {
+                    neuroticismScore += userAnswer;
+                } else {
+                    neuroticismScore -= userAnswer;
+                }
                 break;
             case "O":
-                opennessScore.add(userAnswer);
+                if (question.getScoring() == 1) {
+                    opennessScore += userAnswer;
+                } else {
+                    opennessScore -= userAnswer;
+                }
                 break;
         }
     }
+
 
     /**
      * This method will record the users answer and add that score to the correct personality trait
@@ -166,14 +197,10 @@ public class PersonalityQuestion extends AppCompatActivity {
      */
     private void nextQuestion() {
 
-        /*
-         * Convert current question number to int. When API is working this will be incremented
-         * and added to the API request string to get the next question from the DB
-         */
+
         int currentQuestionNum = Integer.parseInt((String) TV_questionNum.getText());
-        /*if (currentQuestionNum == 15) {
-            loadResultsDisplay();
-        }*/
+
+
         Log.d("Question number:", String.valueOf(currentQuestionNum));
 
         //get the users answer for the question
@@ -188,165 +215,62 @@ public class PersonalityQuestion extends AppCompatActivity {
 
             //Display toast to ask user to choose an answer
             Toast.makeText(PersonalityQuestion.this, "Please check an answer!",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
 
             //If user has selected an answer continue with the quiz
         } else {
 
             //Printing answer for testing
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+
             Log.d("User answer", String.valueOf(userAnswer));
 
             //Get the number of the current question
             //String currentQuestionStr = (String) TV_questionNum.getText();
+            Question currentQuestion = dataBaseHelper.getQuestion(currentQuestionNum);
+            addScoreToPersonalityTrait(currentQuestion, userAnswer);
 
+            int nextQuestionNum = currentQuestionNum + 1;
+            Log.d("########### next questionNum", Integer.toString(nextQuestionNum));
 
-            //String personalityTrait = "";
-            for (Question question : questionsList) {
-                if (question.getQuestionNum() == currentQuestionNum) {
-                    //Passing the trait and user answer to the trait scores
-                    addScoreToPersonalityTrait(question.getPersonality_trait(), userAnswer);
-                    Log.d("Personality Trait:", question.getPersonality_trait());
-                }
-
-
-
-
-            /*
-                Checking the question number against number of questions in the quiz. if quiz
-                is finished calculate scores for each personality trait and display them in the
-                results activity
-             */ //Toast tell user answer was submitted
-                //Toast.makeText(PersonalityQuestion.this, "Answer submitted", Toast.LENGTH_SHORT).show();
-
-                //if (currentQuestionNum <= questionsList.size()) {
-                //Set question number and display next question
-
-
-                for (Question questions : questionsList) {
-                    if (questions.getQuestionNum() == currentQuestionNum + 1) {
-                        TV_questionDisplay.setText(questions.getQuestion());
-                        TV_questionNum.setText(String.valueOf(questions.getQuestionNum()));
-                    }
-                }
-
-
+            if (nextQuestionNum > dataBaseHelper.countQuestions()) {
+                loadResultsDisplay(((User) this.getApplication()).getUsername());
+            } else {
+                Question nextQuestion = dataBaseHelper.getQuestion(nextQuestionNum);
+                Log.d("######### next question text", nextQuestion.getQuestion());
+                TV_questionNum.setText(Integer.toString(nextQuestionNum));
+                TV_questionDisplay.setText(nextQuestion.getQuestion());
             }
 
-            if(opennessScore.size() == 3){
-                loadResultsDisplay();
-            }
 
         }
 
     }
 
 
-    public void loadResultsDisplay() {
+    public void loadResultsDisplay(String username) {
         //Add results to arrayList before going to the activity
-        Toast.makeText(PersonalityQuestion.this, "Questions finished! Calculating score",
-                Toast.LENGTH_SHORT).show();
-        calcScoreList();
+        calcScoreList(username);
         Intent resultsIntent = new Intent(PersonalityQuestion.this, PersonalityQuizResults.class);
-
-        /*
-        resultsIntent.putExtra("user scores", extroversionScore);
-        resultsIntent.putExtra("A score", agreeablenessScore);
-        resultsIntent.putExtra("C score", conscientiousnessScore);
-        resultsIntent.putExtra("N score", neuroticismScore);
-        resultsIntent.putExtra("O score", opennessScore);*/
 
         startActivity(resultsIntent);
     }
 
-    public static void wait(int ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-    }
 
     //Temporary to get all other functionality working
-    private void calcScoreList() {
-
-        //Add the extroversion score
-        int eScore = 20;
-        eScore += extroversionScore.get(0);
-        eScore -= extroversionScore.get(1);
-        eScore += extroversionScore.get(2);
-        ListHolder.getInstance().userPTscore.add(eScore);
+    private void calcScoreList(String username) {
 
 
-        //add the agreeableness score
-        int aScore = 20;
-        aScore -= agreeablenessScore.get(0);
-        aScore += agreeablenessScore.get(1);
-        aScore -= agreeablenessScore.get(2);
-        ListHolder.getInstance().userPTscore.add(aScore);
-
-        //add conscientiousness score
-        int cScore = 20;
-        cScore += conscientiousnessScore.get(0);
-        cScore -= conscientiousnessScore.get(1);
-        cScore += conscientiousnessScore.get(2);
-        ListHolder.getInstance().userPTscore.add(cScore);
-
-        //add Neuroticism score
-        int nScore = 20;
-        nScore += neuroticismScore.get(0);
-        nScore += neuroticismScore.get(1);
-        nScore += neuroticismScore.get(2);
-        ListHolder.getInstance().userPTscore.add(nScore);
-
-        //add Openness score
-        int oScore = 20;
-        oScore += opennessScore.get(0);
-        oScore += opennessScore.get(1);
-        oScore += opennessScore.get(2);
-        ListHolder.getInstance().userPTscore.add(oScore);
-
-    }
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+        SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
+        dataBaseHelper.insertUserScores(db, ((User) this.getApplication()).getUsername(),
+                extroversionScore,
+                agreeablenessScore,
+                conscientiousnessScore,
+                neuroticismScore,
+                opennessScore);
 
 
-    /*Going to create List this way then get results and career matches to work then come back and
-    change this to a database
-    */
-    public ArrayList<Question> getQuestions() {
-
-        ArrayList<Question> questionsList = new ArrayList<>();
-
-        Question one = new Question(1, "I am the life of the party.", "E");
-        questionsList.add(one);
-        Question two = new Question(2, "I feel little concern for others.", "A");
-        questionsList.add(two);
-        Question three = new Question(3, "I am always prepared.", "C");
-        questionsList.add(three);
-        Question four = new Question(4, "I get stressed out easily.", "N");
-        questionsList.add(four);
-        Question five = new Question(5, "I have a rich vocabulary.", "O");
-        questionsList.add(five);
-        Question six = new Question(6, "I don''t talk a lot.", "E");
-        questionsList.add(six);
-        Question seven = new Question(7, "I am interested in people.", "A");
-        questionsList.add(seven);
-        Question eight = new Question(8, "I leave my belongings around.", "C");
-        questionsList.add(eight);
-        Question nine = new Question(9, "I am relaxed most of the time.", "N");
-        questionsList.add(nine);
-        Question ten = new Question(10, "I have difficulty understanding abstract ideas.", "O");
-        questionsList.add(ten);
-        Question eleven = new Question(11, "I feel comfortable around people.", "E");
-        questionsList.add(eleven);
-        Question twelve = new Question(12, "I insult people.", "A");
-        questionsList.add(twelve);
-        Question thirteen = new Question(13, "I pay attention to details.", "C");
-        questionsList.add(thirteen);
-        Question fourteen = new Question(14, "I worry about things.", "N");
-        questionsList.add(fourteen);
-        Question fifteen = new Question(15, "I have a vivid imagination.", "O");
-        questionsList.add(fifteen);
-
-        return questionsList;
     }
 
 

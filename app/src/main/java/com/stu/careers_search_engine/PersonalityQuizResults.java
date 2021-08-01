@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class PersonalityQuizResults extends AppCompatActivity {
@@ -25,8 +25,7 @@ public class PersonalityQuizResults extends AppCompatActivity {
     Button BTN_career_matches_display;
     TextView TV_con, TV_agreeableness, TV_neuroticism, TV_openness, TV_extroversion;
     PieChart pieChart;
-    ArrayList<Integer> extroversionResList, agreeablenessResList, conscientiousnessResList,
-            neuroticismResList, opennessResList;
+
 
     //Need to change to ImageButton
     ImageView IMG_home;
@@ -43,34 +42,35 @@ public class PersonalityQuizResults extends AppCompatActivity {
         TV_openness = findViewById(R.id.TV_openness);
         TV_extroversion = findViewById(R.id.TV_extroversion);
         pieChart = findViewById(R.id.piechart);
+        BTN_career_matches_display = findViewById(R.id.BTN_career_area_matches);
 
 
-        //Intent intent = getIntent();
-        /*if(intent != null){
-            extroversionResList = intent.getIntegerArrayListExtra("E score");
-            agreeablenessResList = intent.getIntegerArrayListExtra("A score");
-            conscientiousnessResList = intent.getIntegerArrayListExtra("C score");
-            neuroticismResList = intent.getIntegerArrayListExtra("N score");
-            opennessResList = intent.getIntegerArrayListExtra("O score");
-        }*/
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+        HashMap<String, Integer> userResultMap = dataBaseHelper.getUserPTScores(((User) this.getApplication()).getUsername());
 
-        
-
-
-
-
-        if(ListHolder.getInstance().userPTscore.size() == 0){
-            Toast.makeText(PersonalityQuizResults.this, "Take quiz to see results",
-                    Toast.LENGTH_SHORT).show();
-            setData(0,0,0,0,0);
-        } else {
-            setData(ListHolder.getInstance().userPTscore.get(0),
-                    ListHolder.getInstance().userPTscore.get(1),
-                    ListHolder.getInstance().userPTscore.get(2),
-                    ListHolder.getInstance().userPTscore.get(3),
-                    ListHolder.getInstance().userPTscore.get(4)
-            );
+        if(userResultMap.isEmpty()){
+            Toast.makeText(this, "Take quiz to see results", Toast.LENGTH_SHORT).show();
         }
+
+        for (Map.Entry<String, Integer> entry : userResultMap.entrySet())
+        {
+
+            Log.d("########## Quiz results from DB:", "######");
+            Log.d(entry.getKey(), Integer.toString(entry.getValue()));
+
+        }
+        setData(userResultMap.getOrDefault("eScore", 0),
+                userResultMap.getOrDefault("aScore", 0),
+                userResultMap.getOrDefault("cScore", 0),
+                userResultMap.getOrDefault("nScore", 0),
+                userResultMap.getOrDefault("oScore", 0));
+
+        BTN_career_matches_display.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadCareerMatches();
+            }
+        });
 
 
 
@@ -83,6 +83,12 @@ public class PersonalityQuizResults extends AppCompatActivity {
                 returnHome();
             }
         });
+    }
+
+    private void loadCareerMatches() {
+        Intent matchesIntent = new Intent(this, CareerMatchesDisplay.class);
+        startActivity(matchesIntent);
+
     }
 
     private void returnHome() {

@@ -10,15 +10,18 @@ public class Question {
 
     private int questionNum;
     private String question;
-    private String personality_trait;
+    private String personalityTrait;
+    private int scoring;
 
-    public Question(int questionNum, String question, String personality_trait) {
+    public Question(int questionNum, String question, String personality_trait, int scoring) {
         this.questionNum = questionNum;
         this.question = question;
-        this.personality_trait = personality_trait;
+        this.personalityTrait = personality_trait;
+        this.scoring = scoring;
     }
 
     public int getQuestionNum() {
+
         return questionNum;
     }
 
@@ -27,10 +30,13 @@ public class Question {
         return question;
     }
 
-    public String getPersonality_trait() {
+    public String getPersonalityTrait() {
 
-        return personality_trait;
+        return personalityTrait;
     }
 
+    public int getScoring() {
 
+        return scoring;
+    }
 }

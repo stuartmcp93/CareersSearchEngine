@@ -14,6 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         >
@@ -22,25 +23,46 @@
         android:src="@drawable/home_logo"
         android:layout_width="100dp"
         android:layout_height="75dp"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         />
+
+        <Spinner
+            android:id="@+id/SP_home_spinner"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/settings_logo"
+            />
+
+        <!--
         <ImageView
             android:id="@+id/IMG_settings_logo"
             android:src="@drawable/settings_logo"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true" />-->
         <TextView
             android:id="@+id/TV_welcome_message"
             android:text="@string/welcome_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+           android:layout_centerHorizontal="true"
             android:layout_below="@+id/IMG_home_logo"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="5dp"
             android:textStyle="bold"
-            android:padding="10dp"
+
+            android:textSize="30sp"/>
+        <TextView
+            android:id="@+id/TV_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_welcome_message"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="1dp"
+            android:textStyle="bold"
+
             android:textSize="30sp"/>
 
     </RelativeLayout>
