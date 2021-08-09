@@ -17,7 +17,7 @@ import java.util.List;
  * This class creates a SQLite database to store data in the application. It contains methods
  * to add items and query the database.
  *
- * @Author Stuart McPherson 29/07/2021
+ * @Author Stuart McPherson
  */
 
 public class DataBaseHelper extends SQLiteOpenHelper {
@@ -952,14 +952,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, new String[]{username});
 
         if (cursor.moveToFirst()) {
-            //do {
-            //Add values to HashMap
             resultMap.put("eScore", cursor.getInt(0));
             resultMap.put("aScore", cursor.getInt(1));
             resultMap.put("cScore", cursor.getInt(2));
             resultMap.put("nScore", cursor.getInt(3));
             resultMap.put("oScore", cursor.getInt(4));
-            //} while (cursor.moveToNext());
+
         }
 
         //Close cursor and database
@@ -1126,34 +1124,71 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public boolean checkPassword(String pword) {
+    /**
+     * A method to check the username and password of a user in the database.
+     *
+     * @param username the username entered
+     * @param password the password enetered
+     * @return true if a match is found
+     */
+
+    public boolean checkUsernameAndPassword(String username, String password) {
+        //Iniate boolean value
         boolean match = false;
 
-        String query = "SELECT * FROM USER_TABLE WHERE PASSWORD = ?;";
+        //SQL query
+        String query = "SELECT * FROM USER_TABLE WHERE USERNAME = ? AND PASSWORD = ?;";
+
+        //Open database
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, new String[]{pword});
+
+        //Create cursor
+        Cursor cursor = db.rawQuery(query, new String[]{username, password});
+
+        //Set boolean to true if the
         if (cursor.moveToFirst()) {
             match = true;
         }
 
+        //Close cursor and database
         cursor.close();
         db.close();
+
+        //Return boolean
         return match;
     }
 
+
+    /**
+     * This method checks if the username already exists in the database.
+     *
+     *
+     * @param username the username entered
+     * @return true if username match found
+     */
     public boolean checkUsername(String username) {
+        //Initiate boolean variable
         boolean match = false;
 
+        //SQl query
         String query = "SELECT * FROM USER_TABLE WHERE USERNAME = ?;";
+
+        //Open database
         SQLiteDatabase db = this.getReadableDatabase();
+
+        //Open cursor
         Cursor cursor = db.rawQuery(query, new String[]{username});
+
+        //If match found set to true
         if (cursor.moveToFirst()) {
             match = true;
         }
 
-        Log.d("########### match", String.valueOf(match));
+        //close cursor and database
         cursor.close();
         db.close();
+
+        //return boolean value
         return match;
     }
 }

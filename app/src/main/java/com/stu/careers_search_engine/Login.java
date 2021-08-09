@@ -57,8 +57,7 @@ public class Login extends AppCompatActivity {
         String password = ET_password.getText().toString();
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
-        if(dataBaseHelper.checkPassword(password) && dataBaseHelper.checkUsername(username)){
-        //ListHolder.getInstance().username.add(username);
+        if(dataBaseHelper.checkUsernameAndPassword(username, password)){
         User user = ((User) this.getApplication()).setUsername(username);
         Intent loginIntent = new Intent(this, Home.class);
         startActivity(loginIntent);

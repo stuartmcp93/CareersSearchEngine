@@ -20,6 +20,13 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * This class displays information about a job that the user has clicked on in the
+ * careersMatchesDisplay class or the FavouritesList class. The user can search for vacancies for
+ * this job by entering a location and minimum salary.
+ *
+ * @Author Stuart McPherson
+ */
 public class DisplayJobInfo extends AppCompatActivity {
     TextView jobTitle, descriptionDisplay, salaryDisplay;
     SwitchCompat favSwitch;
@@ -34,10 +41,10 @@ public class DisplayJobInfo extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
 
+        //Get the career object to display information about from other activity
         Intent intent = getIntent();
         Career careerToDisplay = (Career) intent.getSerializableExtra("career obj");
 
-        //findViewById(R.id.IMG_home_logo_quiz);
 
         BTN_search = findViewById(R.id.BTN_search_jobs);
         jobTitle = findViewById(R.id.title_data);
@@ -49,20 +56,26 @@ public class DisplayJobInfo extends AppCompatActivity {
         IMG_favourites_list = findViewById(R.id.IMG_favs_job_data);
         ET_location = findViewById(R.id.ET_location);
         ET_salary = findViewById(R.id.ET_min_salary);
+
+        //Check if career is added to user favourites list
         checkAlreadyAddedToFavs(careerToDisplay, ((User) this.getApplication()).getUsername());
 
+        //Set displays to show job information
         jobTitle.setText(careerToDisplay.getJobTitle());
         descriptionDisplay.setText(careerToDisplay.getDescription());
         salaryDisplay.setText(careerToDisplay.getSalary());
+
         String username = ((User) this.getApplication()).getUsername();
 
+        //Add or remove job from the user's favourite list
         favSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addorRemoveJobToFavourites(careerToDisplay.getId(), username);
+                addOrRemoveJobToFavourites(careerToDisplay.getId(), username);
             }
         });
 
+        //On click listeners for navigation buttons
         IMG_home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +98,7 @@ public class DisplayJobInfo extends AppCompatActivity {
             }
         });
 
+        //On click listener to search for jobs.
         BTN_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,15 +108,34 @@ public class DisplayJobInfo extends AppCompatActivity {
 
     }
 
+    /**
+     * This method loads the careerMatchesDisplay activity.
+     */
     private void loadCareerMatches() {
         Intent intent = new Intent(this, CareerMatchesDisplay.class);
         startActivity(intent);
     }
 
+
+
+    /**
+     * This method reads parameters entered by the user and searches for job vacancies for the
+     * current job title displayed.
+     *
+     * @param careerToDisplay the career object currently displayed
+     */
+
     private void searchJobs(Career careerToDisplay) {
+        //The location entered
         String location = ET_location.getText().toString();
+
+        //The minimum salary
         String salary = ET_salary.getText().toString();
+
+        //Check salary is a numeric value for searching
         boolean isNumeric = salary.chars().allMatch( Character::isDigit );
+
+        //Check parameters are entered correctly and display toasts for user
         if(location.isEmpty() || salary.isEmpty()){
             Toast.makeText(this, "Please enter a location and min. salary.",
                     Toast.LENGTH_SHORT).show();
@@ -110,6 +143,7 @@ public class DisplayJobInfo extends AppCompatActivity {
             Toast.makeText(this, "Please enter numbers for salary.",
                     Toast.LENGTH_SHORT).show();
 
+        //Pass search parameters if entered correctly to search display activity
         }else {
             Intent intent = new Intent(this, JobSearchDisplay.class);
             intent.putExtra("career obj", careerToDisplay);
@@ -121,7 +155,13 @@ public class DisplayJobInfo extends AppCompatActivity {
 
     }
 
-    public void addorRemoveJobToFavourites(int jobId, String username) {
+
+    /**
+     *
+     * @param jobId the id of the job on display
+     * @param username
+     */
+    public void addOrRemoveJobToFavourites(int jobId, String username) {
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
         // Gets the data repository in write mode

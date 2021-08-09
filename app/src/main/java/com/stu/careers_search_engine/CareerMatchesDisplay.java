@@ -24,7 +24,7 @@ import java.util.Objects;
  * quiz. A list of job matches are displayed and the top three career areas that match their result.
  * The user can filter the results to view careers further from their personality type.
  *
- * @Author Stuart McPherson 29/07/2021
+ * @Author Stuart McPherson
  */
 
 public class CareerMatchesDisplay extends AppCompatActivity {
