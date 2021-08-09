@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context="com.stu.careers_search_engine.FavouritesList">
+    tools:context="com.stu.careers_search_engine.FavouritesList"
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -43,16 +44,41 @@
     </ListView>
 
     <RelativeLayout
+        android:id="@+id/NAV_BAR_fav_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:backgroundTint="@color/design_default_color_primary">
+
         <ImageView
-            android:id="@+id/IMG_home_logo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:id="@+id/IMG_home_logo_fav_list"
             android:src="@drawable/home_logo"
-            android:layout_centerHorizontal="true"/>
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:padding="5dp"
+            />
+
+        <ImageView
+            android:id="@+id/IMG_quiz_res_fav_list"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/results_logo"
+            android:padding="2dp"/>
+        <ImageView
+            android:id="@+id/IMG_career_match_fav_list"
+            android:src="@drawable/suggested_resize"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:padding="2dp"/>
+
+
     </RelativeLayout>
 
 </LinearLayout>

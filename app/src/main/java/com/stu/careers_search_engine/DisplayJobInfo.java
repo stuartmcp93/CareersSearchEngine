@@ -23,8 +23,8 @@ import java.util.Objects;
 public class DisplayJobInfo extends AppCompatActivity {
     TextView jobTitle, descriptionDisplay, salaryDisplay;
     SwitchCompat favSwitch;
-    ImageView IMG_home_btn;
-    Button BTN_favourites, BTN_search;
+    ImageView IMG_home_btn, IMG_career_matches, IMG_favourites_list;
+    Button BTN_search;
     EditText ET_location, ET_salary;
 
     @Override
@@ -38,13 +38,15 @@ public class DisplayJobInfo extends AppCompatActivity {
         Career careerToDisplay = (Career) intent.getSerializableExtra("career obj");
 
         //findViewById(R.id.IMG_home_logo_quiz);
-        BTN_favourites = findViewById(R.id.BTN_return_fav_list);
+
         BTN_search = findViewById(R.id.BTN_search_jobs);
         jobTitle = findViewById(R.id.title_data);
         descriptionDisplay = findViewById(R.id.TV_description);
         salaryDisplay = findViewById(R.id.TV_salary);
         favSwitch = findViewById(R.id.SW_add_to_fav);
-        IMG_home_btn = findViewById(R.id.IMG_home_logo_info);
+        IMG_home_btn = findViewById(R.id.IMG_home_logo_job_data);
+        IMG_career_matches = findViewById(R.id.IMG_career_match_job_data);
+        IMG_favourites_list = findViewById(R.id.IMG_favs_job_data);
         ET_location = findViewById(R.id.ET_location);
         ET_salary = findViewById(R.id.ET_min_salary);
         checkAlreadyAddedToFavs(careerToDisplay, ((User) this.getApplication()).getUsername());
@@ -69,10 +71,17 @@ public class DisplayJobInfo extends AppCompatActivity {
             }
         });
 
-        BTN_favourites.setOnClickListener(new View.OnClickListener() {
+        IMG_favourites_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 returnToFavouritesList();
+            }
+        });
+
+        IMG_career_matches.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadCareerMatches();
             }
         });
 
@@ -83,6 +92,11 @@ public class DisplayJobInfo extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void loadCareerMatches() {
+        Intent intent = new Intent(this, CareerMatchesDisplay.class);
+        startActivity(intent);
     }
 
     private void searchJobs(Career careerToDisplay) {
@@ -144,11 +158,7 @@ public class DisplayJobInfo extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        //do nothing
-        Toast.makeText(this, "Choose home or favourites list", Toast.LENGTH_SHORT).show();
-    }
+
 
 
 }

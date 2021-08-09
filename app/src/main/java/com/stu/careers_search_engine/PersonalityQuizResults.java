@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,13 +24,15 @@ import java.util.Objects;
 
 public class PersonalityQuizResults extends AppCompatActivity {
 
-    Button BTN_career_matches_display;
     TextView TV_con, TV_agreeableness, TV_neuroticism, TV_openness, TV_extroversion;
     PieChart pieChart;
+    Button BTN_close;
+    RelativeLayout explanationView;
+
 
 
     //Need to change to ImageButton
-    ImageView IMG_home;
+    ImageView IMG_home, IMG_career_matches_display, IMG_favs_display;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +46,11 @@ public class PersonalityQuizResults extends AppCompatActivity {
         TV_openness = findViewById(R.id.TV_openness);
         TV_extroversion = findViewById(R.id.TV_extroversion);
         pieChart = findViewById(R.id.piechart);
-        BTN_career_matches_display = findViewById(R.id.BTN_career_area_matches);
+        IMG_career_matches_display = findViewById(R.id.BTN_career_area_matches);
+        IMG_favs_display = findViewById(R.id.BTN_favs_list);
+        IMG_home = findViewById(R.id.IMG_home_logo_quiz_res);
+        BTN_close = findViewById(R.id.BTN_close_explanation);
+        explanationView = findViewById(R.id.Explanation_pop_up);
 
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
@@ -65,16 +73,67 @@ public class PersonalityQuizResults extends AppCompatActivity {
                 userResultMap.getOrDefault("nScore", 0),
                 userResultMap.getOrDefault("oScore", 0));
 
-        BTN_career_matches_display.setOnClickListener(new View.OnClickListener() {
+        BTN_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                explanationView.setVisibility(View.GONE);
+
+            }
+        });
+
+        IMG_career_matches_display.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadCareerMatches();
             }
         });
 
+        IMG_favs_display.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFavs();
+            }
+        });
+
+        TV_extroversion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTraitDescription("Extroversion");
+            }
+        });
+
+        TV_agreeableness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTraitDescription("Agreeableness");
+            }
+        });
+
+        TV_con.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTraitDescription("Conscientiousness");
+            }
+        });
+
+        TV_neuroticism.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String trait = TV_neuroticism.getText().toString();
+                showTraitDescription("Neuroticism");
+            }
+        });
+
+        TV_openness.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTraitDescription("Openness");
+            }
+        });
 
 
-        IMG_home = findViewById(R.id.IMG_home_logo_quiz_res);
+
+
 
         IMG_home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +142,11 @@ public class PersonalityQuizResults extends AppCompatActivity {
                 returnHome();
             }
         });
+    }
+
+    private void loadFavs() {
+        Intent intent = new Intent(this, FavouritesList.class);
+        startActivity(intent);
     }
 
     private void loadCareerMatches() {
@@ -144,6 +208,32 @@ public class PersonalityQuizResults extends AppCompatActivity {
 
         // To animate the pie chart
         pieChart.startAnimation();
+
+    }
+
+    public void showTraitDescription(String traitClicked){
+        TextView explanationText = findViewById(R.id.TV_explanation);
+        explanationView.setVisibility(View.VISIBLE);
+        Log.d("########## trait clicked", traitClicked);
+
+        switch (traitClicked) {
+            case "Extroversion":
+                explanationText.setText(R.string.E_explain);
+                break;
+            case "Agreeableness":
+                explanationText.setText(R.string.A_explain);
+                break;
+            case "Conscientiousness":
+                explanationText.setText(R.string.C_explain);
+                break;
+            case "Neuroticism":
+                explanationText.setText(R.string.N_explain);
+                break;
+            case "Openness":
+                explanationText.setText(R.string.O_explain);
+                break;
+        }
+
 
     }
 }

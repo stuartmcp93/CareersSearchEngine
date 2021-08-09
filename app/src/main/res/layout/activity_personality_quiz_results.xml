@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    tools:context="com.stu.careers_search_engine.PersonalityQuizResults">
+    tools:context="com.stu.careers_search_engine.PersonalityQuizResults"
+    android:backgroundTint="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -68,6 +69,7 @@
                 android:layout_marginLeft="20dp"
                 android:orientation="vertical"
                 android:gravity="center_vertical"
+                android:textColor="@color/black"
                 >
 
                 <LinearLayout
@@ -198,26 +200,57 @@
         app:cardCornerRadius="10dp"
         android:id="@+id/details">
 
-        <!--Relative layout to display -->
-        <!-- use of programming languages -->
+
         <LinearLayout
             android:id="@+id/LO_results_layout"
             android:layout_width="match_parent"
             android:layout_height="350dp"
+            android:textColor="@color/black"
             android:orientation="vertical">
 
-            <!--Text view to use of -->
-            <!-- programming languages text-->
+            <RelativeLayout
+                android:id="@+id/Explanation_pop_up"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                >
+
+                <TextView
+                    android:id="@+id/TV_explanation"
+                    android:layout_marginBottom="50dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:id="@+id/BTN_close_explanation"
+                    android:layout_alignParentBottom="true"
+                    android:text="@string/close_btn"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/personality_results_title"
                 android:textSize="23sp"
                 android:textStyle="bold"
+                android:gravity="center_horizontal"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="20dp"/>
 
-            <!--View to display the line-->
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -234,7 +267,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">
 
-                <!--Text view to display R -->
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -242,9 +275,7 @@
                     android:text="@string/extroversion"
                     android:textSize="18sp"/>
 
-                <!--Text view to display the -->
-                <!-- percentage of programming language -->
-                <!-- used. For now default set to 0-->
+
                 <TextView
                     android:id="@+id/TV_extroversion"
                     android:layout_width="fill_parent"
@@ -260,7 +291,7 @@
                     android:textStyle="bold" />
             </RelativeLayout>
 
-            <!--View to display the line-->
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -283,9 +314,7 @@
                     android:text="@string/agreeableness"
                     android:textSize="18sp"/>
 
-                <!--Text view to display the percentage -->
-                <!-- of programming language used. -->
-                <!-- For now default set to 0-->
+
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -323,9 +352,7 @@
                     android:text="@string/conscientiousness"
                     android:textSize="18sp"/>
 
-                <!--Text view to display the percentage -->
-                <!-- of programming language used. -->
-                <!-- For now default set to 0-->
+
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -363,9 +390,7 @@
                     android:text="@string/neuroticism"
                     android:textSize="18sp"/>
 
-                <!--Text view to display the percentage -->
-                <!-- of programming language used. -->
-                <!-- For now default set to 0-->
+
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -403,9 +428,7 @@
                     android:text="@string/openness"
                     android:textSize="18sp"/>
 
-                <!--Text view to display the percentage -->
-                <!-- of programming language used. -->
-                <!-- For now default set to 0-->
+
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -426,28 +449,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+
                 >
 
-                <Button
-                    android:id="@+id/BTN_career_area_matches"
-                    android:text="@string/see_career_area_matches"
-                    android:drawableRight="@drawable/suggested_resize"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minHeight="150dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    />
-                <ImageView
-                    android:id="@+id/IMG_home_logo_quiz_res"
-                    android:src="@drawable/home_logo"
-                    android:layout_width="75dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentLeft="true"
+               <TextView
+                   android:id="@+id/TV_explanation_instructions"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:text="@string/instructions_results"
+                   android:gravity="center_horizontal"
+                   android:textSize="20sp"
+                   android:textStyle="bold"/>
 
-                    />
 
             </RelativeLayout>
         </LinearLayout>
@@ -456,4 +469,43 @@
     </androidx.cardview.widget.CardView>
 
 
+    <RelativeLayout
+        android:id="@+id/NAV_BAR_QUIZ_RES"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:backgroundTint="@color/design_default_color_primary">
+
+    <ImageView
+        android:id="@+id/IMG_home_logo_quiz_res"
+        android:src="@drawable/home_logo"
+        android:layout_width="75dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        />
+
+        <ImageView
+            android:id="@+id/BTN_career_area_matches"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/suggested_resize"/>
+        <ImageView
+            android:id="@+id/BTN_favs_list"
+            android:src="@drawable/favourites_resize"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"/>
+
+
+    </RelativeLayout>
+
+
+
 </RelativeLayout>
+

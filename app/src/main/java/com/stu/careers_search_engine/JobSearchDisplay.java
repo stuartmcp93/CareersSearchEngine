@@ -29,8 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class JobSearchDisplay extends AppCompatActivity {
     TextView TV_job_title;
-    Button BTN_career_matches;
-    ImageView IMG_home_btn;
+    ImageView IMG_home_btn, IMG_favourites, IMG_career_matches;
     ListView LV_search_display;
     JobSearchResult jobSearchResultList;
 
@@ -42,8 +41,9 @@ public class JobSearchDisplay extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         TV_job_title = findViewById(R.id.TV_title_search);
-        BTN_career_matches = findViewById(R.id.BTN_back_to_careers);
-        IMG_home_btn = findViewById(R.id.IMG_home_logo_search);
+        IMG_career_matches = findViewById(R.id.IMG_career_match_search_res);
+        IMG_favourites = findViewById(R.id.IMG_favs_search_res);
+        IMG_home_btn = findViewById(R.id.IMG_home_logo_search_res);
         LV_search_display = findViewById(R.id.LV_search_results);
         Intent intent = getIntent();
         Career careerToDisplay = (Career) intent.getSerializableExtra("career obj");
@@ -131,14 +131,26 @@ public class JobSearchDisplay extends AppCompatActivity {
             }
         });
 
-        BTN_career_matches.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                returnToCareerMatches();
-            }
-        });
+       IMG_favourites.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               favouritesList();
+           }
+       });
+
+       IMG_career_matches.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               returnToCareerMatches();
+           }
+       });
 
 
+    }
+
+    private void favouritesList() {
+        Intent intent = new Intent(this, FavouritesList.class);
+        startActivity(intent);
     }
 
     private void returnToCareerMatches() {

@@ -26,7 +26,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "CAREERS_SEARCH_ENGINE_DB";
 
     //Current version of the database
-    private static final int DB_VERSION = 3;
+    private static final int DB_VERSION = 5;
 
     DataBaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -42,11 +42,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         //Create table to hold data about jobs
         db.execSQL("CREATE TABLE JOBS_TABLE (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "CAREER_AREA TEXT, " +
-                "JOB_TITLE TEXT," +
-                "MATCHING_TRAIT TEXT, " +
-                "DESCRIPTION TEXT," +
-                "AVG_SALARY TEXT);");
+                "CAREER_AREA TEXT NOT NULL, " +
+                "JOB_TITLE TEXT NOT NULL," +
+                "MATCHING_TRAIT TEXT NOT NULL, " +
+                "DESCRIPTION TEXT NOT NULL," +
+                "AVG_SALARY TEXT NOT NULL);");
 
 
         //Agreeableness personality trait matching jobs
@@ -438,70 +438,201 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                         "ensuring efficient, organized storage.", "26,753");
 
         //Neuroticism personality trait matching jobs
-        insertCareer(db, "Finance", "Stockbroker", "N", "", "");
+        insertCareer(db, "Finance", "Stockbroker", "N",
+                "Stockbrokers buy and sell stocks, shares and other securities on behalf" +
+                        " of private and commercial clients, through a stock exchange or over the " +
+                        "counter, in return for a fee or a commission", "39,548");
 
-        insertCareer(db, "Finance", "Asset Manager", "N", "", "");
+        insertCareer(db, "Finance", "Asset Manager", "N",
+                "Asset managers manage and monitor a company's assets. This could" +
+                        " include property, money, stocks, shares and bonds, commodities, equities " +
+                        "and other financial products. As an asset manager, you'd aim to maximise" +
+                        " your employer's return on investment.", "58,702");
 
-        insertCareer(db, "Healthcare", "Dentist", "N", "", "");
+        insertCareer(db, "Healthcare", "Dentist", "N",
+                "Educating patients on their oral hygiene and dental care. Examining " +
+                        "patient's teeth and identifying or diagnosing any potential dental " +
+                        "problems. Performing dental treatments such as fillings and teeth " +
+                        "extractions. Referring patients to a dental hygienist or dental therapist.",
+                "51,825");
 
-        insertCareer(db, "Healthcare", "Forensic Psychologist", "N", "", "");
+        insertCareer(db, "Healthcare", "Forensic Psychologist", "N",
+                "Your work as a forensic psychologist will mainly relate to the assessment" +
+                        " and treatment of criminal behaviour. You'll work not only with prisoners" +
+                        " and offenders, but with other professionals involved in the judicial " +
+                        "and penal systems as well as with victims of crime.", "27,485");
 
-        insertCareer(db, "Healthcare", "Optometrist", "N", "", "");
+        insertCareer(db, "Healthcare", "Optometrist", "N",
+                "As an optometrist your role is to detect defects in vision, signs of " +
+                        "injury, ocular diseases (diseases of the eye) or abnormality, and problems" +
+                        " with general health. Offer clinical advice regarding eye health and " +
+                        "vision correction. prescribe spectacles or contact lenses.", "37,635");
 
-        insertCareer(db, "Healthcare", "Surgeon", "N", "", "");
+        insertCareer(db, "Healthcare", "Surgeon", "N",
+                "As a surgeon, you'll perform operations by cutting open a patient's " +
+                        "body to repair, remove or replace the diseased or damaged part. As well as" +
+                        " operating, you'll carry out ward rounds and outpatients clinics and will " +
+                        "take on a range of administrative duties and teaching responsibilities.",
+                "70,018");
 
-        insertCareer(db, "Public Services", "Social Worker", "N", "", "");
+        insertCareer(db, "Public Services", "Social Worker", "N",
+                "Social workers support individuals and their families through difficult" +
+                        " times and ensure that vulnerable people, including children and adults, " +
+                        "are safeguarded from harm. Their role is to help improve outcomes in" +
+                        " people's lives.", "30,168");
 
-        insertCareer(db, "Hospitality & tourism", "Chef", "N", "", "");
+        insertCareer(db, "Hospitality & tourism", "Chef", "N",
+                "Oversees a restaurant's kitchen by managing other members of the food " +
+                        "preparation team, deciding what dishes to serve and adjusting orders to " +
+                        "meet guests' requests. May assist in prep work, such as chopping " +
+                        "vegetables, but more often will be involved in cooking specialty dishes.",
+                "28,328");
 
-        insertCareer(db, "Hospitality & tourism", "Cook", "N", "", "");
+        insertCareer(db, "Hospitality & tourism", "Cook", "N",
+                "A Cook, sometimes called a Chef, prepares and serves meals. Their duties" +
+                        " include preparing and measuring out ingredients according to recipes, " +
+                        "plating meals and maintaining condiments and foodstuff.", "19,487");
 
-        insertCareer(db, "Public Service", "Correctional Officer", "N", "", "");
+        insertCareer(db, "Public Service", "Correctional Officer", "N",
+                "Correctional officers oversee inmates to ensure they are safe, secure," +
+                        " and supervised. They do so by enforcing outlined rules and regulations." +
+                        " This might include inspecting cells, writing incident reports, " +
+                        "and restraining inmates. Correctional officers must be alert, decisive, " +
+                        "and have good judgment.", "27,095");
 
-        insertCareer(db, "Public Service", "Firefighter", "N", "", "");
+        insertCareer(db, "Public Service", "Firefighter", "N",
+                "As a firefighter, you'll respond to emergency situations and protect " +
+                        "people, the environment and property from all types of accident and " +
+                        "emergencies. You'll work closely with the local community to increase " +
+                        "their level of fire safety awareness, in order to help prevent fires " +
+                        "and accidents happening in the first place.", "29,877");
 
-        insertCareer(db, "Public Service", "Paramedic", "N", "", "");
+        insertCareer(db, "Public Service", "Paramedic", "N",
+                "Paramedics are emergency response medical professionals, trained in " +
+                        "making quick diagnoses and administering immediate medical care to victims " +
+                        "of accidents, violence and sudden illnesses, such as cardiac arrests or " +
+                        "strokes. Paramedics respond to emergency calls and work under intense" +
+                        " pressure.", "25,813");
 
-        insertCareer(db, "Public Service", "Security Officer", "N", "", "");
+        insertCareer(db, "Public Service", "Security Officer", "N",
+                "A Security Officer, or Security Guard, ensures the safety of the area" +
+                        " they are assigned to watch. Their duties include monitoring the premises," +
+                        " responding to emergency situations and keeping track of all incidents" +
+                        " on-site.", "23,906");
 
-        insertCareer(db, "Public Service", "Civil Servant", "N", "", "");
+        insertCareer(db, "Public Service", "Civil Servant", "N",
+                "The Civil Service delivers public services and supports the government of" +
+                        " the day to develop and implement its policies. Civil servants are " +
+                        "politically impartial. Together, we ensure the effective running of " +
+                        "government and provide the best possible services to the public.",
+                "28,180");
 
         //Openness personality trait matching jobs
-        insertCareer(db, "Arts & Humanities", "Artist", "O", "", "");
+        insertCareer(db, "Arts & Humanities", "Artist", "O",
+                "Artist provides artistic support for company advertising and/or " +
+                        "organization promotional efforts. Develops, sketches, and/or prints " +
+                        "creative ideas for a variety of mediums. The Artist works independently " +
+                        "within established procedures associated with the specific job function.",
+                "24,259");
 
-        insertCareer(db, "Arts & Humanities", "Fashion Designer", "O", "", "");
+        insertCareer(db, "Arts & Humanities", "Fashion Designer", "O",
+                "create or visualise an idea and produce a design by hand or using " +
+                        "computer-aided design (CAD) create moodboards to show to clients. keep up" +
+                        " to date with emerging fashion trends as well as general trends relating " +
+                        "to fabrics, colours and shapes. plan and develop ranges, " +
+                        "often based on a theme.", "26,711");
 
-        insertCareer(db, "Arts & Humanities", "Interior Designer", "O", "", "");
+        insertCareer(db, "Arts & Humanities", "Interior Designer", "O",
+                "Interior and spatial designers are involved in the design or renovation" +
+                        " of internal spaces, including structural alterations, furnishings, " +
+                        "fixtures and fittings, lighting and colour schemes. You may work in a " +
+                        "range of commercial, leisure or domestic settings.", "25,659");
 
-        insertCareer(db, "Business", "Executive", "O", "", "");
+        insertCareer(db, "Business", "Executive", "O",
+                "Top executives typically do the following: Establish and carry out " +
+                        "departmental or organizational goals, policies, and procedures. Direct " +
+                        "and oversee an organization's financial and budgetary activities. Manage " +
+                        "general activities related to making products and providing services.",
+                "23,747");
 
-        insertCareer(db, "Hospitality & Tourism", "Travel Agent", "O", "", "");
+        insertCareer(db, "Hospitality & Tourism", "Travel Agent", "O",
+                "A travel agent's role is to help people plan, choose and arrange their " +
+                        "holiday. They will usually work to a budget set out by whoever is " +
+                        "planning the holiday. They also offer advice and opinions on where to " +
+                        "go and local tourist attractions, events and customs.", "17,770");
 
-        insertCareer(db, "Public Services", "Hairdresser", "O", "", "");
+        insertCareer(db, "Public Services", "Hairdresser", "O",
+                "A Hair Stylist, also known as a Hairdresser, is a professional who " +
+                        "colours, cuts, treats and styles hair. Their main duties include " +
+                        "consulting with and advising clients, delivering a good-looking, " +
+                        "successful end results that the client specified during the " +
+                        "consultation process.", "18,078");
 
-        insertCareer(db, "Public Services", "Lawyer", "O", "", "");
+        insertCareer(db, "Public Services", "Lawyer", "O",
+                "Lawyers advise clients on all aspects of the law and present cases at " +
+                        "court proceedings and hearings. Being a lawyer involves advising clients " +
+                        "on criminal and civil law and representing them in legal proceedings.",
+                "46,408");
 
-        insertCareer(db, "Public Services", "Solicitor", "O", "", "");
+        insertCareer(db, "Public Services", "Solicitor", "O",
+                "Solicitors take instructions from clients and advise on necessary " +
+                        "courses of legal action. Clients can be individuals, groups, public sector" +
+                        " organisations or private companies.", "62,000");
 
-        insertCareer(db, "Marketing & Sales", "Art Director", "O", "", "");
+        insertCareer(db, "Marketing & Sales", "Art Director", "O",
+                "An art director's tasks and duties may include: working from a brief " +
+                        "with a copywriter, generating ideas to present to the client. working on " +
+                        "designs to produce an effective advertising campaign. commissioning " +
+                        "specialists, such as artists and photographers, to work on projects.",
+                "36,733");
 
-        insertCareer(db, "Marketing & Sales", "Graphic Designer", "O", "", "");
+        insertCareer(db, "Marketing & Sales", "Graphic Designer", "O",
+                "Graphic designers/artists design graphics for use in media products " +
+                        "such as magazines, labels, advertising and signage. " +
+                        "Developing concepts, graphics and layouts for product illustrations, " +
+                        "company logos and websites. determining size and arrangement of copy " +
+                        "and illustrative material, as well as font style and size.", "23,258");
 
-        insertCareer(db, "Marketing & Sales", "Marketing Manager", "O", "", "");
+        insertCareer(db, "Marketing & Sales", "Marketing Manager", "O",
+                "A marketing manager builds that awareness by developing and executing" +
+                        " on marketing strategies to meet consumer need — and maximize profits." +
+                        " Working in industries as varied as advertising, hospitality, healthcare," +
+                        " finance, technology, retail, and education, marketing managers are" +
+                        " integral to a company's success.", "34,085");
 
-        insertCareer(db, "Media & Film", "Director", "O", "", "");
 
-        insertCareer(db, "Media & Film", "Editor", "O", "", "");
+        insertCareer(db, "Media & Film", "Editor", "O",
+                "As a film/video editor, you'll manage material such as camera footage," +
+                        " dialogue, sound effects, graphics and special effects to produce a final" +
+                        " film or video product. This is a key role in the post-production process " +
+                        "and your skills can determine the quality and delivery of the finished " +
+                        "result.", "24,677");
 
-        insertCareer(db, "Media & Film", "Filmmaker", "O", "", "");
+        insertCareer(db, "Media & Film", "Producer", "O",
+                "Producers are at the financial, practical and creative heart of a " +
+                        "film or TV drama. They decide on the scale and budget of the film and " +
+                        "source financing from investors, studios and distributors. They work with " +
+                        "creative ideas from the director and approve production costs.",
+                "41,160");
 
-        insertCareer(db, "Media & Film", "Producer", "O", "", "");
+        insertCareer(db, "Transport & Logistics", "Flight Attendant", "O",
+                "As a cabin crew member, you'll provide excellent customer service to " +
+                        "passengers while ensuring their comfort and safety throughout the flight. " +
+                        "You'll help passengers board the plane and give a demonstration of safety " +
+                        "procedures and equipment.", "20,532");
 
-        insertCareer(db, "Transport & Logistics", "Flight Attendant", "O", "", "");
+        insertCareer(db, "IT", "Web Developer", "O",
+                "Your primary task as a web developer will be to create reliable and" +
+                        " high-performing applications and services, which can be accessed over " +
+                        "the internet.", "25,911");
 
-        insertCareer(db, "IT", "Web Developer", "O", "", "");
-
-        insertCareer(db, "IT", "Software Engineer", "O", "", "");
+        insertCareer(db, "IT", "Software Engineer", "O",
+                "As a software engineer, you'll work in a constantly evolving environment," +
+                        " due to technological advances and the strategic direction of the " +
+                        "organisation you work for. You'll create, maintain, audit and improve " +
+                        "systems to meet particular needs, often as advised by a systems analyst or" +
+                        " architect, testing both hard and software systems to diagnose and " +
+                        "resolve system faults.", "37,884");
 
 
         //Creating users table
@@ -516,7 +647,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         //Create table to hold user personality test scores
-        db.execSQL("CREATE TABLE USER_PERSONALITY_TEST_SCORE(USERNAME TEXT NOT NULL UNIQUE, " +
+        db.execSQL("CREATE TABLE USER_PERSONALITY_TEST_SCORE(USERNAME TEXT NOT NULL, " +
                 "E_SCORE INTEGER, " +
                 "A_SCORE INTEGER, " +
                 "C_SCORE INTEGER, " +
@@ -536,6 +667,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "SCORING INTEGER NOT NULL);");
 
         //Insert questions for the quiz
+        //1
         insertPersonalityQuestion(db, "I am the life of the party.", "E", 1);
         insertPersonalityQuestion(db, "I feel little concern for others.", "A", 0);
         insertPersonalityQuestion(db, "I am always prepared.", "C", 1);
@@ -546,11 +678,51 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         insertPersonalityQuestion(db, "I leave my belongings around.", "C", 0);
         insertPersonalityQuestion(db, "I am relaxed most of the time.", "N", 1);
         insertPersonalityQuestion(db, "I have difficulty understanding abstract ideas.", "O", 0);
+        //10
         insertPersonalityQuestion(db, "I feel comfortable around people.", "E", 1);
         insertPersonalityQuestion(db, "I insult people.", "A", 0);
         insertPersonalityQuestion(db, "I pay attention to details.", "C", 1);
         insertPersonalityQuestion(db, "I worry about things.", "N", 0);
         insertPersonalityQuestion(db, "I have a vivid imagination.", "O", 1);
+        insertPersonalityQuestion(db, "I keep in the background.", "E", 0);
+        insertPersonalityQuestion(db, "I sympathize with others' feelings.", "A", 1);
+        insertPersonalityQuestion(db, "I make a mess of things.", "C", 0);
+        insertPersonalityQuestion(db, "I seldom feel blue.", "N", 1);
+        insertPersonalityQuestion(db, "I am not interested in abstract ideas.", "O", 0);
+        //20
+        insertPersonalityQuestion(db, "I start conversations.", "E", 1);
+        insertPersonalityQuestion(db, "I am not interested in other people's problems.", "A", 0);
+        insertPersonalityQuestion(db, "I get chores done right away.", "C", 1);
+        insertPersonalityQuestion(db, "I am easily disturbed.", "N", 0);
+        insertPersonalityQuestion(db, "I have excellent ideas.", "O", 1);
+        insertPersonalityQuestion(db, "I have little to say.", "E", 0);
+        insertPersonalityQuestion(db, "I have a soft heart.", "A", 1);
+        insertPersonalityQuestion(db, "I often forget to put things back in their proper place.", "C", 0);
+        insertPersonalityQuestion(db, "I get upset easily.", "N", 0);
+        insertPersonalityQuestion(db, "I do not have a good imagination.", "O", 0);
+        //30
+        insertPersonalityQuestion(db, "I talk to a lot of different people at parties.", "E", 1);
+        insertPersonalityQuestion(db, "I am not really interested in others", "A", 0);
+        insertPersonalityQuestion(db, "I like order.", "C", 1);
+        insertPersonalityQuestion(db, "I change my mood a lot.", "N", 0);
+        insertPersonalityQuestion(db, "I am quick to understand things", "O", 1);
+        insertPersonalityQuestion(db, "I don't like to draw attention to myself", "E", 0);
+        insertPersonalityQuestion(db, "I take time out for others.", "A", 1);
+        insertPersonalityQuestion(db, "I shirk my duties", "C", 0);
+        insertPersonalityQuestion(db, "I have frequent mood swings.", "N", 0);
+        insertPersonalityQuestion(db, "I use difficult words.", "O", 1);
+       //40
+        insertPersonalityQuestion(db, "I don't mind being the center of attention.", "E", 1);
+        insertPersonalityQuestion(db, "I feel others' emotions.", "A", 1);
+        insertPersonalityQuestion(db, "I follow a schedule.", "C", 1);
+        insertPersonalityQuestion(db, "I get irritated easily.", "N", 0);
+        insertPersonalityQuestion(db, "I spend time reflecting on things.", "O", 1);
+        insertPersonalityQuestion(db, "I am quiet around strangers.", "E", 0);
+        insertPersonalityQuestion(db, "I make people feel at ease.", "A", 1);
+        insertPersonalityQuestion(db, "I am exacting in my work.", "C", 1);
+        insertPersonalityQuestion(db, "I often feel blue.", "N", 0);
+        insertPersonalityQuestion(db, "I am full of ideas.", "O", 1);
+
 
 
     }

@@ -37,9 +37,35 @@
     <string name="neuroticism">Neuroticism</string>
     <string name="openness">Openness</string>
     <string name="extroversion">Extroversion</string>
-
+    <string name="instructions_results">Click trait for details.</string>
     <string name="personality_results_title">Personality trait score:</string>
+    <string name="close_btn">Close</string>
     <string name="see_career_area_matches">Career\n matches</string>
+    <!--Explanations of traits-->
+    <string name="C_explain">Conscientiousness: \n A personality trait that includes reflection,
+        deep thinking and individuals who like to set goals. People who score lower on this trait
+        prefer not to plan out all their activities and are less mindful of deadlines.</string>
+
+    <string name="E_explain">Extroversion: \n This describes an excitable individual in social
+        situations and displays more assertive behaviours, especially in group interactions.
+        On the contrary, scoring low in this trait describes a person who finds social interactions
+        tiresome and reserved in group settings.</string>
+
+    <string name="A_explain">Agreeableness: \n An individual who displays a range of pro-social
+        behaviour such as trustworthiness. People scoring high in this trait tend to perform more
+        altruistic tasks and display more significant levels of kindness to others. Scoring low in
+        this category describes individuals who are more competitive and egotistic.
+</string>
+    <string name="O_explain">Openness: \n Being imaginative and curious about exploring new ideas.
+        People scoring high on this trait tend to be eager to learn new skills and have new experiences.
+        Individuals scoring lower on this trait tend to prefer tradition and value concrete ideas
+        over abstract.
+</string>
+    <string name="N_explain">Neuroticism: \n Scoring highly on this trait describes an individual
+        who may experience frequent mood changes, feel higher levels of anxiety and someone who can
+        become irritated quickly. People who score lower in this trait are thought of as more
+        consistent in their mood and have stronger resilience to negativity.
+</string>
     <!--#########################################################################################-->
 
     <!--Favourites list-->

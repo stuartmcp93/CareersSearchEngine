@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.preference.TwoStatePreference;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PersonalityQuestion extends AppCompatActivity {
+
     ImageView IMG_home_btn;
     Button BTN_submit_answer;
     TextView TV_questionDisplay, TV_questionNum, TV_total_questions;
@@ -63,19 +65,18 @@ public class PersonalityQuestion extends AppCompatActivity {
         TV_questionDisplay = findViewById(R.id.TV_question_display);
         TV_total_questions = findViewById(R.id.TV_question_total);
         TV_questionNum = findViewById(R.id.TV_question_number);
-        //TV_questionNum.setText(getString(R.string.question_num));
         RB_sAgree = findViewById(R.id.RBTN_strongly_agree);
         RB_agree = findViewById(R.id.RBTN_agree);
         RB_neutral = findViewById(R.id.RBTN_neutral);
         RB_disagree = findViewById(R.id.RBTN_disagree);
         RB_sDisagree = findViewById(R.id.RBTN_strongly_disagree);
-        //questionsList = getQuestions();
 
+        //Starting scores for personality test - https://openpsychometrics.org/printable/big-five-personality-test.pdf
         extroversionScore = 20;
-        agreeablenessScore = 50;
-        conscientiousnessScore = 20;
-        neuroticismScore = 20;
-        opennessScore = 20;
+        agreeablenessScore = 14;
+        conscientiousnessScore = 14;
+        neuroticismScore = 38;
+        opennessScore = 8;
 
 
         //Set up first question
@@ -120,23 +121,18 @@ public class PersonalityQuestion extends AppCompatActivity {
         int score = 0;
         if (RB_sAgree.isChecked()) {
             score = 5;
-            RB_sAgree.setChecked(false);
         }
         if (RB_agree.isChecked()) {
             score = 4;
-            RB_agree.setChecked(false);
         }
         if (RB_neutral.isChecked()) {
             score = 3;
-            RB_neutral.setChecked(false);
         }
         if (RB_disagree.isChecked()) {
             score = 2;
-            RB_disagree.setChecked(false);
         }
         if (RB_sDisagree.isChecked()) {
             score = 1;
-            RB_sDisagree.setChecked(false);
         }
         return score;
     }

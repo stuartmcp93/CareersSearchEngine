@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public class FavouritesList extends AppCompatActivity {
 
-    ImageView BTN_home_btn;
+    ImageView IMG_home_btn, IMG_quiz_res, IMG_career_matches;
     ListView favouritesList;
 
 
@@ -30,7 +30,9 @@ public class FavouritesList extends AppCompatActivity {
         setContentView(R.layout.activity_favourites_list);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        BTN_home_btn = findViewById(R.id.IMG_home_logo);
+        IMG_home_btn = findViewById(R.id.IMG_home_logo_fav_list);
+        IMG_quiz_res = findViewById(R.id.IMG_quiz_res_fav_list);
+        IMG_career_matches = findViewById(R.id.IMG_career_match_fav_list);
         favouritesList = findViewById(R.id.LV_favourites_list);
 
 
@@ -70,17 +72,39 @@ public class FavouritesList extends AppCompatActivity {
 
 
 
-        BTN_home_btn.setOnClickListener(new View.OnClickListener() {
+        IMG_home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BTN_home_btn.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
                 returnHome();
+            }
+        });
+
+        IMG_career_matches.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadCareerMatches();
+            }
+        });
+
+        IMG_quiz_res.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadQuizRes();
             }
         });
 
 
     }
 
+    private void loadQuizRes() {
+        Intent intent = new Intent(this, PersonalityQuizResults.class);
+        startActivity(intent);
+    }
+
+    private void loadCareerMatches() {
+        Intent intent = new Intent(this, CareerMatchesDisplay.class);
+        startActivity(intent);
+    }
 
 
     private void displayJobInfo(Career careerToDisplay) {

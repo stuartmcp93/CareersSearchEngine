@@ -29,7 +29,7 @@ import java.util.Objects;
 
 public class CareerMatchesDisplay extends AppCompatActivity {
 
-    ImageView IMG_home_btn;
+    ImageView IMG_home_btn, IMG_quiz_res, IMG_fav_list;
     TextView TV_topMatch, TV_topPercent, TV_secondMatch,
             TV_secondPercent, TV_thirdMatch, TV_thirdPercent, TV_filterBy;
     List<Career> careerMatches;
@@ -53,7 +53,9 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         TV_thirdMatch = findViewById(R.id.TV_third_area);
         TV_filterBy = findViewById(R.id.TV_filter_by);
         TV_thirdPercent = findViewById(R.id.TV_third_percent);
-        IMG_home_btn = findViewById(R.id.IMG_home_logo_quiz);
+        IMG_home_btn = findViewById(R.id.IMG_home_logo_career_res);
+        IMG_fav_list = findViewById(R.id.IMG_favs_list_career_res);
+        IMG_quiz_res = findViewById(R.id.IMG_quiz_res_career_res);
         SP_filterSpinner = findViewById(R.id.SP_career_match_filter_spinner);
 
         //Get a list of high matching careers to display when activity starts
@@ -102,7 +104,31 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         //Call filter results function to set spinner and current list of jobs
         filterResults();
 
+        IMG_fav_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadFavsList();
+            }
+        });
 
+        IMG_quiz_res.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadQuizRes();
+            }
+        });
+
+
+    }
+
+    private void loadQuizRes() {
+        Intent intent = new Intent(this, PersonalityQuizResults.class);
+        startActivity(intent);
+    }
+
+    private void loadFavsList() {
+        Intent intent = new Intent(this, FavouritesList.class);
+        startActivity(intent);
     }
 
     /**

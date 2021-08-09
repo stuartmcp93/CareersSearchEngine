@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context="com.stu.careers_search_engine.Login">
+    tools:context="com.stu.careers_search_engine.Login"
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,6 +29,7 @@
         <TextView
             android:id="@+id/TV_title"
             android:text="@string/title"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/IMG_main_logo"
@@ -51,6 +53,8 @@
             android:id="@+id/ET_username"
             android:hint="@string/enter_username"
             android:gravity="center"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
@@ -61,6 +65,8 @@
         <EditText
             android:id="@+id/ET_password"
             android:hint="@string/enter_password"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
             android:gravity="center"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -69,23 +75,7 @@
             android:background="@drawable/border"
             android:inputType="textPassword"/>
 
-        <CheckBox
-            android:id="@+id/CB_remember_me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="125dp"
-            android:layout_marginLeft="100dp"
-           />
 
-        <TextView
-            android:id="@+id/TV_remember_me"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="125dp"
-            android:layout_toRightOf="@id/CB_remember_me"
-            android:text="@string/remember_me"
-            android:paddingTop="15dp"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -112,9 +102,11 @@
             android:layout_marginTop="60dp"
             android:layout_marginLeft="25dp"
             android:textSize="25sp"
+            android:textColor="@color/black"
             />
         <TextView
             android:id="@+id/TV_forgot_details"
+            android:textColor="@color/black"
             android:text="@string/forgot_details"
             android:layout_width="100dp"
             android:layout_height="wrap_content"

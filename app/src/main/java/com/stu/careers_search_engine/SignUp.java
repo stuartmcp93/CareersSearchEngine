@@ -32,28 +32,32 @@ public class SignUp extends AppCompatActivity {
         BTN_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signUp();
+                String username = ET_username.getText().toString();
+                String password = ET_password.getText().toString();
+                String password2 = ET_retype_password.getText().toString();
+
+                signUp(username, password, password2);
 
             }
         });
     }
 
-    public void signUp() {
+
+
+    public boolean signUp(String username, String password, String password2) {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
-        String password = ET_password.getText().toString();
-        String password2 = ET_retype_password.getText().toString();
-        String username = ET_username.getText().toString();
+
         String email = ET_email.getText().toString();
 
         if(!password.equals(password2)) {
             Toast.makeText(this, "Passwords don't match!", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
 
 
         if(dataBaseHelper.checkUsername(username)){
             Toast.makeText(this, "Username already exists", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
             }
 
 
@@ -61,19 +65,13 @@ public class SignUp extends AppCompatActivity {
         dataBaseHelper.insertUser(db, username, email, password);
         Toast.makeText(this, "Creating account", Toast.LENGTH_SHORT).show();
         db.close();
-        /*ContentValues userValues = new ContentValues();
-        userValues.put("USERNAME", username);
-        userValues.put("PASSWORD", password);
-        userValues.put("EMAIL_ADDRESS", email);
 
-        db.insert("USER_TABLE", null, userValues);
-        Toast.makeText(this, "Success:" + dataBaseHelper.checkUsername(username), Toast.LENGTH_SHORT).show();
-        */
+
 
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
 
-
+        return true;
         }
 
 

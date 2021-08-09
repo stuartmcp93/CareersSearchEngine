@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         android:orientation="vertical"
-        tools:context="com.stu.careers_search_engine.DisplayJobInfo">
+        tools:context="com.stu.careers_search_engine.DisplayJobInfo"
+        android:background="@color/white">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -168,29 +169,43 @@
 
 
         <RelativeLayout
+            android:id="@+id/NAV_BAR_job_data"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:layout_marginTop="5dp">
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:background="@color/design_default_color_primary_dark"
+            android:backgroundTint="@color/design_default_color_primary">
 
             <ImageView
-                android:id="@+id/IMG_home_logo_info"
+                android:id="@+id/IMG_home_logo_job_data"
                 android:src="@drawable/home_logo"
-                android:layout_width="50dp"
-                android:layout_height="75dp"
+                android:layout_width="75dp"
+                android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
+                android:layout_centerHorizontal="true"
+                android:padding="5dp"
                 />
-            <Button
-                android:id="@+id/BTN_return_fav_list"
-                android:text="@string/return_favs_list"
-                android:drawableRight="@drawable/favourites_resize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true" />
+
+            <ImageView
+                android:id="@+id/IMG_favs_job_data"
+                android:layout_width="75dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/favourites_resize"
+                android:padding="2dp"/>
+            <ImageView
+                android:id="@+id/IMG_career_match_job_data"
+                android:src="@drawable/suggested_resize"
+                android:layout_width="75dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:padding="2dp"/>
+
 
         </RelativeLayout>
+
 
 
 

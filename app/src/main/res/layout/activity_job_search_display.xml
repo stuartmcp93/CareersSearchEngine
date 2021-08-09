@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context="com.stu.careers_search_engine.JobSearchDisplay">
+    tools:context="com.stu.careers_search_engine.JobSearchDisplay"
+    android:background="@color/white">
     <ImageView
         android:id="@+id/IMG_careerMatch_search_results"
         android:src="@drawable/main_logo"
@@ -31,25 +32,42 @@
         android:background="@drawable/border"
         android:layout_height="420dp"/>
     <RelativeLayout
+        android:id="@+id/NAV_BAR_search_res"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:layout_marginTop="5dp">
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:background="@color/design_default_color_primary_dark"
+        android:backgroundTint="@color/design_default_color_primary">
 
-    <ImageView
-        android:id="@+id/IMG_home_logo_search"
-        android:src="@drawable/home_logo"
-        android:layout_width="50dp"
-        android:layout_height="75dp"
-        android:layout_alignParentLeft="true"
-        />
-    <Button
-        android:id="@+id/BTN_back_to_careers"
-        android:text="@string/career_matches_return"
-        android:drawableRight="@drawable/suggested_resize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true" /> </RelativeLayout>
+        <ImageView
+            android:id="@+id/IMG_home_logo_search_res"
+            android:src="@drawable/home_logo"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:padding="5dp"
+            />
+
+        <ImageView
+            android:id="@+id/IMG_favs_search_res"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/favourites_resize"
+            android:padding="2dp"/>
+        <ImageView
+            android:id="@+id/IMG_career_match_search_res"
+            android:src="@drawable/suggested_resize"
+            android:layout_width="75dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:padding="2dp"/>
+
+
+    </RelativeLayout>
+
 
 </LinearLayout>

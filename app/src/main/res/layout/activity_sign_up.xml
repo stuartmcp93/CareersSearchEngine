@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context="com.stu.careers_search_engine.SignUp">
+    tools:context="com.stu.careers_search_engine.SignUp"
+    android:background="@color/white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,6 +28,7 @@
 
         <TextView
             android:text="@string/sign_up_title"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/IMG_main_logo"
@@ -55,11 +57,13 @@
             android:layout_height="50dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/border"
+            android:textColor="@color/black"
 
             />
 
         <EditText
             android:id="@+id/ET_email_add"
+            android:textColor="@color/black"
             android:hint="@string/enter_email_add"
             android:gravity="center"
             android:layout_width="300dp"
@@ -90,6 +94,7 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/border"
             android:inputType="textPassword"
+            android:textColor="@color/black"
 
             />
 
@@ -102,6 +107,7 @@
             android:layout_marginTop="65dp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/border"
+            android:textColor="@color/black"
             android:inputType="textPassword"/>
 
 
