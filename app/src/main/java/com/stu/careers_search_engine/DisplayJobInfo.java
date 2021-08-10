@@ -45,7 +45,7 @@ public class DisplayJobInfo extends AppCompatActivity {
         Intent intent = getIntent();
         Career careerToDisplay = (Career) intent.getSerializableExtra("career obj");
 
-
+        //Assign UI components
         BTN_search = findViewById(R.id.BTN_search_jobs);
         jobTitle = findViewById(R.id.title_data);
         descriptionDisplay = findViewById(R.id.TV_description);
@@ -120,7 +120,8 @@ public class DisplayJobInfo extends AppCompatActivity {
 
     /**
      * This method reads parameters entered by the user and searches for job vacancies for the
-     * current job title displayed.
+     * current job title displayed. The method passes the parameters to the JobSearchDisplay
+     * activity which displays the search results.
      *
      * @param careerToDisplay the career object currently displayed
      */
@@ -157,37 +158,60 @@ public class DisplayJobInfo extends AppCompatActivity {
 
 
     /**
+     * This method queries the SQLite database and adds or remove a job to the users favourite list
+     * of jobs. The method is called when the user clicks the 'add to favourites' button.
      *
-     * @param jobId the id of the job on display
-     * @param username
+     * @param jobId the id of the current career object on display
+     * @param username the username of the current user
      */
     public void addOrRemoveJobToFavourites(int jobId, String username) {
 
+        //Create new database helper
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+
         // Gets the data repository in write mode
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
+
+        //Check status of add to favorites button on the UI
         if (favSwitch.isChecked()) {
 
+            //If the button is switched on add the job to the users favoruites list
             ContentValues favContent = new ContentValues();
             favContent.put("USERNAME", username);
             favContent.put("JOB_ID", jobId);
             db.insert("USER_FAVOURITES_TABLE", null, favContent);
         } else {
+            //Else delete the job from the users favorites
             db.delete("USER_FAVOURITES_TABLE", "JOB_ID = ?", new String[]{Integer.toString(jobId)});
 
         }
     }
 
+    /**
+     * This method allows the user to navigate to their favourites list.
+     */
     private void returnToFavouritesList() {
         Intent intent = new Intent(this, FavouritesList.class);
         startActivity(intent);
     }
 
+    /**
+     * This method allows the use to return to the home menu.
+     */
     private void returnHome() {
         Intent returnHome = new Intent(this, Home.class);
         startActivity(returnHome);
     }
 
+    /**
+     * This method checks if the current job on display has already been added to the user's
+     * favourite list. If the job has been added the 'add to favourites' switch button will appear
+     * as checked when the UI display is loaded. This allows the user to remove the job from
+     * their list if they wish to do so.
+     *
+     * @param career the current career object on display.
+     * @param username the username of the current user.
+     */
     public void checkAlreadyAddedToFavs(Career career, String username) {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
         List<Career> favsList = dataBaseHelper.getUserFavouriteList(username);

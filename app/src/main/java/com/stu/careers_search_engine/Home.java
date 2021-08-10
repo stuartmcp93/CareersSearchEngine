@@ -11,6 +11,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This class is the home menu of the application. This class contains buttons for the user to
+ * navigate to the main features of the application. This class also allows users to log out.
+ *
+ * @Author Stuart McPherson
+ */
+
 public class Home extends Activity {
 
     Button BTN_takeQuiz, BTN_viewResults, BTN_suggestedCareers, BTN_favouritesList;
@@ -30,13 +37,12 @@ public class Home extends Activity {
         BTN_suggestedCareers = findViewById(R.id.BTN_suggested_careers);
         BTN_favouritesList = findViewById(R.id.BTN_favourites);
         SP_homeSpinner = findViewById(R.id.SP_home_spinner);
-
         username = findViewById(R.id.TV_username);
-        //username.setText(ListHolder.getInstance().username.get(0));
 
-
+        //Display the current user's name in the welcome message
         username.setText(((User) this.getApplication()).getUsername());
 
+        //Set options in the spinner menu
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item, spinnerOptions);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
@@ -45,18 +51,19 @@ public class Home extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 2){
+                    //Call logout method if logout selected
                     logout();
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                //Do nothing
             }
         });
 
 
-        //On click go to personality quiz results
+        //On click listeners for home menu buttons
         BTN_viewResults.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,35 +95,51 @@ public class Home extends Activity {
 
     }
 
+    /**
+     * This method prevents the user from pressing the back button their device to return to the
+     * login. Users are given a toast to give instructions.
+     */
     @Override
     public void onBackPressed() {
-        //do nothing
+        Toast.makeText(Home.this, "Select \"log out\" from settings.", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * This method allows the user to logout of the application.
+     */
     public void logout() {
         Toast.makeText(Home.this, "Logging out!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(Home.this, Login.class);
         startActivity(intent);
     }
 
-
+    /**
+     * This method takes the user to the CareerMatchesDisplay activity.
+     */
     private void showSuggestedCareers() {
         Intent showSuggestedCIntent = new Intent(this, CareerMatchesDisplay.class);
         startActivity(showSuggestedCIntent);
     }
 
+    /**
+     * This method takes the user to the FavouritesList activity.
+     */
     private void showFavList() {
         Intent showFavLitIntent = new Intent(this, FavouritesList.class);
         startActivity(showFavLitIntent);
     }
 
+    /**
+     * This method takes the user to personality quiz activity where they can take
+     * the personality quiz.
+     */
     private void startQuiz() {
         Intent startQuizIntent = new Intent(this, PersonalityQuestion.class);
         startActivity(startQuizIntent);
     }
 
     /**
-     * Method to go to personality quiz results on click of view results button on home page.
+     * This method takes the user the PersonalityQuizResults activity to view quiz results.
      */
     private void viewPersonalityQuizResults() {
         Intent viewResultsIntent = new Intent(this, PersonalityQuizResults.class);

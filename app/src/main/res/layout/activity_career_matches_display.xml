@@ -226,9 +226,10 @@
         android:layout_marginBottom="15dp"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
-        android:background="@color/design_default_color_primary_dark"
-        android:backgroundTint="@color/design_default_color_primary"
-        android:gravity="bottom">
+        android:background="@color/color_two"
+        android:gravity="bottom"
+        android:layout_gravity="bottom"
+        >
 
         <ImageView
             android:id="@+id/IMG_home_logo_career_res"

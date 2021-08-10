@@ -27,6 +27,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ *This class displays the search results from the search the user created in the DisplayJobInfo
+ * activity. The class displays a list of vacancies based on the user's search from the Reed.co.uk
+ * job seeker API.
+ *
+ * @Author Stuart McPherson
+ */
 public class JobSearchDisplay extends AppCompatActivity {
     TextView TV_job_title;
     ImageView IMG_home_btn, IMG_favourites, IMG_career_matches;
@@ -40,25 +47,33 @@ public class JobSearchDisplay extends AppCompatActivity {
         setContentView(R.layout.activity_job_search_display);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        //Assign UI components
         TV_job_title = findViewById(R.id.TV_title_search);
         IMG_career_matches = findViewById(R.id.IMG_career_match_search_res);
         IMG_favourites = findViewById(R.id.IMG_favs_search_res);
         IMG_home_btn = findViewById(R.id.IMG_home_logo_search_res);
         LV_search_display = findViewById(R.id.LV_search_results);
+
+        //Get the career object from the DisplayJobInfo activity
         Intent intent = getIntent();
         Career careerToDisplay = (Career) intent.getSerializableExtra("career obj");
+
+        //Display the job title that is being searched at the top of the screen
         TV_job_title.setText(careerToDisplay.getJobTitle());
 
+        //Toast to inform the user that the search is being performed
         Toast.makeText(JobSearchDisplay.this, "Loading results...",
                 Toast.LENGTH_LONG).show();
 
         //Authorization API key provided by reed.co.uk for Developers - Jobseeker APIs
         String authHeader = "Basic YTU4Nzc0ZTMtZWM5YS00NDU4LThlMDItNDVlODI1ZjAyMjRkOg==";
+
         //Create new retrofit object
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.reed.co.uk/api/1.0/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         //Create interface and use retrofit object to send GET request
         PlaceholderAPI placeholderAPI = retrofit.create(PlaceholderAPI.class);
 
@@ -72,18 +87,27 @@ public class JobSearchDisplay extends AppCompatActivity {
                 intent.getStringExtra("salary"),
                 30, 15);
 
+        //Make call to get list of JobSearchResults
         call.enqueue(new Callback<JobSearchResult>() {
             @Override
             public void onResponse(Call<JobSearchResult> call, Response<JobSearchResult> response) {
+
+                //If response fails display error code
                 if(!response.isSuccessful()){
                     TV_job_title.setText("Code: " + response.code());
                     return;
                 }
 
-                Log.d("############### success", "RESPONSE!!!!!");
+                //Store successful response in a list
                 jobSearchResultList =  response.body();
+
+                //create list of individual jobs form JSON Array
                 List<Result> results = jobSearchResultList.getResults();
+
+                //Create array list to display results on the UI
                 ArrayList<String> resultDisplayList = new ArrayList<>();
+
+                //Display result info in the UI
                 for(Result result : results){
                     resultDisplayList.add("Title: " + result.getJobTitle() +
                             "\n Employer: " + result.getEmployerName() +
@@ -91,17 +115,13 @@ public class JobSearchDisplay extends AppCompatActivity {
                             "\n Min salary: " + result.getMinimumSalary());
                 }
 
-
-
-
-
-
+                //Alert user if the search returned no results
                 if(resultDisplayList.isEmpty()){
-                    Toast.makeText(JobSearchDisplay.this, "No results!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(JobSearchDisplay.this, "No results!",
+                            Toast.LENGTH_SHORT).show();
                 }
 
-
-
+                //Set array adapter to display results in the list view
                 ArrayAdapter jobsArrayAdapter = new ArrayAdapter<>(JobSearchDisplay.this,
                         android.R.layout.simple_list_item_1, resultDisplayList);
                 LV_search_display.setAdapter(jobsArrayAdapter);
@@ -109,21 +129,14 @@ public class JobSearchDisplay extends AppCompatActivity {
             }
 
 
-
+            //Log error message if call fails
             @Override
             public void onFailure(Call<JobSearchResult> call, Throwable t) {
                 Log.d("############## Error", t.getMessage());
             }
         });
 
-
-
-
-
-
-
-
-
+        //OnClickListeners for navigation buttons
         IMG_home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,19 +158,27 @@ public class JobSearchDisplay extends AppCompatActivity {
            }
        });
 
-
     }
 
+    /**
+     * This method allows the user to return to their favourites list.
+     */
     private void favouritesList() {
         Intent intent = new Intent(this, FavouritesList.class);
         startActivity(intent);
     }
 
+    /**
+     * This method allows the user to return to their career matches.
+     */
     private void returnToCareerMatches() {
         Intent returnCareer = new Intent(this, CareerMatchesDisplay.class);
         startActivity(returnCareer);
     }
 
+    /**
+     * This method allows the user to return to the home menu.
+     */
     private void returnHome() {
         Intent returnHome = new Intent(this, Home.class);
         startActivity(returnHome);

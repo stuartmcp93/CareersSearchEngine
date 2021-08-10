@@ -78,39 +78,43 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:background="@color/color_two"
             android:drawableRight="@drawable/question_resize"
             />
 
 
         <Button
             android:id="@+id/BTN_quiz_results"
+            android:background="@color/color_two"
             android:text="@string/see_results"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/BTN_take_quiz"
-            android:layout_marginTop="15dp"
-            android:drawableRight="@drawable/results_resize"
+            android:layout_marginTop="25dp"
+            android:drawableEnd="@drawable/results_resize"
 
             />
         <Button
             android:id="@+id/BTN_suggested_careers"
             android:text="@string/suggested_careers"
-            android:drawableRight="@drawable/suggested_resize"
+            android:drawableEnd="@drawable/suggested_resize"
+            android:background="@color/color_two"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/BTN_quiz_results"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="25dp"/>
         <Button
             android:id="@+id/BTN_favourites"
             android:text="@string/favourites_list"
-            android:drawableRight="@drawable/favourites_resize"
+            android:background="@color/color_two"
+            android:drawableEnd="@drawable/favourites_resize"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/BTN_suggested_careers"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="25dp"/>
     </RelativeLayout>
 
 </LinearLayout>
