@@ -4,6 +4,13 @@ import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ *
+ * This class stores indiviidual Results that are returned from the job search API.
+ *
+ * @Author Stuart McPherson
+ *
+ */
 @Generated("jsonschema2pojo")
 public class Result {
 

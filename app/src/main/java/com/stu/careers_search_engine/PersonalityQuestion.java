@@ -34,6 +34,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * This class runs the personality quiz of the application. It displays questions from the
+ * 'big five personality test' and stores user responses to calculate their personality score.
+ *
+ *
+ * @Author Stuart McPherson
+ */
 public class PersonalityQuestion extends AppCompatActivity {
 
     ImageView IMG_home_btn;
@@ -41,11 +48,7 @@ public class PersonalityQuestion extends AppCompatActivity {
     TextView TV_questionDisplay, TV_questionNum, TV_total_questions;
     RadioButton RB_sAgree, RB_agree, RB_neutral, RB_disagree, RB_sDisagree;
 
-
-    //These will hold the users the score for each personality trait and
-    //them to the database for the user.
-    //When having working properly will have these int[] that will hold each score the question.
-    // This will allow for calculation of final score
+    //Variables to hold integer scores for each of the personality traits measured
     int extroversionScore, agreeablenessScore, conscientiousnessScore,
             neuroticismScore, opennessScore;
 
@@ -59,9 +62,9 @@ public class PersonalityQuestion extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
 
+        //Assign UI components
         IMG_home_btn = findViewById(R.id.IMG_home_logo_quiz);
         BTN_submit_answer = findViewById(R.id.BTN_submit_answer);
-
         TV_questionDisplay = findViewById(R.id.TV_question_display);
         TV_total_questions = findViewById(R.id.TV_question_total);
         TV_questionNum = findViewById(R.id.TV_question_number);
@@ -79,14 +82,20 @@ public class PersonalityQuestion extends AppCompatActivity {
         opennessScore = 8;
 
 
-        //Set up first question
+        //Set up first question on creation of the activity
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+
+
         Question question = dataBaseHelper.getQuestion(Integer.parseInt(TV_questionNum.getText().toString()));
+
+        //Display the first question
         TV_questionDisplay.setText(question.getQuestion());
+
+        //Display total number of questions in the quiz
         TV_total_questions.setText(" / " + dataBaseHelper.countQuestions());
 
 
-        //Set on click listeners
+        //Set on click listeners for home navigation button
         IMG_home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +104,7 @@ public class PersonalityQuestion extends AppCompatActivity {
             }
         });
 
+        //Set on click listener for the submit answer button
         BTN_submit_answer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,75 +115,108 @@ public class PersonalityQuestion extends AppCompatActivity {
 
     }
 
+    /**
+     * This method allows the user to return to the home screen of the application.
+     */
     private void returnHome() {
         Intent returnHome = new Intent(this, Home.class);
         startActivity(returnHome);
     }
 
+
     /**
-     * This method reads which radio button was clicked and returns the score
+     * This method reads which radio button was clicked by the user and returns the score
      * depending on the button that was clicked.
      *
-     * @return the user answer as an integer to be added to array for that personality trait
+     * @return the user answer as an integer to be added/subtracted
      */
-
     public int radioButtonClicked() {
+        //Initiate integer variable
         int score = 0;
+
+        //If user selects 'Strongly Agree'
         if (RB_sAgree.isChecked()) {
             score = 5;
         }
+
+        //If user selects 'Agree'
         if (RB_agree.isChecked()) {
             score = 4;
         }
+
+        //If user selects 'Neutral'
         if (RB_neutral.isChecked()) {
             score = 3;
         }
+
+        //If user selects 'Disagree'
         if (RB_disagree.isChecked()) {
             score = 2;
         }
+        //If user selects 'Strongly Disagree'
         if (RB_sDisagree.isChecked()) {
             score = 1;
         }
+
+
         return score;
     }
 
     /**
-     * This method adds the score to the correct personality trait.
+     * This method adds the score of the user option to the personality trait measured by the current
+     * question.
      *
      * @param question   the personality trait associated with the current question
      * @param userAnswer the response of the user as an integer
      */
     public void addScoreToPersonalityTrait(Question question, int userAnswer) {
+
+        //Get the personality trait of the question
         switch (question.getPersonalityTrait()) {
+
+            //Extroversion
             case "E":
+                //Check if score is added or subtracted to the total
                 if (question.getScoring() == 1) {
                     extroversionScore += userAnswer;
                 } else {
                     extroversionScore -= userAnswer;
                 }
                 break;
+
+            //Agreeableness
             case "A":
+                //Check if score is added or subtracted to the total
                 if (question.getScoring() == 1) {
                     agreeablenessScore += userAnswer;
                 } else {
                     agreeablenessScore -= userAnswer;
                 }
                 break;
+
+            //Conscientiousness
             case "C":
+                //Check if score is added or subtracted to the total
                 if (question.getScoring() == 1) {
                     conscientiousnessScore += userAnswer;
                 } else {
                     conscientiousnessScore -= userAnswer;
                 }
                 break;
+
+            //Neuroticism
             case "N":
+                //Check if score is added or subtracted to the total
                 if (question.getScoring() == 1) {
                     neuroticismScore += userAnswer;
                 } else {
                     neuroticismScore -= userAnswer;
                 }
                 break;
+
+            //Openness
             case "O":
+                //Check if score is added or subtracted to the total
                 if (question.getScoring() == 1) {
                     opennessScore += userAnswer;
                 } else {
@@ -185,19 +228,13 @@ public class PersonalityQuestion extends AppCompatActivity {
 
 
     /**
-     * This method will record the users answer and add that score to the correct personality trait
-     * the score will be updated in the database for that user.
-     * The method then loads the next question in the personality quiz.
-     * <p>
-     * When the quiz is complete the app will load the results.
+     * This method is called when the user clicks 'submit' after answering the previous question.
+     * The method updates the UI with the next question in the quiz.
      */
     private void nextQuestion() {
 
-
+        //Current question number from UI display
         int currentQuestionNum = Integer.parseInt((String) TV_questionNum.getText());
-
-
-        Log.d("Question number:", String.valueOf(currentQuestionNum));
 
         //get the users answer for the question
         int userAnswer = radioButtonClicked();
@@ -205,7 +242,7 @@ public class PersonalityQuestion extends AppCompatActivity {
         /*
             Default value for the user answer is 0.
             A user answer of 0 means the user has not checked a radio button.
-            The user cannot loads the next question without submitting an answer
+            The user cannot load the next question without submitting an answer
          */
         if (userAnswer == 0) {
 
@@ -213,27 +250,36 @@ public class PersonalityQuestion extends AppCompatActivity {
             Toast.makeText(PersonalityQuestion.this, "Please check an answer!",
                     Toast.LENGTH_SHORT).show();
 
-            //If user has selected an answer continue with the quiz
+
         } else {
 
-            //Printing answer for testing
+            //Create new database helper
             DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
 
-            Log.d("User answer", String.valueOf(userAnswer));
-
-            //Get the number of the current question
-            //String currentQuestionStr = (String) TV_questionNum.getText();
+            //Get the current Question object from the database
             Question currentQuestion = dataBaseHelper.getQuestion(currentQuestionNum);
+
+            //Pass Question object and user answer to add the score to the trait being measured
             addScoreToPersonalityTrait(currentQuestion, userAnswer);
 
+            //Get the next question number
             int nextQuestionNum = currentQuestionNum + 1;
-            Log.d("########### next questionNum", Integer.toString(nextQuestionNum));
 
+            //Check if quiz is finished
             if (nextQuestionNum > dataBaseHelper.countQuestions()) {
-                loadResultsDisplay(((User) this.getApplication()).getUsername());
+
+                //If all questions are answered start results display activity
+                loadResultsDisplay();
+
+                //Alert user of results being calculated
+                Toast.makeText(this, "Calculating results!", Toast.LENGTH_SHORT).show();
+
+                //If questions remaining in the quiz update the UI with the next question
             } else {
+                //Get next Question object form the database
                 Question nextQuestion = dataBaseHelper.getQuestion(nextQuestionNum);
-                Log.d("######### next question text", nextQuestion.getQuestion());
+
+                //Set UI to display the question data
                 TV_questionNum.setText(Integer.toString(nextQuestionNum));
                 TV_questionDisplay.setText(nextQuestion.getQuestion());
             }
@@ -243,22 +289,20 @@ public class PersonalityQuestion extends AppCompatActivity {
 
     }
 
+    /**
+     * This method adds the users scores for the personality traits to the database and
+     * loads the PersonalityQuizResults activity.
+     *
+     */
+    public void loadResultsDisplay() {
 
-    public void loadResultsDisplay(String username) {
-        //Add results to arrayList before going to the activity
-        calcScoreList(username);
-        Intent resultsIntent = new Intent(PersonalityQuestion.this, PersonalityQuizResults.class);
-
-        startActivity(resultsIntent);
-    }
-
-
-    //Temporary to get all other functionality working
-    private void calcScoreList(String username) {
-
-
+        //Create new Databasehelper
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+
+        //Open writable database to add scores
         SQLiteDatabase db = dataBaseHelper.getWritableDatabase();
+
+        //Insert the username and scores into the database
         dataBaseHelper.insertUserScores(db, ((User) this.getApplication()).getUsername(),
                 extroversionScore,
                 agreeablenessScore,
@@ -266,8 +310,11 @@ public class PersonalityQuestion extends AppCompatActivity {
                 neuroticismScore,
                 opennessScore);
 
-
+        //Start PersonalityQuizResults activity
+        Intent resultsIntent = new Intent(PersonalityQuestion.this, PersonalityQuizResults.class);
+        startActivity(resultsIntent);
     }
+
 
 
 }

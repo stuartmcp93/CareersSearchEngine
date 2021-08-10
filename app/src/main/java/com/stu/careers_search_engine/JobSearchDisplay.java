@@ -85,7 +85,7 @@ public class JobSearchDisplay extends AppCompatActivity {
                 keyword,
                 intent.getStringExtra("location"),
                 intent.getStringExtra("salary"),
-                30, 15);
+                50, 25);
 
         //Make call to get list of JobSearchResults
         call.enqueue(new Callback<JobSearchResult>() {

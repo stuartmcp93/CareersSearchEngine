@@ -7,6 +7,11 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  *
+ * This class holds the JSON array containing a list of job search results
+ * that is returned from the API search.
+ *
+ * @Author Stuart McPherson
+ *
  */
 @Generated("jsonschema2pojo")
 public class JobSearchResult {
