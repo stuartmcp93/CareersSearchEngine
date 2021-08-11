@@ -87,6 +87,10 @@ public class DisplayJobInfo extends AppCompatActivity {
         IMG_favourites_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //on click animation
+                IMG_favourites_list.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                 returnToFavouritesList();
             }
         });
@@ -94,6 +98,10 @@ public class DisplayJobInfo extends AppCompatActivity {
         IMG_career_matches.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //on click animation
+                IMG_career_matches.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                 loadCareerMatches();
             }
         });

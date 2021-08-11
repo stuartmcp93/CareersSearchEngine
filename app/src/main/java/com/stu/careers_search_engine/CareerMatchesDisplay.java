@@ -96,7 +96,9 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         IMG_home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //on click animation
                 IMG_home_btn.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                 returnHome();
             }
         });
@@ -107,6 +109,9 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         IMG_fav_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //on click animation
+                IMG_fav_list.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
                 loadFavsList();
             }
         });
@@ -114,6 +119,10 @@ public class CareerMatchesDisplay extends AppCompatActivity {
         IMG_quiz_res.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //on click animation
+                IMG_quiz_res.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                 loadQuizRes();
             }
         });

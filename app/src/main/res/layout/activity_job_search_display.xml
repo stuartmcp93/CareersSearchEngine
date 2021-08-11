@@ -27,16 +27,20 @@
         />
     <ListView
         android:id="@+id/LV_search_results"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:background="@drawable/border"
-        android:layout_height="420dp"/>
+        android:layout_height="450dp"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
     <RelativeLayout
         android:id="@+id/NAV_BAR_search_res"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
         android:background="@color/color_two">

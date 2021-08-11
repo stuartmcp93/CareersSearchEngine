@@ -91,6 +91,10 @@ public class FavouritesList extends AppCompatActivity {
         IMG_home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //on click animation
+                IMG_home_btn.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                 returnHome();
             }
         });
@@ -99,6 +103,10 @@ public class FavouritesList extends AppCompatActivity {
         IMG_career_matches.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //on click animation
+                IMG_career_matches.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                 loadCareerMatches();
             }
         });
@@ -106,6 +114,10 @@ public class FavouritesList extends AppCompatActivity {
         IMG_quiz_res.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //on click animation
+                IMG_quiz_res.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                 loadQuizRes();
             }
         });

@@ -3,6 +3,7 @@ package com.stu.careers_search_engine;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.net.wifi.hotspot2.pps.Credential;
 import android.os.Bundle;
 import android.util.Log;
@@ -140,6 +141,10 @@ public class JobSearchDisplay extends AppCompatActivity {
         IMG_home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //on click animation
+                IMG_home_btn.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                 returnHome();
             }
         });
@@ -147,6 +152,10 @@ public class JobSearchDisplay extends AppCompatActivity {
        IMG_favourites.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+
+               //on click animation
+               IMG_favourites.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                favouritesList();
            }
        });
@@ -154,6 +163,10 @@ public class JobSearchDisplay extends AppCompatActivity {
        IMG_career_matches.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+
+               //on click animation
+               IMG_career_matches.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                returnToCareerMatches();
            }
        });

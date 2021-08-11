@@ -92,6 +92,10 @@ public class PersonalityQuizResults extends AppCompatActivity {
         IMG_career_matches_display.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //on click animation
+                IMG_career_matches_display.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                 loadCareerMatches();
             }
         });
@@ -100,6 +104,10 @@ public class PersonalityQuizResults extends AppCompatActivity {
         IMG_favs_display.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //on click animation
+                IMG_favs_display.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
+
                 loadFavouritesList();
             }
         });
@@ -108,6 +116,7 @@ public class PersonalityQuizResults extends AppCompatActivity {
         IMG_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 IMG_home.setColorFilter(0x800080, PorterDuff.Mode.MULTIPLY);
                 returnHome();
             }

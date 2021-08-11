@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +47,10 @@ public class PersonalityQuestion extends AppCompatActivity {
     ImageView IMG_home_btn;
     Button BTN_submit_answer;
     TextView TV_questionDisplay, TV_questionNum, TV_total_questions;
+
+    RadioGroup radioButtons;
     RadioButton RB_sAgree, RB_agree, RB_neutral, RB_disagree, RB_sDisagree;
+
 
     //Variables to hold integer scores for each of the personality traits measured
     int extroversionScore, agreeablenessScore, conscientiousnessScore,
@@ -63,6 +67,7 @@ public class PersonalityQuestion extends AppCompatActivity {
 
 
         //Assign UI components
+        radioButtons = findViewById(R.id.RG_radio_group);
         IMG_home_btn = findViewById(R.id.IMG_home_logo_quiz);
         BTN_submit_answer = findViewById(R.id.BTN_submit_answer);
         TV_questionDisplay = findViewById(R.id.TV_question_display);
@@ -282,6 +287,9 @@ public class PersonalityQuestion extends AppCompatActivity {
                 //Set UI to display the question data
                 TV_questionNum.setText(Integer.toString(nextQuestionNum));
                 TV_questionDisplay.setText(nextQuestion.getQuestion());
+
+                //Reset radio buttons
+                radioButtons.clearCheck();
             }
 
 
