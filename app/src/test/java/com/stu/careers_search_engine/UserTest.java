@@ -3,6 +3,13 @@ package com.stu.careers_search_engine;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+
+/**
+ * This class tests the creation of a new User.
+ *
+ * @Result a new User is created
+ * @Author Stuart McPherson
+ */
 public class UserTest {
 
     User user = new User();

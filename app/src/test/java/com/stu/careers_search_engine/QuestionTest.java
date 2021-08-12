@@ -4,6 +4,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * This class tests the creation of a Question object.
+ *
+ * @Result a Question object
+ * @Author Stuart McPherson
+ *
+ */
 public class QuestionTest {
 
     Question questionTest = new Question(1,

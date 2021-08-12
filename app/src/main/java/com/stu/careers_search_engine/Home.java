@@ -97,7 +97,7 @@ public class Home extends Activity {
 
     /**
      * This method prevents the user from pressing the back button their device to return to the
-     * login. Users are given a toast to give instructions.
+     * login. Users are shown a toast to give instructions how to logout.
      */
     @Override
     public void onBackPressed() {

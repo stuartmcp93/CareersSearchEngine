@@ -1,48 +1,49 @@
 package com.stu.careers_search_engine;
 
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.action.ViewActions;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
-
-import static androidx.test.espresso.Espresso.closeSoftKeyboard;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.*;
 
 /**
- * This class performs an automated UI test for logging into the application.
+ * This class tests a user signing up for an account
  *
- * @Result login successful and home page loads
+ * @Result successful user sign up
  * @Author Stuart McPherson
  */
 @RunWith(AndroidJUnit4.class)
-public class LoginTest {
+public class SignUpTest {
 
     private String username;
     private String password;
+    private String password2;
 
     @Rule
-    public ActivityScenarioRule<Login> activityRule = new ActivityScenarioRule<>(Login.class);
+    public ActivityScenarioRule<SignUp> activityRule = new ActivityScenarioRule<>(SignUp.class);
+
 
     @Before
     public void initValidLoginDetails() {
         // Specify a valid login details.
         username = "stuartM";
         password = "password";
+        password2 = "password";
     }
 
     @Test
-    public void test_login() {
+    public void test_signUp() {
         onView(withId(R.id.ET_username)).perform(typeText(username),
                 ViewActions.closeSoftKeyboard());
 

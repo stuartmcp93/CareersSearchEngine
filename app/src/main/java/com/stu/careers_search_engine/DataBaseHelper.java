@@ -32,6 +32,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+
     /**
      * This method creates a SQLite database to store data locally in the application.
      *
@@ -786,7 +787,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
      * @param trait    the personality trait being measured
      * @param scoring  scoring value to check if score is added or subtracted from total
      */
-    private static void insertPersonalityQuestion(SQLiteDatabase db, String question, String trait, int scoring) {
+    public void insertPersonalityQuestion(SQLiteDatabase db, String question, String trait, int scoring) {
 
         //create new content values object
         ContentValues questionValues = new ContentValues();

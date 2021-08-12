@@ -50,7 +50,7 @@ public class PersonalityQuizResults extends AppCompatActivity {
         TV_neuroticism = findViewById(R.id.TV_neuroticism);
         TV_openness = findViewById(R.id.TV_openness);
         TV_extroversion = findViewById(R.id.TV_extroversion);
-        pieChart = findViewById(R.id.piechart);
+        pieChart = findViewById(R.id.pie_chart);
         IMG_career_matches_display = findViewById(R.id.BTN_career_area_matches);
         IMG_favs_display = findViewById(R.id.BTN_favs_list);
         IMG_home = findViewById(R.id.IMG_home_logo_quiz_res);
